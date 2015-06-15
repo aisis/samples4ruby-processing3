@@ -7,7 +7,7 @@ def setup
   sketch_title 'Custom Array'
   wide_count = width / UNIT
   height_count = height / UNIT
-  @custom_array = CustomArray.new(self)
+  @custom_array = CustomArray.new
   height_count.times do |i|
     wide_count.times do |j|
       custom_array.add_object(j * UNIT, i * UNIT, UNIT / 2, UNIT / 2, rand(0.05..0.8))
@@ -32,18 +32,14 @@ Particle = Struct.new(:x, :y, :mx, :my, :size, :speed, :xdir, :ydir)
 require 'forwardable'
 
 # The custom Array created using Forwardable
-# Processing::Proxy gives access to background(int), fill(int) and stroke(int)
+# Processing::Proxy gives access to PApplet methods
 class CustomArray 
   extend Forwardable
   def_delegators(:@objs, :each, :<<)
   include Enumerable, Processing::Proxy
   
-  attr_reader :app
-  
-  def initialize(app)
-    @app = app
+  def initialize
     @objs = []
-    puts P3D
   end
   
   def add_object(mx, my, x, y, speed)
@@ -71,7 +67,7 @@ class CustomArray
     background(0)
     fill(255)
     each do |obj|
-      app.ellipse(obj.mx + obj.x, obj.my + obj.y, 6, 6)
+      ellipse(obj.mx + obj.x, obj.my + obj.y, 6, 6)
     end
   end
 end

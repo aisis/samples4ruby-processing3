@@ -26,20 +26,20 @@ class Plane
   end
   
   def display(renderer)
-    begin_shape(TRIANGLES)
+    begin_shape(PConstants::TRIANGLES)
     vecs.map { |vec| vec.to_vertex(renderer) }
     end_shape
     
     #normal
     stroke(200, 160, 30)
-    begin_shape(LINES)
+    begin_shape(PConstants::LINES)
     c.to_vertex(renderer)
     (c + n * NORM_LEN).to_vertex(renderer)
     end_shape
     
     #binormal
     stroke(160, 200, 30)
-    begin_shape(LINES)
+    begin_shape(PConstants::LINES)
     c.to_vertex(renderer)
     # tangent
     v = vecs[1].copy
@@ -50,7 +50,7 @@ class Plane
     end_shape
     
     stroke(30, 200, 160)
-    begin_shape(LINES)
+    begin_shape(PConstants::LINES)
     c.to_vertex(renderer)
     b = v.cross(n)
     (c + b * NORM_LEN).to_vertex(renderer)

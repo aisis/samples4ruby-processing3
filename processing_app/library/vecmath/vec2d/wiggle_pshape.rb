@@ -9,7 +9,7 @@ load_library :vecmath
 attr_reader :wiggler
 
 def setup
-  sketch_title 'Wiggle Pshape'
+  sketch_title 'Wiggle PShape'
   @wiggler = Wiggler.new width, height
 end
 
@@ -43,13 +43,13 @@ class Wiggler
     s.stroke(0)
     s.stroke_weight(2)
     original.map{|v| v.to_vertex(renderer)}
-    s.end_shape(CLOSE)
+    s.end_shape(PConstants::CLOSE)
   end
 
   def wiggle
     @xoff = 0
     # Apply an offset to each vertex
-    rad = ->(pos){(Vec2D.from_angle(TAU * noise(xoff, yoff)) * 4) + pos}
+    rad = ->(pos){(Vec2D.from_angle(PConstants::TAU * noise(xoff, yoff)) * 4) + pos}
     
     original.each_with_index do |pos, i| 
       # Calculate a new vertex location based on noise around "original" location
@@ -71,9 +71,6 @@ class Wiggler
   end
 end
 
-
-
 def settings
   size(640, 360, P2D)
 end
-

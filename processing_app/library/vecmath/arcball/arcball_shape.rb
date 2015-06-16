@@ -1,13 +1,11 @@
 load_library :vecmath
-
 attr_reader :my_cube
 
 def setup
   sketch_title 'Arcball Shape'
   ArcBall.init(self)
-  @my_cube = create_shape(BOX, 400, 400, 400)
+  @my_cube = create_shape BOX, 400, 400, 400
   my_cube.set_fill(color(100, 10, 100))
-
 end
 
 def draw
@@ -26,9 +24,7 @@ def define_lights
   spot_light(30, 30, 30, 0, 40, 200, 0, -0.5, -0.5, PI / 2, 2)
 end
 
-
 def settings
-  size(600, 600, P3D)
-  smooth(8)
+  size 600, 600, P3D
+  smooth 8
 end
-

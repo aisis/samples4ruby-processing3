@@ -25,7 +25,7 @@ class Cylinder
   end
   
   def display(renderer)
-    begin_shape(QUADS)
+    begin_shape(PConstants::QUADS)
     detail.times do |i|
       if i < (detail - 1)
         vecs[i].to_vertex(renderer)

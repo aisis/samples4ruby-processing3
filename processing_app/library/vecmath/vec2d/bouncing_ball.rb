@@ -19,7 +19,6 @@ def setup
   @loc = Vec2D.new(100, 100)
   @velocity = Vec2D.new(1.5, 2.1)
   @gravity = Vec2D.new(0, 0.2)
-
 end
 
 def draw
@@ -47,4 +46,3 @@ def settings
   size(640, 360)
   smooth 4
 end
-

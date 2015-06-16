@@ -7,7 +7,6 @@
 
 load_library :vecmath
 
-
 module SeekingNeural
   class Perceptron
     # Perceptron is created with n weights and learning constant
@@ -31,8 +30,7 @@ module SeekingNeural
       forces.zip(@weights).map { |a, b| a * b }.reduce(Vec2D.new, :+)
       # forces.zip(@weights).map { |a, b| a * b }.reduce(:+)
     end
-  end
-  
+  end  
   # Seek
   # Daniel Shiffman <http://www.shiffman.net>
   
@@ -72,13 +70,10 @@ module SeekingNeural
     def steer(targets, desired)
       # Steer towards all targets
       forces = targets.map { |target| seek(target) }
-      
       # That array of forces is the input to the brain
       result = brain.feedforward(forces)
-      
       # Use the result to steer the vehicle
       apply_force(result)
-      
       # Train the brain according to the error
       error = desired - location
       brain.train(forces, error)
@@ -88,7 +83,6 @@ module SeekingNeural
     # STEER = DESIRED MINUS VELOCITY
     def seek(target)
       desired = target - location  # A vector pointing from the location to the target
-      
       # Normalize desired and scale to the maximum speed
       desired.normalize!
       desired *= MAX_SPEED
@@ -98,10 +92,9 @@ module SeekingNeural
       steer
     end
     
-    def display
-      
+    def display      
       # Draw a triangle rotated in the direction of velocity
-      theta = @velocity.heading + Math::PI / 2
+      theta = @velocity.heading + PI / 2
       fill(175)
       stroke(0)
       stroke_weight(1)
@@ -112,7 +105,7 @@ module SeekingNeural
         vertex(0, -sz)
         vertex(-sz * 0.5, sz)
         vertex(sz * 0.5, sz)
-      end_shape(CLOSE)
+      end_shape(PConstants::CLOSE)
       pop_matrix
     end
   end    
@@ -123,15 +116,12 @@ include SeekingNeural
 # A Vehicle controlled by a Perceptron
 attr_reader :targets, :desired, :v
 
-
 def setup
   sketch_title 'Seeking Neural'
   # The Vehicle's desired location
-  @desired = Vec2D.new(width / 2, height / 2)
-  
+  @desired = Vec2D.new(width / 2, height / 2)  
   # Create a list of targets
-  make_targets
-  
+  make_targets  
   # Create the Vehicle (it has to know about the number of targets
   # in order to configure its brain)
   @v = Vehicle.new(targets.size, rand(width), rand(height))
@@ -143,14 +133,12 @@ def make_targets
 end
 
 def draw
-  background(255)
-  
+  background(255)  
   # Draw a circle to show the Vehicle's goal
   stroke(0)
   stroke_weight(2)
   fill(0, 100)
-  ellipse(desired.x, desired.y, 36, 36)
-  
+  ellipse(desired.x, desired.y, 36, 36)  
   # Draw the targets
   targets.each do |target|
     no_fill
@@ -159,8 +147,7 @@ def draw
     ellipse(target.x, target.y, 16, 16)
     line(target.x, target.y - 16, target.x, target.y + 16)
     line(target.x - 16, target.y, target.x + 16, target.y)
-  end
-  
+  end  
   # Update the Vehicle
   v.steer(targets, desired)
   v.update(width, height)
@@ -172,6 +159,5 @@ def mouse_pressed
 end
 
 def settings
-  size(640, 360)
+  size 640, 360, P2D
 end
-

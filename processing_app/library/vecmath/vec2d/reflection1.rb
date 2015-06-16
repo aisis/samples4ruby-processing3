@@ -12,7 +12,7 @@ attr_reader :base1, :base2, :base_length, :coords, :position, :radius
 attr_reader :direction, :speed, :velocity, :incidence 
 
 def setup
-  sketch_title 'Reflection1'
+  sketch_title 'Reflection One'
   @radius = 6
   @speed = 3.5
   fill(128)
@@ -106,8 +106,6 @@ def create_ground
   return coords
 end
 
-
 def settings
-  size(640, 360)
+  size 640, 360, P2D
 end
-

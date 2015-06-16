@@ -1,13 +1,12 @@
 ########################################################
 # A 3D Hilbert fractal implemented using a
 # Lindenmayer System in ruby-processing by Martin Prout
+# ruby-processing-3.0
 # Demonstrates arcball rotation hold down z, y or z key
 # to constrain to that axis of rotation. Otherwise get
 # intuitive rotation using mouse drag.
 ########################################################
-
 load_libraries :hilbert, :vecmath
-
 attr_reader :hilbert, :renderer
 
 def setup
@@ -28,15 +27,12 @@ end
 
 def define_lights
   ambient(20, 20, 20)
-  ambient_light(60, 60, 60)
+  ambient_light(160, 160, 160)
   point_light(30, 30, 30, 0, 0, 0)
   directional_light(40, 40, 50, 1, 0, 0)
   spot_light(30, 30, 30, 0, 40, 200, 0, -0.5, 0.5, PI / 2, 2)
 end
 
-
-
 def settings
   size 1024, 768, P3D
 end
-

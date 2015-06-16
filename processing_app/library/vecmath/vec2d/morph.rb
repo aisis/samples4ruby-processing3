@@ -50,26 +50,21 @@ end
 
 def draw
   background(51)
-
   # We will keep how far the vertices are from their target
-  @total_distance = 0
-  
+  @total_distance = 0  
   # Look at each vertex
   circle.length.times do |i|
     # Are we lerping to the circle or square?
     v1 = state ?  circle[i] : square[i]
     # Get the vertex we will draw
-    v2 = morph[i]
-    
+    v2 = morph[i]    
     # Lerp to the target
     v2.lerp!(v1, 0.1)
     # Check how far we are from target
     @total_distance += v1.dist(v2)
-  end
-  
+  end  
   # If all the vertices are close, switch shape
-  @state = !state if @total_distance < 0.08
-  
+  @state = !state if @total_distance < 0.08  
   # Draw relative to center
   translate(width / 2, height / 2)
   stroke_weight(4)
@@ -83,10 +78,6 @@ def draw
   end_shape(CLOSE)
 end
 
-
-
-
 def settings
   size(640, 360)
 end
-

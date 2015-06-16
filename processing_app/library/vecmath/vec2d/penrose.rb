@@ -71,6 +71,5 @@ def init(alt_seed)
 end
 
 def settings
-  size(1024, 576)
+  size 1024, 576
 end
-

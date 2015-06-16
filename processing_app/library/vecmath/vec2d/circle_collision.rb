@@ -2,7 +2,6 @@
 # by Joe Holt
 load_library :vecmath
 
-
 # This inner class demonstrates the use of Ruby-Processing's emulation of
 # Java inner classes. The Balls are able to call Processing::App methods.
 class Ball
@@ -30,7 +29,6 @@ end
 
 attr_reader :balls
 
-
 def setup
   sketch_title 'Circle Collision'
   no_stroke
@@ -43,21 +41,18 @@ def setup
   @frame_count = 0
 end
 
-
 def draw
   t = Time.now
   fps = 1.0 / (t - @frame_time) if @frame_time
   @frame_time = t
-  @frame_count += 1
-  
+  @frame_count += 1  
   # erase previous screen
   if @frame_count == 1
     background 51
   else
     fill 51
     balls.each { |ball| ball.erase }
-  end
-  
+  end  
   # move the balls 
   fill 240
   balls.each do |ball|
@@ -74,17 +69,15 @@ def empty_space(r)
   while !pos || !empty_space?(pos, r) do
     pos = Vec2D.new(rand(r..width - r), rand(r..height - r))
   end
-  return pos
+  pos
 end
-
 
 def empty_space?(position, r)
   balls.each do |ball|
     return false if position.dist(ball.position) < r + ball.r
   end
-  return true
+  true
 end
-
 
 def check_object_collisions
   
@@ -143,21 +136,17 @@ def check_object_collisions
       bFinal[0].position.x = cosine * bTemp[0].position.x - sine * bTemp[0].position.y
       bFinal[0].position.y = cosine * bTemp[0].position.y + sine * bTemp[0].position.x
       bFinal[1].position.x = cosine * bTemp[1].position.x - sine * bTemp[1].position.y
-      bFinal[1].position.y = cosine * bTemp[1].position.y + sine * bTemp[1].position.x
-      
+      bFinal[1].position.y = cosine * bTemp[1].position.y + sine * bTemp[1].position.x      
       # update balls to screen position
       bb.position = ba.position + bFinal[1].position     
-      ba.position = ba.position + bFinal[0].position
-
-      
+      ba.position = ba.position + bFinal[0].position      
       # update velocities
       ba.velocity.x = cosine * vFinal[0].x - sine * vFinal[0].y
       ba.velocity.y = cosine * vFinal[0].y + sine * vFinal[0].x
       bb.velocity.x = cosine * vFinal[1].x - sine * vFinal[1].y
       bb.velocity.y = cosine * vFinal[1].y + sine * vFinal[1].x
     end
-  end
-  
+  end  
 end
 
 # reverse ball velocity if at sketch boundary
@@ -166,9 +155,6 @@ def check_boundary_collision(ball)
   ball.velocity.y *= -1 unless (ball.r..height - ball.r).include? ball.position.y 
 end
 
-
-
 def settings
   size 400, 400
 end
-

@@ -10,7 +10,7 @@ load_library :particle
 attr_reader :ps
 
 def setup
-  sketch_title 'Particle System Pshape'
+  sketch_title 'Particle System PShape'
   # Load the image
   sprite = load_image('sprite.png')
   # A new particle system with 10,000 particles
@@ -31,11 +31,9 @@ def draw
   # Display frame rate
   fill(255, 0, 255)
   text_size(16)
-  text("Frame rate: #{format('%0.1f', frame_rate)}", 10, 20)
+  text(format('Frame rate: %0.1f', frame_rate), 10, 20)
 end
-
 
 def settings
   size(640, 360, P2D)
 end
-

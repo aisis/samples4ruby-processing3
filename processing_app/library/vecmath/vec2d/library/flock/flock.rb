@@ -14,8 +14,7 @@ class Flock
     self.each do |bird|
       bird.run(self)  # Passing the entire list of boids to each boid individually
     end
-  end
-  
+  end  
 end
 
 # The Boid class
@@ -96,7 +95,7 @@ class Boid
     push_matrix
     translate(location.x,location.y)
     rotate(theta)
-    begin_shape(TRIANGLES)
+    begin_shape(PConstants::TRIANGLES)
     vertex(0, -r * 2)
     vertex(-r, r * 2)
     vertex(r, r * 2)

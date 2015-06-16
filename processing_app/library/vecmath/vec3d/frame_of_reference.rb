@@ -104,4 +104,3 @@ end
 def settings
   size(800, 800, P3D)
 end
-

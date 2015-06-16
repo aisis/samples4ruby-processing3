@@ -4,9 +4,7 @@
 # time. A ParticleSystem (Array) object manages a variable size list of
 # particles.
 require 'forwardable'
-
 load_library :vecmath
-
 attr_reader :ps
 
 def setup
@@ -46,8 +44,7 @@ class ParticleSystem
   
   def dead?
     self.empty?
-  end 
-
+  end
 end
 
 # A simple Particle class
@@ -80,11 +77,9 @@ class Particle
     stroke(255,lifespan)
     fill(255,lifespan)
     ellipse(loc.x, loc.y, 8, 8)
-  end
-  
+  end  
 end
 
 def settings
   size(640,360)
 end
-

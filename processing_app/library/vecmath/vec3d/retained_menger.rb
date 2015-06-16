@@ -1,9 +1,8 @@
 ##########################
 # RetainedMenger.rb
-# (processing-2.0)
+# (processing-3.0)
 # author Martin Prout
 ##########################
-
 load_library :vecmath
 
 PTS = [-1, 0, 1]
@@ -103,17 +102,17 @@ def create_cube(xx, yy, zz, sz)
   cube.vertex(+dim + xx, +dim + yy, +dim + zz)
   cube.vertex(-dim + xx, +dim + yy, +dim + zz)
   cube.end_shape
-  return cube
+  cube
 end
 
 def define_lights
-  ambient_light(50, 50, 50)
+  ambient_light(180, 180, 180)
   point_light(30, 30, 30, 200, 240, 0)
   directional_light(50, 50, 50, 1, 0, 0)
   spot_light(30, 30, 30, 0, 40, 200, 0, -0.5, -0.5, PI / 2, 2)
 end
+
 def settings
   size(640, 480, P3D)
   smooth(8)
 end
-

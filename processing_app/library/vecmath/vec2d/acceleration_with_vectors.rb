@@ -46,14 +46,12 @@ class Mover
     @topspeed = 5
   end
   
-  def update
-    
+  def update    
     # Compute a vector that points from location to mouse
     mouse = Vec2D.new(mouse_x, mouse_y)
     @acceleration = mouse - location
     # Set magnitude of acceleration
-    acceleration.set_mag(0.2)
-    
+    acceleration.set_mag(0.2)    
     # Velocity changes according to acceleration vector
     @velocity += acceleration
     # Limit the velocity to topspeed, PVector has a limit function 
@@ -72,8 +70,6 @@ class Mover
   end
 end
 
-
 def settings
-  size(640, 360)
+  size 640, 360, P2D
 end
-

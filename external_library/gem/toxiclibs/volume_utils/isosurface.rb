@@ -61,7 +61,7 @@ def settings
 end
 
 def draw
-  background(0)
+  background(200, 0, 200)
   if is_wire_frame
     no_fill
     stroke(255)

@@ -1,9 +1,7 @@
-#
 # Regular Expression example
 # by Martin Prout.
-#
-# This uses ruby scan
-#
+# This uses ruby scan in practice rubyist would use a parser
+# eg Nokogiri to achieve same result
 # Here we'll load the raw HTML from a URL and search for web-links
 #
 
@@ -32,20 +30,9 @@ def load_links(s)
   lines = load_strings(s)
   # Put it in one big string
   all_txt = lines.join('\n')
-  all_txt.scan(/
-        https?:\/\/
-        \w+
-        (?: [.-]\w+ )*
-        (?:
-            \/
-            [0-9]{1,5}
-            \?
-            [\w=]*
-        )?
-    /ix)
+  all_txt.scan(%r{https?:\/\/\w+(?: [.-]\w+ )*(?: \/[0-9]{1,5}\?[\w=]*)?}ix)
 end
 
 def settings
   size(360, 480)
 end
-

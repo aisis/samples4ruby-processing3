@@ -5,8 +5,6 @@
 # ruby Enumerable method?
 # 2010-03-22 - fjenett (somewhat revised by Martin Prout 2014-07-06)
 
-load_library :vecmath, :fastmath
-
 attr_reader :drawing_mode, :points, :rot_x, :rot_y, :vertices, :renderer
 
 def setup

@@ -2,7 +2,7 @@ load_libraries :hemesh, :vbo, :vecmath
 
 include MS # module MS imports necessary java classes and contains ruby MeshToVBO class
 
-RES = 20
+RES ||= 20
 
 attr_reader :mesh_ret, :inv_mesh_ret, :render
 
@@ -57,7 +57,7 @@ def settings
 end
 
 def draw
-  background(120)
+  background(200)
   lights
   define_lights
   shape(inv_mesh_ret)

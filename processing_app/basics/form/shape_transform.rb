@@ -10,7 +10,7 @@
 # Down Arrow - decreases points
 # 'p' key toggles between cube/pyramid
 
-load_library :vecmath
+
 attr_reader :renderer
 
 

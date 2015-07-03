@@ -2,7 +2,7 @@
 # Part of a series of articles on Processing 2.
 # Blog post here:
 # http://vormplus.be/blog/article/drawing-shapes-with-quadratic-vertices
-# translated for ruby-processing by Martin Prout
+# translated for JRubyArt by Martin Prout
 # Note how to specify fill and background using hexadecimal string for color,
 # this is different from vanilla processing
 #

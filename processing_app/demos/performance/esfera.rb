@@ -1,11 +1,10 @@
 #
 # Esfera
 # by David Pena.
-# Somewhat re-factored for ruby-processing
+# Somewhat re-factored for JRubyArt
 # by Martin Prout
 # Distribucion aleatoria uniforme sobre la superficie de una esfera.
 #
-load_library :vecmath
 
 QUANTITY = 16_000
 

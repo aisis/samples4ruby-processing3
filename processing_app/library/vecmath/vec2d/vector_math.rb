@@ -5,7 +5,7 @@
 # Demonstration some basic vector math: subtraction, normalization, scaling
 # Normalizing a vector sets its length to 1.
 #
-load_library :vecmath
+
 
 def setup
   sketch_title 'Vector Math'

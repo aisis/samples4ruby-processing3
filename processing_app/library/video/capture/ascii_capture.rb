@@ -1,6 +1,6 @@
 #
 # ASCII Video
-# by Ben Fry, translated to ruby-processing by Martin Prout.
+# by Ben Fry, translated to JRubyArt by Martin Prout.
 #
 #
 # Text chars have been used to represent images since the earliest computers.

@@ -5,7 +5,7 @@
 # than the constrain(val, range.begin, range.end) processing method
 # it is used implement (for a more ruby like experience).
 
-load_library :vecmath
+
 
 module SeekingNeural
   class Perceptron

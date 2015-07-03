@@ -1,10 +1,9 @@
 ###############
 # Frame of Reference example by Ira Greenberg
 # https://github.com/irajgreenberg/ProcessingTips
-# Translated to ruby-processing by Martin Prout January 2014
+# Translated to JRubyArt by Martin Prout July 2015
 ###############
 
-load_libraries :fastmath, :vecmath
 load_library :geometry
 
 FACE_COUNT = 50

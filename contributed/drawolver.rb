@@ -8,7 +8,7 @@
 # now uses 'zip' and 'each', in place of a custom Array object
 # with a 'one_of_each' method
 
-load_library :vecmath
+
 attr_reader :drawing_mode, :points, :rot_x, :rot_y, :vertices
 
 def setup

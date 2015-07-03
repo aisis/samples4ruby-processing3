@@ -3,7 +3,7 @@
 # (processing-3.0)
 # author Martin Prout
 ##########################
-load_library :vecmath
+
 
 PTS = [-1, 0, 1]
 MIN_SIZE = 20

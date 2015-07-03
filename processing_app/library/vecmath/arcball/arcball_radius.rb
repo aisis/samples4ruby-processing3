@@ -1,4 +1,4 @@
-load_library :vecmath
+
 
 ############################
 # Use mouse drag to rotate

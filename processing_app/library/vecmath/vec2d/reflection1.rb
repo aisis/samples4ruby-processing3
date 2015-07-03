@@ -6,7 +6,7 @@
 # reflection vector, N is the normal, and L is the incident
 # vector. NB: variant uses Vec2D in place of PVector
 #
-load_library :vecmath
+
 
 attr_reader :base1, :base2, :base_length, :coords, :position, :radius
 attr_reader :direction, :speed, :velocity, :incidence 

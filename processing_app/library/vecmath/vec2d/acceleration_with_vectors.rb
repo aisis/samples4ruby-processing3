@@ -12,7 +12,6 @@
 # Simulate/ForcesWithVectors, Simulate/GravitationalAttraction3D
 #
 
-load_library 'vecmath'
 # A Mover object
 attr_reader :mover
 

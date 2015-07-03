@@ -1,6 +1,6 @@
 # Bicubic filtering (see bicubic.glsl file for details)
 # Uncheck 'apply_filter' to show regular texture map filtering
-# Ported to ruby-processing by Martin Prout
+# Ported to JRubyArt by Martin Prout
 load_library :control_panel
 
 attr_reader :bicubic, :my_image, :hide, :panel, :zoom

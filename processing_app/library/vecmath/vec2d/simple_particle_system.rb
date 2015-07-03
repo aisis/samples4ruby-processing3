@@ -4,7 +4,7 @@
 # time. A ParticleSystem (Array) object manages a variable size list of
 # particles.
 require 'forwardable'
-load_library :vecmath
+
 attr_reader :ps
 
 def setup

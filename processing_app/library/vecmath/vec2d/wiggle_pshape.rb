@@ -4,7 +4,7 @@
 # 
 # How to move the individual vertices of a PShape
 #
-load_library :vecmath
+
 
 attr_reader :wiggler
 

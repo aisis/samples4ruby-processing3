@@ -23,7 +23,7 @@ def setup
 end
 
 def load_image_thread
-  thread do     # supply a block in ruby-processing rather than use reflection
+  thread do     # supply a block in JRubyArt rather than use reflection
     FRAMES.times do |i|
       frames << load_image(format(IMG_F, i.to_s.rjust(3, '0')))
       @curr = i

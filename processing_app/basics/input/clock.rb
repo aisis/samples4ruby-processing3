@@ -1,6 +1,6 @@
 # Current time can be read with the t = Time.now. Get hour, minute and second 
 # using t.hour, t.min, t.sec functions. The processing hour(), minute() and 
-# second are deprecated since ruby-processing-2.5.1. In this example, sine and 
+# second are not available in JRubyArt. In this example, sine and 
 # cosine values are used to set the position of the hands.
 
 def setup

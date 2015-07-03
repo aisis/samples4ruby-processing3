@@ -2,7 +2,7 @@
 # the seconds Time.now.sec, minutes Time.now.min etc...
 # functions. In this example, DegLut.sin() and DegLut.cos() values are used to
 # set the position of the hands, perfect for degree precision Lookup Table.
-load_library :fastmath
+
 
 def setup
   sketch_title 'Clock'

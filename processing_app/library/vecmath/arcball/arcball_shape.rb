@@ -1,4 +1,4 @@
-load_library :vecmath
+
 attr_reader :my_cube
 
 def setup

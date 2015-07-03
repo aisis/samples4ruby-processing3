@@ -11,7 +11,7 @@
 # 
 # Photographs by Folkert Gorter (@folkertgorter / http://superfamous.com/) made available under a CC Attribution 3.0 license.
 #
-load_library :vecmath
+
 
 DIM = 300 # the grid dimensions of the heightmap
 attr_reader :blur_factor # the blur for the displacement map (to make it smoother)

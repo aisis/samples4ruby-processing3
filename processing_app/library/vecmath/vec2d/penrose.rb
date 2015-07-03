@@ -2,9 +2,9 @@
 # Using a variant of the "ArrayList" recursion technique: http://natureofcode.com/book/chapter-8-fractals/chapter08_section4
 # Penrose Algorithm from: http://preshing.com/20110831/penrose-tiling-explained
 # Daniel Shiffman May 2013
-# Translated (and refactored) to ruby-processing Jan 2014 by Martin Prout
+# Translated (and refactored) to JRubyArt July 2015 by Martin Prout
 
-load_libraries :vecmath, :tile, :control_panel
+load_libraries :tile, :control_panel
 attr_reader :tris, :s, :panel, :hide, :acute
 
 def setup

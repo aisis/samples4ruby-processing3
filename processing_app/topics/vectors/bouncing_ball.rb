@@ -7,7 +7,7 @@
 # See AccelerationWithVectors for an example of how to simulate motion using vectors in an object
 # See library/vecmath for more ruby like Vec2D and Vec3D examples
 #
-load_library :vecmath
+
 RADIUS = 24
 attr_reader :loc,      # Location of shape
             :velocity, # Velocity of shape

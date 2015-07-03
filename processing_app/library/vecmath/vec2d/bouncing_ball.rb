@@ -7,7 +7,7 @@
 # This example is not object-oriented
 # See AccelerationWithVectors for an example of how to simulate motion using vectors in an object
 #
-load_library :vecmath
+
 RADIUS = 24
 
 attr_reader :loc,  # Location of shape

@@ -3,7 +3,7 @@
 # http://www.contextfreeart.org/gallery/view.php?id=2844
 #
 
-load_library :fastmath
+
 
 CMIN = -2.0 # Important to specify float else get random int from range?
 CMAX = 2.0

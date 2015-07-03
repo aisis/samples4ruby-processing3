@@ -18,7 +18,7 @@
 #
 
 #
-# Copyright (c) 2010 Karsten Schmidt & ruby-processing version Martin Prout 2012
+# Copyright (c) 2010 Karsten Schmidt & JRubyArt version Martin Prout 2015
 # This sketch relies on a custom toxiclibscore library for PovRAY export
 #
 # This library is free software you can redistribute it and/or
@@ -39,7 +39,7 @@
 #
 
 require 'toxiclibs'
-load_library :vecmath 
+ 
 RES = 64
 ISO = 0.2
 MAX_ISO = 0.66

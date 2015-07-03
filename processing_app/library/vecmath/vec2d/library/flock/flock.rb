@@ -21,7 +21,6 @@ end
 
 class Boid
   include Processing::Proxy
-  import 'vecmath'
   attr_reader :location, :velocity, :acceleration, :r, :maxforce, :maxspeed
   attr_reader :width, :height
   def initialize(loc)

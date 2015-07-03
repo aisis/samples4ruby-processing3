@@ -8,7 +8,7 @@
 # 3. press x, y, or z to constrain arcball rotation to that axis
 #
 
-load_library :vecmath
+
 
 PHI = (sqrt(5) + 1) / 2 - 1   # golden ratio
 GA = PHI * TAU           # golden angle

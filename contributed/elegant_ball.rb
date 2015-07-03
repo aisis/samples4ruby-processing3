@@ -3,7 +3,7 @@
 # Ben Notorianni aka lazydog
 #
 # elegant.rb
-load_library :vecmath
+
 attr_reader :start_t, :renderer
 
 def setup

@@ -5,10 +5,10 @@
 # Original code: http://paulbourke.net/geometry/bezier/
 #
 # hit "spacebar" to generate a new shape and save current
-# translated for ruby-processing by Martin Prout 
+# translated for JRubyArt by Martin Prout 
 #
 
-load_library :vecmath
+
 
 NI=4
 NJ=5

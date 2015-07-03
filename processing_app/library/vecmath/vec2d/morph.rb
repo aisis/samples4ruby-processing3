@@ -4,7 +4,7 @@
 # Changing one shape into another by interpolating
 # vertices from one to another
 #
-load_library :vecmath
+
 
 attr_reader :circle, :square, :morph, :state, :v1, :v2, :renderer
 

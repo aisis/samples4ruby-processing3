@@ -6,7 +6,7 @@
 # see line 62 for inititialization of renderer where obj is an instance of PShape
 # renderer = ShapeRender.new(obj)
 
-load_library :vecmath
+
 
 attr_reader :pg, :trefoil
 

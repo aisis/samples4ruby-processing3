@@ -3,7 +3,7 @@
 # A particle system optimized for drawing using PShape
 # For guts of implementation see 'particle' library
 #
-load_library :vecmath
+
 load_library :particle
 
 # Particle System object and image

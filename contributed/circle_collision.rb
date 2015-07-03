@@ -1,7 +1,5 @@
 # Based on http://processing.org/learning/topics/circlecollision.html
 
-load_library :vecmath
-
 # The Ball class knows how to behave, their is a case for a separate boundary class
 class Ball
   attr_accessor :position, :r, :m, :velocity

@@ -1,7 +1,7 @@
 #
 # Background Subtraction
 # by Golan Levin.
-# translated to ruby-processing by Martin Prout
+# translated to JRubyArt by Martin Prout
 # Detect the presence of people and objects in the frame using a simple
 # background-subtraction technique. To initialize the background, press a key.
 #

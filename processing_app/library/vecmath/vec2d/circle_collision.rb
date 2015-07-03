@@ -1,6 +1,6 @@
 # Based on http://processing.org/learning/topics/circlecollision.html
 # by Joe Holt
-load_library :vecmath
+
 
 # This inner class demonstrates the use of Ruby-Processing's emulation of
 # Java inner classes. The Balls are able to call Processing::App methods.

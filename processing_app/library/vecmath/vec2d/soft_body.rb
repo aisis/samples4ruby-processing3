@@ -3,7 +3,6 @@
 # Softbody dynamic simulation using curve_vertex
 # and curve_tightness (and new Vec2D to_curve_vertex)
 ########
-load_libraries :vecmath, :fastmath
 
 attr_reader :accel, :center, :frequency, :radius, :rot_angle
 attr_reader :organic_constant, :nodes, :renderer, :angle, :node_start

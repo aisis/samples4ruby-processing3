@@ -6,7 +6,7 @@
 # Normalizing a vector sets its length to 1. See library/vecmath for example
 # using the more ruby like Vec2D class instead of Vec2D
 #
-load_library :vecmath
+
 
 def setup
   sketch_title 'Vector Math'

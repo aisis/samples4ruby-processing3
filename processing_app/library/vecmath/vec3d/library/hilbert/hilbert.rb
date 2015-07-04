@@ -21,12 +21,11 @@ class Grammar
     expand(@axiom, gen) {|token| yield token }
   end
 
-  def generate gen
-    output = []
-    each(gen) { |token| output << token }
-    output
+  def generate(gen)
+    [].tap do |output|
+      each(gen) { |token| output << token }
+    end
   end
-
 end
 
 

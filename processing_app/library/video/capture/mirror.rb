@@ -5,7 +5,7 @@
 # Each pixel from the video source is drawn as a rectangle with rotation
 # based on brightness.
 
-load_libraries :video, :video_event
+load_library :video
 include_package 'processing.video'
 
 # Size of each cell in the grid
@@ -20,7 +20,7 @@ def setup
   @cols = width / CELL_SIZE
   @rows = height / CELL_SIZE
   color_mode(RGB, 255, 255, 255, 100)
-  @video = Capture.new(self, width, height)
+  @video = Java::ProcessingVideo::Capture.new(self, width, height)
   # Start capturing the images from the camera
   video.start
   background(0)
@@ -58,9 +58,9 @@ def draw
   end
 end
 
-def captureEvent(c)
-  c.read
-end
+# def captureEvent(c)
+#   c.read
+# end
 
 def settings
   size(640, 480)

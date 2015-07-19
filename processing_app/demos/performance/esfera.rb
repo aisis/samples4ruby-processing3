@@ -61,8 +61,8 @@ class HairyOrb
 
   def render
     self.each do |hair|
-      off = (app.noise(app.millis() * 0.0005, sin(hair.phi)) - 0.5) * 0.3
-      offb = (app.noise(app.millis() * 0.0007, sin(hair.z) * 0.01) - 0.5) * 0.3
+      off = (noise(millis() * 0.0005, sin(hair.phi)) - 0.5) * 0.3
+      offb = (noise(millis() * 0.0007, sin(hair.z) * 0.01) - 0.5) * 0.3
       thetaff = hair.theta + off
       costhetaff = cos(thetaff)
       coshairtheta = cos(hair.theta)
@@ -74,13 +74,13 @@ class HairyOrb
       yo = radius * costhetaff * sin(phff)
       zo = radius * sin(thetaff)
       xb, yb, zb = xo * hair.len, yo * hair.len, zo * hair.len
-      app.stroke_weight(1)
-      app.begin_shape(PConstants::LINES)
-      app.stroke_int(0)
-      app.vertex(x, y, za)
-      app.stroke_float_float(200, 150)
-      app.vertex(xb, yb, zb)
-      app.end_shape()
+      stroke_weight(1)
+      begin_shape(LINES)
+      stroke_int(0)
+      vertex(x, y, za)
+      stroke_float_float(200, 150)
+      vertex(xb, yb, zb)
+      end_shape()
     end
   end
 end

@@ -8,7 +8,7 @@ load_library 'grammar'
 # Euclidean travelling salesman problem
 ####################################################
 class MPeano
-  include Processing::Proxy
+  include Processing::PConstants, Processing::Proxy
 
   SQRT2 = Math.sqrt(2.0)
   ISQRT2 = 1 / SQRT2
@@ -25,8 +25,8 @@ class MPeano
       'B' => 'AFF'
     }
     @grammar = Grammar.new(axiom, rules)
-    @delta   = Math::PI / 4          # 45 degrees
-    @theta   = Math::PI / 4 
+    @delta   = PI / 4          # 45 degrees
+    @theta   = PI / 4 
     @draw_length = 8
     @xpos = xpos
     @ypos = ypos
@@ -64,7 +64,7 @@ end
 attr_reader :points
 
 def setup
-  sketch_title 'Mpeano'
+  sketch_title 'MPeano'
   mpeano = MPeano.new(width * 0.8, height * 0.8)
   production = mpeano.generate 7                  # 7 generations looks OK
   @points = mpeano.translate_rules(production)
@@ -80,6 +80,6 @@ def draw
 end
 
 def settings
-  size(600, 600)
+  size(600, 600, P2D)
 end
 

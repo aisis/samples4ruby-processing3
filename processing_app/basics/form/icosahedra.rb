@@ -1,6 +1,7 @@
 require_relative 'lib/icosahedron'
 
 def setup
+  sketch_title 'Icosahedra'
   @ico1 = Icosahedron.new self, 75.0
   @ico2 = Icosahedron.new self, 75.0
   @ico3 = Icosahedron.new self, 75.0

@@ -1,49 +1,40 @@
-# The Nature of Code
-# Box2DProcessing example
-
 # Basic example of falling rectangles
-load_libraries :box2d_processing, :custom_shape
+require 'pbox2d'
+require_relative 'lib/custom_shape'
+require_relative 'lib/boundary'
+require_relative 'lib/shape_system'
 
-# module B2D is a wrapper for java imports, and Boundary and CustomShape classes
-include B2D
+attr_reader :box2d, :boundaries, :system
 
-attr_reader :box2d, :boundaries, :polygons
+Vect = Struct.new(:x, :y)
 
 def setup
   sketch_title 'Polygons'
-  # Initialize box2d physics and create the world
-  @box2d = B2D::Box2DProcessing.new(self)
+  smooth
+  @box2d = Box2D.new(self)
+  box2d.init_options(gravity: [0, -20])
   box2d.create_world
-  # We are setting a custom gravity
-  box2d.set_gravity(0, -20)
-  # Create Arrays
-  @polygons = []
-  @boundaries = []
-  # Add a bunch of fixed boundaries
-  boundaries << Boundary.new(box2d, width / 4, height - 5, width/2 - 50, 10, 0)
-  boundaries << Boundary.new(box2d, 3 * width / 4, height - 50, width/2 - 50, 10, 0)
-  boundaries << Boundary.new(box2d, width - 5, height / 2, 10, height, 0)
-  boundaries << Boundary.new(box2d, 5, height / 2, 10, height, 0)
+  @system = ShapeSystem.new self
+  @boundaries = [
+    Boundary.new(box2d, Vect.new(width / 4, height - 5), Vect.new(width / 2 - 50, 10)),
+    Boundary.new(box2d, Vect.new(3 * width / 4, height - 50), Vect.new(width / 2 - 50, 10)),
+    Boundary.new(box2d, Vect.new(width - 5, height / 2), Vect.new(10, height)),
+    Boundary.new(box2d, Vect.new(5, height / 2), Vect.new(10, height))
+  ]
 end
 
 def draw
   background(255)
-  # We must always step through time!
-  box2d.step
   # Display all the boundaries
   boundaries.each(&:display)
   # Display all the polygons
-  polygons.each(&:display)
-  # polygons that leave the screen, we delete them
-  # (note they have to be deleted from both the box2d world and our list
-  polygons.reject!(&:done)
+  system.run
 end
 
 def mouse_pressed
-  polygons << CustomShape.new(box2d, mouse_x, mouse_y)
+  system << CustomShape.new(box2d, mouse_x, mouse_y)
 end
 
 def settings
-  size 640, 360, P2D
-  smooth 8
+  size(640, 360)
 end

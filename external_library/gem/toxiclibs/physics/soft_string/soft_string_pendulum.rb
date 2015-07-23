@@ -31,6 +31,7 @@ def setup
   @physics = Physics::VerletPhysics2D.new
   physics.addBehavior(Physics::GravityBehavior2D.new(TVec2D.new(0, 0.1)))
   physics.setWorldBounds(Toxi::Rect.new(0, 0, width, height))
+
   # Initialize the chain
   @chain = Chain.new(physics, 180, 20, 16, 0.2)
 end
@@ -45,10 +46,6 @@ def draw
   chain.display
 end
 
-def settings
-  size 640, 360, P2D
-end
-
 def mouse_pressed
   # Check to see if we're grabbing the chain
   chain.contains(mouse_x, mouse_y)
@@ -58,3 +55,8 @@ def mouse_released
   # Release the chain
   chain.release
 end
+
+def settings
+  size(640, 360)
+end
+

@@ -29,6 +29,7 @@
 # License along with this library if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
+require 'forwardable'
 require 'toxiclibs'
 require_relative 'blanket'
 require_relative 'connection'
@@ -37,10 +38,10 @@ require_relative 'particle'
 attr_reader :b, :physics
 
 def setup
-  sketch_title 'Blanket'
+  sketch_title 'Soft Body Square Adapted'
   @physics = Physics::VerletPhysics2D.new
   physics.addBehavior(Physics::GravityBehavior2D.new(TVec2D.new(0, 0.1)))
-  @b = Blanket.new(physics)
+  @b = Blanket.new(self)
 end
 
 def draw
@@ -50,5 +51,5 @@ def draw
 end
 
 def settings
-  size 640, 360
+  size(640, 360)
 end

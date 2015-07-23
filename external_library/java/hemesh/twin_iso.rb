@@ -1,4 +1,4 @@
-load_libraries :hemesh, :vbo, :vecmath
+load_libraries :hemesh, :vbo
 
 include MS # module MS imports necessary java classes and contains ruby MeshToVBO class
 

@@ -4,12 +4,14 @@
 # Force directed graph
 # Heavily based on: http://code.google.com/p/fidgen/
 class Cluster
-  include Processing::Proxy
-  attr_reader :nodes, :diameter, :physics
+  extend Forwardable
+  def_delegators(:@app, :line, :physics, :stroke, :stroke_weight)
+  attr_reader :nodes, :diameter
 
   # We initialize a Cluster with a number of nodes, a diameter, and centerpoint
-  def initialize(physics, n, d, center)
-    @diameter, @physics = d, physics
+  def initialize(n, d, center)
+    @diameter = d
+    @app = $app
     # Create the nodes
     @nodes = (0..n).map { Node.new(center.add(TVec2D.randomVector)) }
     # Connect all the nodes with a Spring

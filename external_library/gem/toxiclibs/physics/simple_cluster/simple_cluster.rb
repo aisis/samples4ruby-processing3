@@ -4,7 +4,7 @@
 
 # Force directed graph,
 # heavily based on: http://code.google.com/p/fidgen/
-
+require 'forwardable'
 require 'toxiclibs'
 require_relative 'cluster'
 require_relative 'node'
@@ -14,7 +14,6 @@ attr_reader :physics, :cluster, :f, :show_physics, :show_particles
 def setup
   sketch_title 'Simple Cluster'
   @f = createFont('Georgia', 12, true)
-
   @show_physics = true
   @show_particles = true
   @show_physics = true
@@ -24,7 +23,7 @@ def setup
   @physics.setWorldBounds(Toxi::Rect.new(10, 10, width - 20, height - 20))
 
   # Spawn a new random graph
-  @cluster = Cluster.new(physics, 8, 100, TVec2D.new(width / 2, height / 2))
+  @cluster = Cluster.new(8, 100, TVec2D.new(width / 2, height / 2))
 end
 
 def draw
@@ -52,10 +51,11 @@ def key_pressed
     @show_particles = true unless show_physics
   when 'n'
     physics.clear
-    @cluster = Cluster.new(physics, rand(3..20), rand(10..width / 2), TVec2D.new(width / 2, height / 2))
+    @cluster = Cluster.new(rand(3..20), rand(10..width / 2), TVec2D.new(width / 2, height / 2))
   end
 end
 
 def settings
-  size 640, 360, P2D
+  size(640, 360)
 end
+

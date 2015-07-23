@@ -16,7 +16,7 @@ module MS
       tri_mesh = mesh.get
       tri_mesh.triangulate
       retained = parent.create_shape
-      retained.begin_shape(PConstants::TRIANGLES)
+      retained.begin_shape(TRIANGLES)
       if col
         retained.fill(col)
       else # we will have a light grey color, created by bit shifting

@@ -7,10 +7,12 @@
 # We could have just stored a reference to a VerletParticle object
 # inside the Node class, but inheritance is a nice alternative
 class Node < Physics::VerletParticle2D
-  include Processing::Proxy
+  extend Forwardable
+  def_delegators(:@app, :fill, :stroke, :stroke_weight, :ellipse)
 
   def initialize(pos)
     super(pos)
+    @app = $app
   end
 
   # All we're doing really is adding a display function to a VerletParticle

@@ -7,20 +7,22 @@
 # Heavily based on: http://code.google.com/p/fidgen/
 # A cluster is a grouping of Nodes
 class Cluster
-  include Processing::Proxy
-  attr_reader :nodes, :diameter, :physics
+  extend Forwardable
+  def_delegators(:@app, :physics, :stroke, :stroke_weight, :line)
+  attr_reader :nodes, :diameter
 
   # We initialize a Cluster with a number of nodes, a diameter, and centerpoint
-  def initialize(p, n, d, center)
+  def initialize(n, d, center)
     # Set the diameter
-    @diameter, @physics = d, p
+    @diameter, = d
+    @app = $app
     # Create the nodes
     @nodes = (0..n).map { Node.new(center.add(TVec2D.randomVector)) }
     # Connect all the nodes with a Spring
     nodes[0..nodes.size - 2].each_with_index do |ni, i|
       nodes[i + 1..nodes.size - 1].each do |nj|
         # A Spring needs two particles, a resting length, and a strength
-        physics.addSpring(Physics::VerletSpring2D.new(ni, nj, diameter, 0.01))
+        physics.add_spring(Physics::VerletSpring2D.new(ni, nj, diameter, 0.01))
       end
     end
   end

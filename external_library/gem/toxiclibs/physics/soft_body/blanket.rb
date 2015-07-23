@@ -2,9 +2,12 @@
 # Daniel Shiffman
 # http://natureofcode.com
 class Blanket
+  extend Forwardable
+  def_delegators(:@app, :physics, :width)  
   attr_reader :particles, :springs
 
-  def initialize(physics)
+  def initialize(app)
+    @app = app
     @particles = []
     @springs = []
     w = 20
@@ -13,19 +16,19 @@ class Blanket
     strength = 0.125
     h.times do |y|
       w.times do |x|
-        p = Particle.new(TVec2D.new($app.width / 2 + x * len - w * len / 2, y * len))
+        p = Particle.new(TVec2D.new(width / 2 + x * len - w * len / 2, y * len))
         physics.addParticle(p)
         particles << p
         if x > 0
           previous = particles[particles.size - 2]
           c = Connection.new(p, previous, len, strength)
-          physics.addSpring(c)
+          physics.add_spring(c)
           springs << c
         end
         if y > 0
           above = particles[particles.size - w - 1]
           c = Connection.new(p, above, len, strength)
-          physics.addSpring(c)
+          physics.add_spring(c)
           springs << c
         end
       end

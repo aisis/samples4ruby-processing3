@@ -1,4 +1,4 @@
-load_library :hemesh, :vecmath
+load_library :hemesh
 
 module MS  
   include_package 'wblut.math'

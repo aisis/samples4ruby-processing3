@@ -1,12 +1,12 @@
 # This example demonstrates how to rotate a number of meshes
 # so that each points towards a common & user controlled focal point.
 #
-# Requires toxiclibs gem (NB: as a bare sketch needs to run with 'k9')
+# Requires toxiclibs gem
 #
 # (c) 2012 Karsten Schmidt / LGPL2 licensed
 #
 require 'toxiclibs'
-load_libraries :vecmath
+
 # container for mesh positions
 attr_reader :gfx, :positions
 

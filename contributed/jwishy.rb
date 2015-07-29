@@ -1,9 +1,9 @@
 # This one has a long lineage:
 # It was originally adapted to Shoes in Ruby,
 # from a Python example for Nodebox, and then, now
-# to Ruby-Processing.
+# to JRubyArt.
 
-# For fun, try running it via jirb, and
+# For fun, try running it using live mode, and
 # playing with the attr_accessors, as
 # well as the background.
 
@@ -13,17 +13,19 @@
 
 load_library :control_panel
 
-attr_accessor :x_wiggle, :y_wiggle, :magnitude, :bluish, :panel, :laf, :hide
+attr_reader :alpha, :back_color, :bluish, :hide, :magnitude, :panel
+attr_reader :x_wiggle, :y_wiggle
 
 def setup
-  sketch_title 'JWishy'
+  sketch_title 'Wishy Worm'
   control_panel do |c|
+    c.title = 'Control Panel'
     c.look_feel 'Nimbus'
     c.slider    :bluish, 0.0..1.0, 0.5
     c.slider    :alpha,  0.0..1.0, 0.5
     c.checkbox  :go_big
     c.button    :reset
-    c.menu      :shape, %w(oval square)
+    c.menu      :shape, %w(oval square triangle)
     @panel = c
   end
   @hide = false
@@ -31,20 +33,15 @@ def setup
   @alpha, @bluish = 0.5, 0.5
   @x_wiggle, @y_wiggle = 10.0, 0
   @magnitude = 8.15
-  @background = [0.06, 0.03, 0.18]
+  @back_color = [0.06, 0.03, 0.18]
   color_mode RGB, 1
   ellipse_mode CORNER
   smooth
 end
 
-def background=(*args)
-  @background = args.flatten
-end
-
-
 def draw_background
-  @background[3] = @alpha
-  fill(*@background) if @background[0]
+  back_color[3] = alpha
+  fill(*back_color.to_java(:float)) if back_color[0]
   rect 0, 0, width, height
 end
 
@@ -62,10 +59,10 @@ def draw
 
   # Seed the random numbers for consistent placement from frame to frame
   srand(0)
-  horiz, vert, mag = @x_wiggle, @y_wiggle, @magnitude
+  horiz, vert, mag = x_wiggle, y_wiggle, magnitude
 
   if @go_big
-    mag  *= 2
+    mag *= 2
     vert /= 2
   end
 
@@ -76,10 +73,10 @@ def draw
   64.times do
     x += cos(horiz) * mag
     y += log10(vert) * mag + sin(vert) * 2
-    fill(sin(@y_wiggle + c), rand * 0.2, rand * blu, 0.5)
+    fill(sin(y_wiggle + c), rand * 0.2, rand * blu, 0.5)
     s = 42 + cos(vert) * 17
-    args = [x - s / 2, y - s / 2, s, s]
-    @shape == 'oval' ? oval(*args) : rect(*args)
+    args = [@shape, x - s / 2, y - s / 2, s, s]
+    draw_shape(args)
     vert += rand * 0.25
     horiz += rand * 0.25
     c += 0.1
@@ -93,6 +90,23 @@ def mouse_pressed
   @hide = false if hide
 end
 
+def draw_shape(args)
+  case args[0]
+  when 'triangle'
+    x0 = args[1] - (args[3] * 0.6)
+    x1 = args[1]
+    x2 = args[1] + (args[3] * 0.6)
+    y0 = args[2] + (args[4] * 0.396)
+    y1 = args[2] - (args[4] * 0.792)
+    y2 = args[2] + (args[4] * 0.396)
+    triangle(x0, y0, x1, y1, x2, y2)
+  when 'square'
+    rect(args[1], args[2], args[3], args[4])
+  else
+    oval(args[1], args[2], args[3], args[4])
+  end
+end
+
 def settings
-  size 600, 600, FX2D
+  size 600, 600
 end

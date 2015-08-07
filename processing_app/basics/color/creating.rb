@@ -25,8 +25,8 @@ end
 
 def draw
   no_stroke
-	background 51, 0, 0
-	push_matrix
+  background 51, 0, 0
+  push_matrix
   translate 80, 80
   fill orangish
   rect 0, 0, 200, 200

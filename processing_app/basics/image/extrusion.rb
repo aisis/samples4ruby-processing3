@@ -8,17 +8,18 @@
 attr_reader :a, :values, :angle
 
 def setup
+  sketch_title 'Extrusion'
   @angle = 0
   @values = [] 
   no_fill
   # Load the image into a new array
   # Extract the values and store in an array
-  @a = load_image("ystone08.jpg")
+  @a = load_image('ystone08.jpg')
   a.load_pixels
   (0 ... a.height).each do |i|
     row = []
     (0 ... a.width).each do |j|
-      pix = a.pixels[i*a.width + j]
+      pix = a.pixels[i * a.width + j]
       row << blue(pix).to_i
     end
     values << row
@@ -27,7 +28,7 @@ end
 
 def draw
   background(0)
-  translate(width/2, height/2, -height/2)
+  translate(width / 2, height / 2, -height / 2)
   scale(2.0)
   
   # Update and constrain the angle

@@ -5,9 +5,9 @@
 attr_reader :scale
 
 def setup
-  size 640, 360
+  sketch_title 'Milliseconds'
   no_stroke
-  @scale = width/10
+  @scale = width / 10
 end
 
 def draw
@@ -16,5 +16,9 @@ def draw
     fill millis % ((i + 1) * scale * 10)
     rect i * scale, 0, scale, height
   end
+end
+
+def settings
+  size 640, 360
 end
 

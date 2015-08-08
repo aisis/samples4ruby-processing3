@@ -7,6 +7,7 @@
 attr_reader :bot
 
 def setup
+  sketch_title 'Scale Shape'
   # The file "bot1.svg" must be in the data folder
   # of the current sketch to load successfully
   @bot = load_shape("bot1.svg")

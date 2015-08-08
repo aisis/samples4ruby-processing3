@@ -4,7 +4,8 @@
 # Here, the third dimension ('z') is treated as time.
 attr_reader :increment, :z_increment
 
-def setup    
+def setup
+  sketch_title 'Noise 3D'
   frame_rate 30    
   @increment = 0.01
   @zoff = 0.0
@@ -20,7 +21,7 @@ def draw
     yoff = 0.0  		
     (0...height).each do |y|  		    
       yoff += increment  			
-      bright = noise( xoff, yoff, @zoff ) * 255  			
+      bright = noise(xoff, yoff, @zoff) * 255  			
       pixels[x + y * width] = color(bright, bright, bright)
     end
   end  	

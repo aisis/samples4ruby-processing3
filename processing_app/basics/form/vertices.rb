@@ -1,14 +1,11 @@
-
-
 # The beginShape() function begins recording vertices 
 # for a shape and endShape() stops recording. 
 # A vertex is a location in space specified by X, Y, 
 # and sometimes Z coordinates. After calling the beginShape() function, 
 # a series of vertex() functions must follow.  
 # To stop drawing the shape, call the endShape() functions.
-
-
 def setup
+  sketch_title 'Vertices'
   background 10, 10, 50
   no_fill
   stroke_weight 3

@@ -1,39 +1,36 @@
 #
 # Star
-# 
-# The star function created for this example is capable of drawing a
-# wide range of different forms. Try placing different numbers into the 
-# star function calls within draw to explore. 
 #
-
+# The star function created for this example is capable of drawing a
+# wide range of different forms. Try placing different numbers into the
+# star function calls within draw to explore.
+#
 def setup
+  sketch_title 'Star'
 end
 
 def draw
   background(102)
-  
   push_matrix
-  translate(width*0.2, height*0.5)
+  translate(width * 0.2, height * 0.5)
   rotate(frame_count / 200.0)
-  star(0, 0, 5, 70, 3) 
+  star(0, 0, 5, 70, 3)
   pop_matrix
-  
   push_matrix
-  translate(width*0.5, height*0.5)
+  translate(width * 0.5, height * 0.5)
   rotate(frame_count / 50.0)
-  star(0, 0, 80, 100, 40) 
+  star(0, 0, 80, 100, 40)
   pop_matrix
-  
   push_matrix
-  translate(width*0.8, height*0.5)
+  translate(width * 0.8, height * 0.5)
   rotate(frame_count / -100.0)
-  star(0, 0, 30, 70, 5) 
+  star(0, 0, 30, 70, 5)
   pop_matrix
 end
 
 def star(x, y, radius1, radius2, npoints)
   angle = TAU / npoints
-  half_angle = angle/2.0
+  half_angle = angle / 2.0
   begin_shape
   (0..TAU).step(angle) do |a|
     sx = x + Math.cos(a) * radius2

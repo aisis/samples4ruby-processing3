@@ -1,11 +1,12 @@
-# Move the mouse to change the direction of the eyes. 
-# The atan2() function computes the angle from each eye 
-# to the cursor. 
+# Move the mouse to change the direction of the eyes.
+# The atan2() function computes the angle from each eye
+# to the cursor.
 
 def setup
+  sketch_title 'Arc Tangent'
   @eyes = [
   Eye.new(420, 230, 220),
-  Eye.new(250,  16, 120), 
+  Eye.new(250,  16, 120),
   Eye.new(164, 185,  80)
   ]
   no_stroke
@@ -13,7 +14,6 @@ end
 
 def draw
   background 102
-  
   @eyes.each do |eye|
     eye.update mouse_x, mouse_y
     eye.display self
@@ -24,12 +24,12 @@ class Eye
   def initialize(x, y, sz) # contructor, called by Eye.new
     @x, @y, @size = x, y, sz
   end
-  
+
   def update(mx, my)
     @angle = Math.atan2(my - @y, mx - @x)
   end
-  
-  def display( context )
+
+  def display(context)
     context.push_matrix
     context.translate @x, @y
     context.fill 255
@@ -40,7 +40,6 @@ class Eye
     context.pop_matrix
   end
 end
-
 
 def settings
   size 640, 360

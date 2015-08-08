@@ -6,7 +6,7 @@
 attr_reader :rectangles
 
 def setup    
-  size 640, 360    
+  sketch_title 'Objects'
   fill 255, 204
   @rectangles = []
   no_stroke    
@@ -54,4 +54,9 @@ class MRect
 end
 
 # ^^^^ CLASS MRECT
+
+
+def settings
+  size 640, 360
+end
 

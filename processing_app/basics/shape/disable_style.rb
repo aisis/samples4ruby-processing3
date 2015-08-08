@@ -11,6 +11,7 @@
 attr_reader :bot
 
 def setup
+  sketch_title 'Disable Style'
   # The file "bot1.svg" must be in the data folder
   # of the current sketch to load successfully
   @bot = load_shape("bot1.svg")
@@ -27,8 +28,6 @@ def draw
   bot.enableStyle()
   shape(bot, 320, 25, 300, 300)
 end
-
-
 
 def settings
   size(640, 360)

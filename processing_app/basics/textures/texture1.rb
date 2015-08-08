@@ -4,7 +4,8 @@
 # the texture image. The vertex() function maps the image to the geometry.
 
 
-def setup  
+def setup 
+  sketch_title 'Texture 1' 
   @img = load_image "berlin-1.jpg"  
   no_stroke  
 end

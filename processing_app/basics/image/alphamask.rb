@@ -4,8 +4,9 @@
 
 
 def setup
-  @image = load_image "test.jpg"
-  @image_mask = load_image "mask.jpg"
+  sketch_title 'Alpha Mask'
+  @image = load_image 'test.jpg'
+  @image_mask = load_image 'mask.jpg'
   @image.mask @image_mask
 end
 

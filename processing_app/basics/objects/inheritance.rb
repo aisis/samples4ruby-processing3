@@ -9,7 +9,7 @@
 
 
 def setup    
-  size 640, 360
+  sketch_title 'Inheritance'
   @arm = SpinArm.new self, width/2, height/2, 0.01
   @spots = SpinSpots.new self, width/2, height/2, -0.02, 90.0
 end
@@ -83,3 +83,8 @@ class SpinSpots < Spin
 end
 
 # ^^^ CLASS SPINSPOTS
+
+def settings
+  size 640, 360
+end
+

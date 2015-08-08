@@ -1,13 +1,12 @@
-
 # Pointillism
 # by Daniel Shiffman. 
 # 
 # Creates a simple pointillist effect using ellipses colored
 # according to pixels in an image. 
 
-
 def setup
-  @a = load_image "eames.jpg"  
+  sketch_title 'Pointillism'
+  @a = load_image 'eames.jpg'  
   no_stroke
   background 255
   smooth

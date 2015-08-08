@@ -1,4 +1,3 @@
-
 # TRIANGLE_STRIP Mode
 # by Ira Greenberg.
 #
@@ -10,27 +9,26 @@
 attr_reader :x, :y, :outer_radius, :inner_radius
 
 def setup
-  @x = width/2
-  @y = height/2
+  sketch_title 'Triangle Strip'
+  @x = width / 2
+  @y = height / 2
   @outer_radius = [width, height].min * 0.4
   @inner_radius = outer_radius * 0.6
 end
 
 def draw
   background 204
-  pts = map(mouse_x, 0, width, 6, 60).to_i
+  pts = map1d(mouse_x, (0..width), (6..60)).to_i
   angle = 0.0      # degrees
-  step = 180.0/pts # degrees
-  
+  step = 180.0 / pts # degrees
   begin_shape TRIANGLE_STRIP
-  (0..pts).each do 
-    px = x + Math.cos(angle.radians)*outer_radius
-    py = y + Math.sin(angle.radians)*outer_radius
+  (0..pts).each do
+    px = x + DegLut.cos(angle) * outer_radius
+    py = y + DegLut.sin(angle) * outer_radius
     angle += step
     vertex px, py
-    
-    px = x + Math.cos(angle.radians)*inner_radius
-    py = y + Math.sin(angle.radians)*inner_radius
+    px = x + DegLut.cos(angle) * inner_radius
+    py = y + DegLut.sin(angle) * inner_radius
     angle += step
     vertex px, py
   end

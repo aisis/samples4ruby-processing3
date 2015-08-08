@@ -5,15 +5,16 @@
 attr_reader :tube_res, :tube_x, :tube_y, :img
 
 def setup
+  sketch_title 'Texture 3'
   @tube_res = 32
   @tube_x = []
   @tube_y = []
   @img = load_image 'berlin-1.jpg'
   angle = 270 / tube_res
-  (0...tube_res).each { |i|
+  (0...tube_res).each do |i|
     tube_x.push DegLut.cos(i * angle)
     tube_y.push DegLut.sin(i * angle)
-  }
+  end
   no_stroke
 end
 
@@ -24,13 +25,13 @@ def draw
   rotate_y map1d(mouse_x, (0..width), (-PI..PI))
   begin_shape QUAD_STRIP
   texture img
-  (0...tube_res).each { |i|
+  (0...tube_res).each do |i|
     x = tube_x[i] * 100
     z = tube_y[i] * 100
     u = img.width / tube_res * i
     vertex x, -100, z, u, 0
     vertex x,  100, z, u, img.height
-  }
+  end
   end_shape
   begin_shape QUADS
   texture img

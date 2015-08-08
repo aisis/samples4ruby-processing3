@@ -13,7 +13,7 @@
 attr_reader :imgs
 
 def setup
-  sketch_title 'request image'
+  sketch_title 'Request Image'
   @imgs = []
   # Load images asynchronously, kind of pointless with this few small images
   10.times do |i|

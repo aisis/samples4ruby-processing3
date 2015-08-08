@@ -27,9 +27,8 @@
 
 
 def setup    
-  size 640, 360    
+  sketch_title 'Multiple Constructors'
   background 204
-  smooth(8)
   no_loop    
   sp1 = Spot.new
   sp2 = Spot.new width * 0.5, height * 0.5, 120    
@@ -55,4 +54,10 @@ class Spot
 end
 
 # ^^^ CLASS SPOT
+
+
+def settings
+  size 640, 360    
+  smooth(8)
+end
 

@@ -19,6 +19,7 @@
 attr_reader :letter, :words
 
 def setup
+  sketch_title 'Characters Strings'
   @words = "Begin..."
   # Create the font
   text_font create_font("Georgia", 36)
@@ -26,13 +27,11 @@ end
 
 def draw
   background(0) # Set background to black
-
   # Draw the letter to the center of the screen
   text_size(14)
   text("Click on the program, then type to add to the String", 50, 50)
   text("Current key: #{letter}", 50, 70)
-  text("The String is #{words.length()} characters long", 50, 90)
-  
+  text("The String is #{words.length} characters long", 50, 90)
   text_size(36)
   text(words, 50, 120, 540, 300)
 end
@@ -46,7 +45,6 @@ def key_pressed
     puts(key)
   end
 end
-
 
 def settings
   size 640, 360

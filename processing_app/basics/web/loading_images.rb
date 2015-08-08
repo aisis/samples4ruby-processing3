@@ -6,11 +6,11 @@
 # not run in a web browser and will only work when the computer
 # is connected to the Internet. 
 
-
-def setup  	
+def setup
+  sketch_title 'Load Image'
   background 255  	
-	img1 = load_image "http://s3.amazonaws.com/jashkenas/images/ruby.jpg"	
-	image img1, 0, 45
+  img1 = load_image 'http://s3.amazonaws.com/jashkenas/images/ruby.jpg'	
+  image img1, 0, 45
 end
 
 def settings

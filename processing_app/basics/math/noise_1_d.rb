@@ -2,8 +2,8 @@
 # 
 # Using 1D Perlin Noise to assign location. 
 
-
-def setup  
+def setup
+  sketch_title 'Noise 1D'
   @xoff = 0.0
   @x_increment = 0.01  
   background 0
@@ -16,7 +16,7 @@ def draw
   n = noise(@xoff) * width  
   @xoff += @x_increment  
   fill 200
-  ellipse n, height/2, 64, 64  
+  ellipse n, height / 2, 64, 64  
 end
 
 def settings

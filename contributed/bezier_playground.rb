@@ -76,7 +76,7 @@ end
 
 def draw
   unless hide
-    panel.visible = visible
+    panel.set_visible true
     @hide = true
   end
   background 50

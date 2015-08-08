@@ -10,6 +10,7 @@
 attr_reader :usa, :michigan, :ohio
 
 def setup
+  sketch_title 'Get Child'
   @usa = load_shape("usa-wikipedia.svg")
   @michigan = usa.get_child("MI")
   @ohio = usa.get_child("OH")

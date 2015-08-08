@@ -6,8 +6,8 @@
 # necessary to finish. Use this class if you need to draw into an off-screen 
 # graphics buffer or to maintain two contexts with different properties.
 
-
-def setup    
+def setup
+  sketch_title 'Create Graphics'
   @pg = create_graphics 400, 200
 end
 
@@ -25,7 +25,6 @@ def draw
   @pg.end_draw  	
   image @pg, 120, 60
 end
-
 
 def settings
   size 640, 380

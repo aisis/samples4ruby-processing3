@@ -9,7 +9,8 @@
 
 attr_reader :steps
 
-def setup  
+def setup
+  sketch_title 'Double Random'
   frame_rate(1) 
   total_pts = 300  
   @steps = total_pts + 1.0
@@ -20,14 +21,12 @@ end
 def draw
   background 0
   rand_y = 0.0  
-  (1 ... steps).each do |i|
+  (1...steps).each do |i|
     noise_y = (rand_y > 0)? rand(-rand_y..rand_y) : rand(rand_y..-rand_y)    
-    point( (width/steps) * i, (height/2) + noise_y )
+    point( (width / steps) * i, (height / 2) + noise_y )
     rand_y += rand(-5..5)  
   end
 end
-
-
 
 def settings
   size 640, 360

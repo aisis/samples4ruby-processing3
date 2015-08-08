@@ -27,7 +27,7 @@ def draw
   @ico2.draw
   pop_matrix
   push_matrix
-  translate width/3.5, 0
+  translate width / 3.5, 0
   rotate_x frame_count * PI / -200
   rotate_y frame_count * PI / 200
   no_stroke
@@ -36,8 +36,7 @@ def draw
   pop_matrix
 end
 
-
-
 def settings
   size 640, 360, P3D
 end
+

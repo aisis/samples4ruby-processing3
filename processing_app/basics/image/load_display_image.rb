@@ -1,9 +1,9 @@
 
-
 def setup
+  sketch_title 'Load Image'
   # The file "jelly.jpg" must be in the data folder
   # of the current sketch to load successfully
-  @a = load_image "jelly.jpg"    
+  @a = load_image 'jelly.jpg'    
   no_loop # Makes draw only run once
 end
 
@@ -13,5 +13,5 @@ def draw
 end
 
 def settings
-  # Displays the image at point (@a.width, 0) at half of its size
+  size 300, 200
 end

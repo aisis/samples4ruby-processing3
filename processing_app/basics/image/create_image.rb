@@ -3,6 +3,7 @@
 
 
 def setup
+  sketch_title 'Create Image'
   @image = create_image 230, 230, ARGB
   @image.pixels.length.times do |i|
     @image.pixels[i] = color 0, 90, 102, (i % @image.width * 2) # red, green, blue, alpha
@@ -12,7 +13,7 @@ end
 def draw
   background 204
   image @image, 90, 80
-  image @image, mouse_x-@image.width, mouse_y-@image.width
+  image @image, mouse_x - @image.width, mouse_y - @image.width
 end
 
 def settings

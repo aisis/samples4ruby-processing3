@@ -1,8 +1,6 @@
-# Moving the mouse changes the position and size of each box. 
-
-
+# Moving the mouse changes the position and size of each box.
 def setup
-  size 640, 360
+  sketch_title 'Mouse 2d'
   no_stroke
   color_mode RGB, 255, 255, 255, 100
   rect_mode CENTER
@@ -16,4 +14,8 @@ def draw
   inverse_x = width - mouse_x
   inverse_y = height - mouse_y
   rect inverse_x, height / 2, inverse_y / 2 + 10, inverse_y/ 2 + 10
+end
+
+def settings
+  size 640, 360
 end

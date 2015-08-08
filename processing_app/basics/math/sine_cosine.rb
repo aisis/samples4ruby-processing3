@@ -11,8 +11,9 @@ attr_reader :angle1, :angle2
 SCALAR = 70
 
 def setup
-  noStroke()
-  rectMode(CENTER)
+  sketch_title 'Sine Cosine'
+  no_stroke
+  rect_mode(CENTER)
   @angle1 = 0
   @angle2 = 0
 end
@@ -36,7 +37,6 @@ def draw
   @angle1 += 2
   @angle2 += 3  
 end
-
 
 def settings
   size(640, 360)

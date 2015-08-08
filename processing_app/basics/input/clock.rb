@@ -4,9 +4,8 @@
 # cosine values are used to set the position of the hands.
 
 def setup
-  size 200, 200
+  sketch_title 'Clock'
   stroke 255
-  smooth 4
 end
 
 def draw
@@ -42,3 +41,9 @@ end
 def calc_hand_y(time, time_bit, length, origin)
   DegLut.sin(time * 6  + time_bit / 10 - 90) * length + origin
 end
+
+def settings
+  size 200, 200
+  smooth 4
+end
+

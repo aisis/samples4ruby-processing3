@@ -6,6 +6,7 @@
 attr_reader :y, :clicked
 
 def setup
+  sketch_title 'Loop'
   @y = height / 2
   stroke 255
   frame_rate 30

@@ -6,7 +6,6 @@
 # possibly a rare use for this ruby Enumerable method?
 # 2010-03-22 - fjenett (last revised by monkstone 2013-09-13)
 
-
 attr_reader :drawing_mode, :points, :rot_x, :rot_y, :vertices
 
 module ExtendedArray
@@ -25,9 +24,8 @@ module ExtendedArray
   end
 end
 
-
 def setup 
-  size 1024, 768, P3D
+  sketch_title 'Module Two'
   frame_rate 30 
   reset_scene
 end
@@ -106,6 +104,7 @@ def recalculate_shape
   @drawing_mode = false
 end
 
-
-
+def settings
+  size 1024, 768, P3D
+end
 

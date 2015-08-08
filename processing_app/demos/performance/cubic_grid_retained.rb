@@ -5,7 +5,7 @@
 
 BOX_SIZE = 20
 MARGIN = BOX_SIZE * 2
-DEPTH = 200
+DEPTH = 400
 FINT = 3
 
 attr_reader :box_fill, :grid, :fcount, :lastm, :frate

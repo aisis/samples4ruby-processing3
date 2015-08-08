@@ -15,7 +15,7 @@ require 'forwardable'
 attr_reader :ps
 
 def setup
-  size(640,360)
+  sketch_title 'Module'
   @ps = ParticleSystem.new(Vec2D.new(width/2, 50))
 end
 
@@ -82,3 +82,8 @@ class Particle
     app.ellipse(loc.x, loc.y, 8, 8)
   end
 end
+
+def settings
+  size(640,360)
+end
+

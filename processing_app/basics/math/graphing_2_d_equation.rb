@@ -8,6 +8,7 @@
 #
  
 def setup
+  sketch_title 'Graphing 2D Equation'
 end
 
 def draw
@@ -28,14 +29,13 @@ def draw
       #val = Math.cos(r)                            # Another simple function
       #val = Math.sin(theta)                        # Another simple function
       # Map the resulting value to a grayscale value
-      pixels[i + j * width] = color((val + 1.0) * 255.0/2.0)     # Scale to between 0 and 255
+      pixels[i + j * width] = color((val + 1.0) * 255 / 2.0)     # Scale to between 0 and 255
       y += dy                # Increment y
     end
     x += dx                  # Increment x
   end
   update_pixels
 end
-
 
 def settings
   size(640, 360)

@@ -15,9 +15,8 @@ attr_reader :pos
 Vec = Struct.new(:x, :y) # create named Struct Type with getters and setters
 
 def setup  
-  size(640, 360)
+  sketch_title 'Struct'
   @pos = Array.new(NUM, Vec.new(0, 0))  # initialize a array of Struct
-  smooth(4)
   no_stroke()
   fill(255, 153) 
 end
@@ -36,3 +35,9 @@ def draw
     ellipse(pos[idx].x, pos[idx].y, i, i)
   end
 end
+
+def settings
+  size(640, 360)
+  smooth(4)
+end
+

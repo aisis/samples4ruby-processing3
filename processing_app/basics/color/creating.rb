@@ -9,24 +9,26 @@ def setup
   @redder = color 204, 102, 0
   @yellower = color 204, 153, 0
   @orangish = color 153, 51, 0  
-	# These statements are equivalent to the statements above.
-	# Programmers may use the format they prefer.
+  # These statements are equivalent to the statements above.
+  # Programmers may use the format they prefer.
+
+  # hex color as a String (NB quotes are required)
 	
-	# @redder = color '#CC6600'
-	# @yellower = color '#CC9900'
-	# @orangish = color '#993300'
+  # @redder = color '#CC6600'
+  # @yellower = color '#CC9900'
+  # @orangish = color '#993300'
 	
-	# or alternatively
+  # or alternatively as a hexadecimal
 	
-	# @redder = color 0xFFCC6600
-	# @yellower = color 0xFFCC9900
-	# @orangish = color 0xFF993300	
+  # @redder = color 0xFFCC6600
+  # @yellower = color 0xFFCC9900
+  # @orangish = color 0xFF993300	
 end
 
 def draw
   no_stroke
-	background 51, 0, 0
-	push_matrix
+  background 51, 0, 0
+  push_matrix
   translate 80, 80
   fill orangish
   rect 0, 0, 200, 200

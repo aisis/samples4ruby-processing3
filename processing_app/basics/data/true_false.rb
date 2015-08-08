@@ -8,26 +8,21 @@
 # that will fail an "if" test. Absolutely everything else passes "if".
 
 def setup
+  sketch_title 'True False'
   background 0
   stroke 0
-  
   (1..width).step(2) do |i|
-    
-    x = i < (width/2) # Evaluates to true or false, depending on i
-    
+    x = i < (width / 2) # Evaluates to true or false, depending on i
     if x
       stroke 255
-      line i, 1, i, height-1
+      line i, 1, i, height - 1
     end
-    
     if !x
       stroke 126
-      line width/2, i, width-2, i
+      line width / 2, i, width - 2, i
     end
-    
   end
 end
-
 
 def settings
   size 200, 200

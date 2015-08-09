@@ -7,12 +7,9 @@
 # method to convert your values. For example: scale(90.radians)
 # is identical to the statement scale(PI/2).
 
-
 # Notice in ruby everything is an object, so we can chain stuff
 # check it out using irb to see what you get with Time.now
 # Time.now.sec and finally Time.now.sec.even? isn't ruby just wonderful
-
-
 def setup    
   no_stroke
   fill 255

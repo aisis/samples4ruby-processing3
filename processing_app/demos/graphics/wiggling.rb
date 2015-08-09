@@ -12,23 +12,17 @@ java_alias :background_int, :background, [Java::int]
 attr_reader :sine, :cosine
  
 def setup
-  sketch_title 'Wiggling'
-  @sine = []
-  @cosine = []
-  wiggling = false 
+  sketch_title 'Wiggling Broken'
+  @wiggling = false 
   # Dry up that processing code a tiny bit
-  (0..TAU).step(TAU / CIRCLE_RES) do |i|
-    sine << CIRCLE_RAD * sin(i)
-  end
-  (0..TAU).step(TAU / CIRCLE_RES) do |i|
-    cosine << CIRCLE_RAD * cos(i)
-  end
+  @sine = (0..CIRCLE_RES).map { |i| CIRCLE_RAD * sin(TAU * i / CIRCLE_RES) }
+  @cosine = (0..CIRCLE_RES).map { |i| CIRCLE_RAD * cos(TAU * i / CIRCLE_RES) }
   @cube = create_cube
 end
 
 def draw
   background_int(0)  
-  translate(width/2, height/2)
+  translate(width / 2, height / 2)
   rotate_x(frame_count * 0.01)
   rotate_y(frame_count * 0.01)  
   shape(cube)  
@@ -36,11 +30,11 @@ def draw
     (0...cube.get_child_count).each do |i|
       face = cube.get_child(i)
       face.get_vertex_count.times do |j|
-        x, y, z = face.get_vertex_x(j), face.get_vertex_y(j), face.get_vertex_z(j)
-        x += rand(-NOISE_MAG/2..NOISE_MAG/2)
-        y += rand(-NOISE_MAG/2..NOISE_MAG/2)
-        z += rand(-NOISE_MAG/2..NOISE_MAG/2)
-        face.set_vertex(j, x, y, z)
+        vec = face.get_vertex(j)
+        vec.x += rand(-NOISE_MAG / 2..NOISE_MAG / 2)
+        vec.y += rand(-NOISE_MAG / 2..NOISE_MAG / 2)
+        vec.z += rand(-NOISE_MAG / 2..NOISE_MAG / 2)
+        face.set_vertex(j, vec)
       end
     end
   end  
@@ -97,7 +91,7 @@ def create_cube
   face.end_contour
   face.begin_contour
   CIRCLE_RES.times do |i|
-    x = sine[i]
+    x = -sine[i]
     y = cosine[i]
     z = -CUBE_SIZE / 2
     face.vertex(x, y, z)
@@ -141,34 +135,13 @@ def create_cube
   CIRCLE_RES.times do |i|
     x = -CUBE_SIZE / 2
     y = sine[i]
-    z = cosine[i]
+    z = -cosine[i]
     face.vertex(x, y, z)
   end
   face.end_contour
   face.end_shape(CLOSE)
   cube.add_child(face)  
   # Top face
-  face = create_shape
-  face.begin_shape(POLYGON)
-  face.stroke(255, 0, 0)
-  face.fill(255)
-  face.begin_contour
-  face.vertex(-CUBE_SIZE / 2, CUBE_SIZE / 2, CUBE_SIZE / 2)
-  face.vertex(CUBE_SIZE / 2, CUBE_SIZE / 2, CUBE_SIZE / 2)
-  face.vertex(CUBE_SIZE / 2, CUBE_SIZE / 2, -CUBE_SIZE / 2)
-  face.vertex(-CUBE_SIZE / 2, CUBE_SIZE / 2, -CUBE_SIZE / 2)
-  face.end_contour
-  face.begin_contour
-  CIRCLE_RES.times do |i|
-    x = sine[i]
-    y = CUBE_SIZE / 2
-    z = cosine[i]
-    face.vertex(x, y, z)
-  end
-  face.end_contour
-  face.end_shape(CLOSE)
-  cube.add_child(face)  
-  # Bottom face
   face = create_shape
   face.begin_shape(POLYGON)
   face.stroke(255, 0, 0)
@@ -183,6 +156,27 @@ def create_cube
   CIRCLE_RES.times do |i|
     x = sine[i]
     y = -CUBE_SIZE / 2
+    z = cosine[i]
+    face.vertex(x, y, z)
+  end
+  face.end_contour
+  face.end_shape(CLOSE)
+  cube.add_child(face)  
+  # Bottom face
+  face = create_shape
+  face.begin_shape(POLYGON)
+  face.stroke(255, 0, 0)
+  face.fill(255)
+  face.begin_contour
+  face.vertex(-CUBE_SIZE / 2, CUBE_SIZE / 2, CUBE_SIZE / 2)
+  face.vertex(CUBE_SIZE / 2, CUBE_SIZE / 2, CUBE_SIZE / 2)
+  face.vertex(CUBE_SIZE / 2, CUBE_SIZE / 2, -CUBE_SIZE / 2)
+  face.vertex(-CUBE_SIZE / 2, CUBE_SIZE / 2, -CUBE_SIZE / 2)
+  face.end_contour
+  face.begin_contour
+  CIRCLE_RES.times do |i|
+    x = -sine[i]
+    y = CUBE_SIZE / 2
     z = cosine[i]
     face.vertex(x, y, z)
   end
@@ -212,7 +206,7 @@ def restore_cube
   face.set_vertex(2, -CUBE_SIZE / 2, CUBE_SIZE / 2, -CUBE_SIZE / 2)
   face.set_vertex(3, CUBE_SIZE / 2, CUBE_SIZE / 2, -CUBE_SIZE / 2)
   CIRCLE_RES.times do |i|
-    x = sine[i]
+    x = -sine[i]
     y = cosine[i]
     z = -CUBE_SIZE / 2
     face.set_vertex(4 + i, x, y, z)
@@ -238,23 +232,11 @@ def restore_cube
   CIRCLE_RES.times do |i|
     x = -CUBE_SIZE / 2
     y = sine[i]
-    z = cosine[i]
+    z = -cosine[i]
     face.set_vertex(4 + i, x, y, z)
   end  
   # Top face
   face = cube.get_child(4)
-  face.set_vertex(0, -CUBE_SIZE / 2, CUBE_SIZE / 2, CUBE_SIZE / 2)
-  face.set_vertex(1, CUBE_SIZE / 2, CUBE_SIZE / 2, CUBE_SIZE / 2)
-  face.set_vertex(2, CUBE_SIZE / 2, CUBE_SIZE / 2, -CUBE_SIZE / 2)
-  face.set_vertex(3, -CUBE_SIZE / 2, CUBE_SIZE / 2, -CUBE_SIZE / 2)
-  CIRCLE_RES.times do |i|
-    x = sine[i]
-    y = CUBE_SIZE / 2
-    z = cosine[i]
-    face.set_vertex(4 + i, x, y, z)
-  end  
-  # Bottom face
-  face = cube.get_child(5)
   face.set_vertex(0, CUBE_SIZE / 2, -CUBE_SIZE / 2, CUBE_SIZE / 2)
   face.set_vertex(1, -CUBE_SIZE / 2, -CUBE_SIZE / 2, CUBE_SIZE / 2)
   face.set_vertex(2, -CUBE_SIZE / 2, -CUBE_SIZE / 2, -CUBE_SIZE / 2)
@@ -262,6 +244,18 @@ def restore_cube
   CIRCLE_RES.times do |i|
     x = sine[i]
     y = -CUBE_SIZE / 2
+    z = cosine[i]
+    face.set_vertex(4 + i, x, y, z)
+  end  
+  # Bottom face
+  face = cube.get_child(5)
+  face.set_vertex(0, -CUBE_SIZE / 2, CUBE_SIZE / 2, CUBE_SIZE / 2)
+  face.set_vertex(1, CUBE_SIZE / 2, CUBE_SIZE / 2, CUBE_SIZE / 2)
+  face.set_vertex(2, CUBE_SIZE / 2, CUBE_SIZE / 2, -CUBE_SIZE / 2)
+  face.set_vertex(3, -CUBE_SIZE / 2, CUBE_SIZE / 2, -CUBE_SIZE / 2)
+  CIRCLE_RES.times do |i|
+    x = -sine[i]
+    y = CUBE_SIZE / 2
     z = cosine[i]
     face.set_vertex(4 + i, x, y, z)
   end

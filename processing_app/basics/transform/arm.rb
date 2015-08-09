@@ -5,7 +5,8 @@
 # are also applied to the second segment because they are inside
 # the same push_matrix and pop_matrix group.
 
-def setup    
+def setup
+  sketch_title 'Arm'
   @x, @y = width * 0.3, height * 0.5
   @angle1, @angle2 = 0.0, 0.0
   @seg_length = 100
@@ -28,7 +29,6 @@ def segment ( x, y, a )
   rotate a  	
   line 0, 0, @seg_length, 0 
 end
-
 
 def settings
   size 640, 360

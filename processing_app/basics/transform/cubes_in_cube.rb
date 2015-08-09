@@ -9,6 +9,7 @@
 require_relative 'lib/cube'
 
 def setup
+  sketch_title 'Cubes in a Cube'
   lights
   smooth 4
   @cube_count = 20

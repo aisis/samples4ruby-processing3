@@ -7,9 +7,6 @@
 # hit "spacebar" to generate a new shape and save current
 # translated for JRubyArt by Martin Prout 
 #
-
-
-
 NI=4
 NJ=5
 RESI=NI*10

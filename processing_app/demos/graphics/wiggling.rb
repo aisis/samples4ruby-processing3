@@ -1,5 +1,5 @@
 # Press 'w' to start wiggling, space to restore
-# original positions.
+# original positions. Ripe for a re-factor!!!
 
 attr_reader :cube, :wiggling
 CUBE_SIZE = 320.0
@@ -7,13 +7,13 @@ CIRCLE_RAD = 100.0
 CIRCLE_RES = 40
 NOISE_MAG = 1.0
 
-# signature-specific alias for overloaded method 
+# signature-specific alias for overloaded method
 java_alias :background_int, :background, [Java::int]
 attr_reader :sine, :cosine
- 
+
 def setup
-  sketch_title 'Wiggling Broken'
-  @wiggling = false 
+  sketch_title 'Wiggling'
+  @wiggling = false
   # Dry up that processing code a tiny bit
   @sine = (0..CIRCLE_RES).map { |i| CIRCLE_RAD * sin(TAU * i / CIRCLE_RES) }
   @cosine = (0..CIRCLE_RES).map { |i| CIRCLE_RAD * cos(TAU * i / CIRCLE_RES) }
@@ -21,23 +21,22 @@ def setup
 end
 
 def draw
-  background_int(0)  
+  background_int(0)
   translate(width / 2, height / 2)
   rotate_x(frame_count * 0.01)
-  rotate_y(frame_count * 0.01)  
-  shape(cube)  
-  if (wiggling)
-    (0...cube.get_child_count).each do |i|
-      face = cube.get_child(i)
-      face.get_vertex_count.times do |j|
-        vec = face.get_vertex(j)
-        vec.x += rand(-NOISE_MAG / 2..NOISE_MAG / 2)
-        vec.y += rand(-NOISE_MAG / 2..NOISE_MAG / 2)
-        vec.z += rand(-NOISE_MAG / 2..NOISE_MAG / 2)
-        face.set_vertex(j, vec)
-      end
+  rotate_y(frame_count * 0.01)
+  shape(cube)
+  return unless wiggling
+  (0...cube.get_child_count).each do |i|
+    face = cube.get_child(i)
+    face.get_vertex_count.times do |j|
+      vec = face.get_vertex(j)  # vec is an instance of PVector
+      vec.x += rand(-NOISE_MAG / 2..NOISE_MAG / 2)
+      vec.y += rand(-NOISE_MAG / 2..NOISE_MAG / 2)
+      vec.z += rand(-NOISE_MAG / 2..NOISE_MAG / 2)
+      face.set_vertex(j, vec)
     end
-  end  
+  end
 end
 
 def key_pressed
@@ -56,8 +55,8 @@ def key_pressed
 end
 
 def create_cube
-  cube = create_shape(GROUP)  
-  # Front face         
+  cube = create_shape(GROUP)
+  # Front face
   face = create_shape
   face.begin_shape(POLYGON)
   face.stroke(255, 0, 0)
@@ -77,7 +76,7 @@ def create_cube
   end
   face.end_contour
   face.end_shape(CLOSE)
-  cube.add_child(face)  
+  cube.add_child(face)
   # Back face
   face = create_shape
   face.begin_shape(POLYGON)
@@ -98,7 +97,7 @@ def create_cube
   end
   face.end_contour
   face.end_shape(CLOSE)
-  cube.add_child(face)  
+  cube.add_child(face)
   # Right face
   face = create_shape
   face.begin_shape(POLYGON)
@@ -119,7 +118,7 @@ def create_cube
   end
   face.end_contour
   face.end_shape(CLOSE)
-  cube.add_child(face)  
+  cube.add_child(face)
   # Left face
   face = create_shape
   face.begin_shape(POLYGON)
@@ -140,7 +139,7 @@ def create_cube
   end
   face.end_contour
   face.end_shape(CLOSE)
-  cube.add_child(face)  
+  cube.add_child(face)
   # Top face
   face = create_shape
   face.begin_shape(POLYGON)
@@ -161,7 +160,7 @@ def create_cube
   end
   face.end_contour
   face.end_shape(CLOSE)
-  cube.add_child(face)  
+  cube.add_child(face)
   # Bottom face
   face = create_shape
   face.begin_shape(POLYGON)
@@ -186,7 +185,7 @@ def create_cube
   cube
 end
 
-def restore_cube  
+def restore_cube
   # Front face
   face = cube.get_child(0)
   face.set_vertex(0, -CUBE_SIZE / 2, -CUBE_SIZE / 2, CUBE_SIZE / 2)
@@ -198,7 +197,7 @@ def restore_cube
     y = cosine[i]
     z = CUBE_SIZE / 2
     face.set_vertex(4 + i, x, y, z)
-  end  
+  end
   # Back face
   face = cube.get_child(1)
   face.set_vertex(0, CUBE_SIZE / 2, -CUBE_SIZE / 2, -CUBE_SIZE / 2)
@@ -210,7 +209,7 @@ def restore_cube
     y = cosine[i]
     z = -CUBE_SIZE / 2
     face.set_vertex(4 + i, x, y, z)
-  end  
+  end
   # Right face
   face = cube.get_child(2)
   face.set_vertex(0, CUBE_SIZE / 2, -CUBE_SIZE / 2, CUBE_SIZE / 2)
@@ -222,7 +221,7 @@ def restore_cube
     y = sine[i]
     z = cosine[i]
     face.set_vertex(4 + i, x, y, z)
-  end  
+  end
   # Left face
   face = cube.get_child(3)
   face.set_vertex(0, -CUBE_SIZE / 2, -CUBE_SIZE / 2, -CUBE_SIZE / 2)
@@ -234,7 +233,7 @@ def restore_cube
     y = sine[i]
     z = -cosine[i]
     face.set_vertex(4 + i, x, y, z)
-  end  
+  end
   # Top face
   face = cube.get_child(4)
   face.set_vertex(0, CUBE_SIZE / 2, -CUBE_SIZE / 2, CUBE_SIZE / 2)
@@ -246,7 +245,7 @@ def restore_cube
     y = -CUBE_SIZE / 2
     z = cosine[i]
     face.set_vertex(4 + i, x, y, z)
-  end  
+  end
   # Bottom face
   face = cube.get_child(5)
   face.set_vertex(0, -CUBE_SIZE / 2, CUBE_SIZE / 2, CUBE_SIZE / 2)
@@ -264,4 +263,3 @@ end
 def settings
   size(1024, 768, P3D)
 end
-

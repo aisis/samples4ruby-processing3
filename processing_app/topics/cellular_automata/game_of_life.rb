@@ -29,7 +29,6 @@ def setup
   @alive = color(100, 255, 100)
   # This stroke will draw the background grid (live cells)
   stroke(48, 100)
-  no_smooth
 end
 
 def draw
@@ -73,6 +72,11 @@ def draw
   end
 end
 
+def settings
+  size(960, 640)
+  no_smooth
+end
+
 def tick!  # When the clock ticks
   # Save cells to buffer (so we operate with one array keeping the other intact)
   @cells_buffer = clone2d(cells)
@@ -84,13 +88,11 @@ def tick!  # When the clock ticks
       (x - 1..x + 1).each do |xx|
         (y - 1..y + 1).each do |yy|
           # Make sure you are not out of bounds
-          if [(xx >= 0), (xx < row), (yy >= 0), (yy < column)].all? { |in_bounds| in_bounds == true }
-            # Make sure to check against self
-            unless [(xx == x), (yy == y)].all? { |is_self| is_self == true }
-              if cells_buffer[xx][yy] # true == ALIVE
-                neighbours += 1 # Check alive neighbours and count them
-              end # alive
-            end # End of if self
+          next unless [(xx >= 0), (xx < row), (yy >= 0), (yy < column)].all? { |in_bounds| in_bounds == true }
+          # Make sure to check against self
+          unless [(xx == x), (yy == y)].all? { |is_self| is_self == true }
+            # Check alive neighbours and count them
+            neighbours += 1 if cells_buffer[xx][yy]
           end # End of if grid bounds
         end # End of yy loop
       end # End of xx loop
@@ -116,8 +118,3 @@ def clone2d(array)
   # Marshal.load(Marshal.dump(array)) # alternative ruby method
   array.map(&:clone)
 end
-
-def settings
-  size(960, 640)
-end
-

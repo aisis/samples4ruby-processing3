@@ -5,7 +5,7 @@
 require 'pbox2d'
 require_relative 'lib/surface'
 
-attr_reader :surface, :box2d, :particles
+attr_reader :srface, :box2d, :particles
 
 def setup
   sketch_title 'Bumpy Surface Noise'
@@ -18,16 +18,16 @@ def setup
   # box2d.gravity([0, -20])
   # Create the empty list
   @particles = []
-  # Create the surface
-  @surface = Surface.new(self)
+  # Create the srface
+  @srface = Surface.new(self)
 end
 
 def draw
   # If the mouse is pressed, we make new particles
   # We must always step through time!
   background(138, 66, 54)
-  # Draw the surface
-  surface.display
+  # Draw the srface
+  srface.display
   # NB ? reqd to call mouse_pressed value, else method gets called.
   particles << Particle.new(self, mouse_x, mouse_y, rand(2.0..6)) if mouse_pressed?
   # Draw all particles

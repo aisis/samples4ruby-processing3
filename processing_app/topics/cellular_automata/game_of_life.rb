@@ -1,6 +1,6 @@
 #
 # A Processing implementation of Game of Life
-# By Joan Soler-Adillon
+# By Martin Prout after Joan Soler-Adillon processing version
 #
 # Press SPACE BAR to pause and change the cell's values with the mouse
 # On pause, click to activate/deactivate cells
@@ -88,12 +88,11 @@ def tick!  # When the clock ticks
       (x - 1..x + 1).each do |xx|
         (y - 1..y + 1).each do |yy|
           # Make sure you are not out of bounds
-          next unless [(xx >= 0), (xx < row), (yy >= 0), (yy < column)].all? { |in_bounds| in_bounds == true }
+          next unless [(xx >= 0), (xx < row), (yy >= 0), (yy < column)].all? 
           # Make sure to check against self
-          unless [(xx == x), (yy == y)].all? { |is_self| is_self == true }
-            # Check alive neighbours and count them
-            neighbours += 1 if cells_buffer[xx][yy]
-          end # End of if grid bounds
+          next if [(xx == x), (yy == y)].all? 
+          # Check alive neighbours and count them
+          neighbours += 1 if cells_buffer[xx][yy]
         end # End of yy loop
       end # End of xx loop
       # We've checked the neighbours: apply rules in one line (only in ruby)!

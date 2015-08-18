@@ -12,7 +12,7 @@ def setup
   @over_block = false
   @bounds = AABB.new(
     center: Vec2D.new(width / 2, height / 2),
-    extent: Vec2D.new(width, height))
+    extent: Vec2D.new(width - BLOCK_WIDTH, height - BLOCK_WIDTH))
   @renderer = AppRender.new(self)
 end
 
@@ -53,7 +53,7 @@ end
 def mouse_dragged
   return unless block_locked?
   position = Vec2D.new(mouse_x, mouse_y)
-  block.new_position(position) if bounds.contains? position
+  block.new_position(position) { bounds.contains? position }
 end
 
 def mouse_released
@@ -73,8 +73,9 @@ class Block
     @aabb = AABB.new(center: center, extent: size)
   end
 
-  def new_position(center)
-    @aabb.position(center.dup)
+  # passing ruby block on to @aabb.position
+  def new_position(center, &block)
+    @aabb.position(center.dup, &block)
   end
 
   def over?(vec)

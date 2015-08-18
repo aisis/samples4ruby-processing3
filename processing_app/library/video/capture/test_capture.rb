@@ -25,7 +25,7 @@ def start_capture(cam_string)
 end
 
 def draw
-  image(cam, 0, 0)
+  image(cam, 0, 0, width, height)
   # The following does the same, and is faster when just drawing the image
   # without any additional resizing, transformations, or tint.
   # set(0, 0, cam)

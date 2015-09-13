@@ -25,6 +25,6 @@ def draw
 end
 
 def settings
-  size 640, 250, FX2D
-  smooth 4
+  size 640, 250
+#  smooth 4
 end

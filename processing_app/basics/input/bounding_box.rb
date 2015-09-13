@@ -5,12 +5,13 @@ BLOCK_WIDTH = 150
 
 def setup
   sketch_title 'AABB Example'
+  on_top
   @block = Block.new(
     center: Vec2D.new(width / 2, height / 2),
     size: Vec2D.new(BLOCK_WIDTH, BLOCK_WIDTH))
   @locked = false
   @over_block = false
-  @bounds = AABB.new(
+  @bounds = AaBb.new(
     center: Vec2D.new(width / 2, height / 2),
     extent: Vec2D.new(width - BLOCK_WIDTH, height - BLOCK_WIDTH))
   @renderer = AppRender.new(self)
@@ -70,7 +71,7 @@ class Block
   attr_reader :aabb
 
   def initialize(center:, size:)
-    @aabb = AABB.new(center: center, extent: size)
+    @aabb = AaBb.new(center: center, extent: size)
   end
 
   # passing ruby block on to @aabb.position

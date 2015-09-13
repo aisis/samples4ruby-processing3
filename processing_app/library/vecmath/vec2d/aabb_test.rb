@@ -5,6 +5,7 @@ BLOCK_WIDTH = 150
 
 def setup
   sketch_title 'AaBb Example'
+  on_top
   @block = Block.new(
     center: Vec2D.new(width / 2, height / 2),
     size: Vec2D.new(BLOCK_WIDTH, BLOCK_WIDTH))
@@ -68,6 +69,7 @@ end
 # Use class to contain block behaviour
 class Block
   attr_reader :aabb
+  
 
   def initialize(center:, size:)
     @aabb = AaBb.new(center: center, extent: size)

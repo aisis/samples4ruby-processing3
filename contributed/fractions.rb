@@ -18,13 +18,12 @@ def draw
   background 10
   text_font(f, 24)
   fill(220)
-  text('Math Blackboard Ruby-Processing-3.0', 80, 50)
-  text(add, 110, 100)
-  text(subtract, 110, 150)
-  text(multiply, 110, 200)
+  text('Math Blackboard JRubyArt', 110, 50)
+  text(add, 130, 100)
+  text(subtract, 130, 150)
+  text(multiply, 130, 200)
 end
 
 def settings
   size 640, 250
-#  smooth 4
 end

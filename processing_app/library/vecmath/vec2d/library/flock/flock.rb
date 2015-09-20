@@ -25,7 +25,7 @@ class Boid
   attr_reader :width, :height
   def initialize(loc)
     @acceleration = Vec2D.new
-    @velocity = Vec2D.new(rand(-1.0..1), rand(-1.0..1))
+    @velocity = Vec2D.random
     @location = loc
     @r = 2.0
     @maxspeed = 2
@@ -94,7 +94,7 @@ class Boid
     push_matrix
     translate(location.x,location.y)
     rotate(theta)
-    begin_shape(PConstants::TRIANGLES)
+    begin_shape(TRIANGLES)
     vertex(0, -r * 2)
     vertex(-r, r * 2)
     vertex(r, r * 2)

@@ -17,7 +17,7 @@ def setup
   sketch_title 'Http Client'
   background(50)
   fill(200)
-  @client = Client.new(self, 'www.processing.org', 80) # Connect to server on port 80
+  @client = Client.new(self, 'www.ucla.edu', 80) # Connect to server on port 80
   client.write("GET / HTTP/1.0\r\n") # Use the HTTP "GET" command to ask for a Web page
   client.write("\r\n")
 end

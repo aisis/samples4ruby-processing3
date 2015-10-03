@@ -62,7 +62,7 @@ class HScrollbar
     else
       @locked = mouse_pressed? && over_event?
     end
-    @newspos = (spos_min..spos_max).clip(mouse_x - sheight / 2) if locked
+    @newspos = constrain(mouse_x - sheight / 2, spos_min, spos_max) if locked
     @spos = spos + (newspos - spos) / loose if (newspos - spos).abs > 1
   end
 

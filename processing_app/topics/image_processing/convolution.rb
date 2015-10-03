@@ -24,10 +24,10 @@ def draw
   # so let's set the whole image as the background first
   image(img, 0, 0)
   # Calculate the small rectangle we will process
-  xstart = (0..img.width).clip(mouse_x - W / 2)
-  ystart = (0..img.height).clip(mouse_y - W / 2)
-  xend = (0..img.width).clip(mouse_x + W / 2)
-  yend = (0..img.height).clip(mouse_y + W / 2)
+  xstart = constrain(mouse_x - W / 2, 0, img.width)
+  ystart = constrain(mouse_y - W / 2, 0, img.height)
+  xend = constrain(mouse_x + W / 2, 0, img.width)
+  yend = constrain(mouse_y + W / 2, 0, img.height)
   load_pixels
   # Begin our loop for every pixel in the smaller image
   (xstart...xend).each do |x|
@@ -51,7 +51,7 @@ def convolution(x, y, matrix, matrixsize, img)
       yloc = y + j - offset
       loc = xloc + img.width * yloc
       # Make sure we haven't walked off our image, we could do better here
-      loc = (0..img.pixels.length - 1).clip(loc)
+      loc = constrain(loc, 0, img.pixels.length - 1)
       # Calculate the convolution
       rtotal += (red(img.pixels[loc]) * matrix[i][j])
       gtotal += (green(img.pixels[loc]) * matrix[i][j])
@@ -59,9 +59,9 @@ def convolution(x, y, matrix, matrixsize, img)
     end
   end
   # Make sure RGB is within range
-  rtotal = (0..255).clip rtotal
-  gtotal = (0..255).clip gtotal
-  btotal = (0..255).clip btotal
+  rtotal = constrain(rtotal, 0, 255)
+  gtotal = constrain(gtotal, 0, 255)
+  btotal = constrain(btotal, 0, 255)
   # Return the resulting color
   color(rtotal, gtotal, btotal)
 end

@@ -7,8 +7,11 @@ H_SIZE = 10
 
 attr_reader :handles
 
-def setup
-  sketch_title 'Handles'
+def settings
+  size(640, 360)
+end
+
+def setup  
   num = height / 15
   @handles = []
   num.times do |i|
@@ -18,8 +21,8 @@ def setup
       50 - H_SIZE / 2,
       10,
       handles,
-      width,
-      height)
+      640,
+      360)
   end
 end
 
@@ -41,7 +44,7 @@ end
 class Handle
   attr_reader :x, :y, :boxx, :boxy, :stretch, :size, :over, :press
   attr_reader :others, :others_locked, :locked, :width, :height
-  
+
   def initialize(ix, iy, il, is, o, width, height)
     @x = ix
     @y = iy
@@ -55,7 +58,7 @@ class Handle
     @width = width
     @height = height
   end
-  
+
   def update
     @boxx = x + stretch
     @boxy = y - size / 2
@@ -74,11 +77,11 @@ class Handle
     return unless press
     @stretch = lock(mouse_x - width / 2 - size / 2, 0, width / 2 - size - 1)
   end
-  
+
   def over_event
     @over = over_rect?(boxx, boxy, size, size)
   end
-  
+
   def press_event
     if over && mouse_pressed? || locked
       @press, @locked = true, true
@@ -86,11 +89,11 @@ class Handle
       @press = false
     end
   end
-  
+
   def release_event
     @locked = false
   end
-  
+
   def display
     line(x, y, x + stretch, y)
     fill(255)
@@ -100,17 +103,12 @@ class Handle
     line(boxx, boxy, boxx + size, boxy + size)
     line(boxx, boxy + size, boxx + size, boxy)
   end
-  
+
   def over_rect?(x, y, width, height)
     (mouse_x >= x && mouse_x <= x + width && mouse_y >= y && mouse_y <= y + height)
   end
-  
+
   def lock(val, first, last)
-    (first..last).clip val
+    constrain(val, first, last)
   end
 end
-
-def settings
-  size(640, 360)
-end
-

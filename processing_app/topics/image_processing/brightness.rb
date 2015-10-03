@@ -28,7 +28,7 @@ def draw
       d = dist(x, y, mouseX, mouseY)
       adjustbrightness = 255 * (maxdist - d) / maxdist
       r += adjustbrightness
-      r = (0..255).clip r
+      r = constrain(r, 0, 255)
       pixels[y * width + x] = color(r)
     end
   end

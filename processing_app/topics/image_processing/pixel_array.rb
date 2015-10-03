@@ -24,8 +24,8 @@ def draw
     @direction = direction * -1
   end
   if mouse_pressed?
-    mx = (0..img.width - 1).clip mouse_x
-    my = (0..img.height - 1).clip mouse_y
+    mx = constrain(mouse_x, 0, img.width - 1)
+    my = constrain(mouse_y, 0, img.height - 1)
     @signal = my * img.width + mx
   else
     @signal += 0.33 * direction

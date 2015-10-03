@@ -17,8 +17,8 @@
 #
 load_library 'word'
 
-DRACULA = 'dracula.txt'
-FRANKENSTEIN = 'frankenstein.txt'
+DRACULA = 'data/dracula.txt'
+FRANKENSTEIN = 'data/frankenstein.txt'
 DRAC = Regexp.new(DRACULA)
 FRANK = Regexp.new(FRANKENSTEIN)
 
@@ -48,7 +48,7 @@ end
 
 # Load a file
 def load_file(filename)
-  tokens = File.open(data_path(filename), 'r') { |file| file.read.scan(/[\w'-]+/) }
+  tokens = File.open(filename, 'r') { |file| file.read.scan(/[\w'-]+/) }
   tokens.each do |s|
     s = s.downcase
     # Is the word in the HashMap

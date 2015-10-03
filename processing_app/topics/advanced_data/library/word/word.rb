@@ -39,9 +39,9 @@ class Word
   # The more often it appears, the faster it falls
   def move
     @speed = map1d(total_count, (5..25), (0.1..0.4))
-    @speed = (0..10.0).clip speed
-    @position[PConstants::Y] += speed
-    @position[PConstants::Y] = -height if position[PConstants::Y] > height * 2
+    @speed = constrain(speed, 0, 10.0)
+    @position[Y] += speed
+    @position[Y] = -height if position[Y] > height * 2
   end
 
   # Depending on which book it gets a color
@@ -53,9 +53,9 @@ class Word
     end
     # Its size is also tied to number of occurences
     fs = map1d(total_count, (5..25), (2..24.0))
-    fs = (2..48).clip fs
+    fs = constrain(fs, 2, 48)
     text_size(fs)
-    text_align(PConstants::CENTER)
-    text(word, position[PConstants::X], position[PConstants::Y])
+    text_align(CENTER)
+    text(word, position[X], position[Y])
   end
 end

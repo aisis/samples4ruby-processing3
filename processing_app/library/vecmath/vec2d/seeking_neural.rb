@@ -20,7 +20,7 @@ module SeekingNeural
     def train(forces, error)
       trained = @weights.zip(forces.map { |f| f.to_a }
         .map { |a, b| (a * error.x + b * error.y) * @c })
-      .map { |w, c| (0.0..1.0).clip(w + c) }
+      .map { |w, c| constrain(w + c, 0, 1.0) }
       @weights = trained
     end
     
@@ -57,8 +57,8 @@ module SeekingNeural
       @location += @velocity
       # Reset acceleration to 0 each cycle
       @acceleration *= 0
-      @location.x = (0..width).clip(location.x)
-      @location.y = (0..height).clip(location.y)
+      @location.x = constrain(location.x, 0, width)
+      @location.y = constrain(location.y, 0, height)
     end
     
     def apply_force(force)
@@ -105,7 +105,7 @@ module SeekingNeural
         vertex(0, -sz)
         vertex(-sz * 0.5, sz)
         vertex(sz * 0.5, sz)
-      end_shape(PConstants::CLOSE)
+      end_shape(CLOSE)
       pop_matrix
     end
   end    
@@ -160,4 +160,5 @@ end
 
 def settings
   size 640, 360, P2D
+  smooth(4)
 end

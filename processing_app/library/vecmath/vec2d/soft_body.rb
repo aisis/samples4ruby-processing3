@@ -43,7 +43,7 @@ def draw_shape
   begin_shape
   nodes.each { |vec| vec.to_curve_vertex(renderer) }
   nodes.take(NODES - 1).each { |vec| vec.to_curve_vertex(renderer) }
-  end_shape(Java::ProcessingCore::PConstants::CLOSE)
+  end_shape(CLOSE)
 end
 
 def update

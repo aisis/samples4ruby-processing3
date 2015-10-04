@@ -1,37 +1,18 @@
-#
-# Handles.
-#
-# Click and drag the white boxes to change their position.
-#
-H_SIZE = 10
-
 attr_reader :handles
 
-def settings
-  size(640, 360)
-end
-
-def setup  
+def setup
+  sketch_title 'Handles'
   num = height / 15
   @handles = []
+  hsize = 10
   num.times do |i|
-    handles << Handle.new(
-      width / 2,
-      10 + i * 15,
-      50 - H_SIZE / 2,
-      10,
-      handles,
-      640,
-      360)
+    handles[i] = Handle.new(width / 2, 10 + i * 15, 50 - hsize / 2, 10, handles)
   end
 end
 
 def draw
   background(153)
-  handles.each do |handle|
-    handle.update
-    handle.display
-  end
+  handles.each(&:run)
   fill(0)
   rect(0, 0, width / 2, height)
 end
@@ -40,12 +21,18 @@ def mouse_released
   handles.each(&:release_event)
 end
 
-# the Handle class
-class Handle
-  attr_reader :x, :y, :boxx, :boxy, :stretch, :size, :over, :press
-  attr_reader :others, :others_locked, :locked, :width, :height
+def over_rect(x, y, width, height)
+  return false unless (x..x + width).cover? mouse_x
+  return false unless (y..y + height).cover? mouse_y
+  true
+end
 
-  def initialize(ix, iy, il, is, o, width, height)
+# the class Handle, unfortunate need to access global $app.mouse_pressed? variable
+class Handle
+  attr_reader :x, :y, :boxx, :boxy, :otherslocked
+  attr_reader :others, :over, :locked, :press, :size, :stretch
+
+  def initialize(ix, iy, il, is, o)
     @x = ix
     @y = iy
     @stretch = il
@@ -54,37 +41,29 @@ class Handle
     @boxy = y - size / 2
     @others = o
     @locked = false
-    @others_locked = false
-    @width = width
-    @height = height
+    @otherslocked = false
   end
 
   def update
     @boxx = x + stretch
     @boxy = y - size / 2
-    others.each do |other|
-      if other.locked
-        @others_locked = true
-        break
-      else
-        @others_locked = false
-      end
-    end
-    if others_locked == false
+    @otherslocked = others.any?(&:locked)
+    unless otherslocked
       over_event
       press_event
     end
     return unless press
-    @stretch = lock(mouse_x - width / 2 - size / 2, 0, width / 2 - size - 1)
+    @stretch = constrain(mouse_x - width / 2 - size / 2, 0, width / 2 - size - 1)
   end
 
   def over_event
-    @over = over_rect?(boxx, boxy, size, size)
+    @over = over_rect(boxx, boxy, size, size)
   end
 
   def press_event
-    if over && mouse_pressed? || locked
-      @press, @locked = true, true
+    if over && $app.mouse_pressed? || locked
+      @press = true
+      @locked = true
     else
       @press = false
     end
@@ -104,11 +83,12 @@ class Handle
     line(boxx, boxy + size, boxx + size, boxy)
   end
 
-  def over_rect?(x, y, width, height)
-    (mouse_x >= x && mouse_x <= x + width && mouse_y >= y && mouse_y <= y + height)
+  def run
+    update
+    display
   end
+end
 
-  def lock(val, first, last)
-    constrain(val, first, last)
-  end
+def settings
+  size(640, 360)
 end

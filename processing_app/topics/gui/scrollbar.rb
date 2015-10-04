@@ -5,6 +5,10 @@
 #
 attr_reader :hs1, :hs2, :img1, :img2
 
+def settings
+  size 640, 360
+end
+
 def setup
   sketch_title 'Scrollbar'
   no_stroke
@@ -57,10 +61,10 @@ class HScrollbar
   end
 
   def update
-    if !mouse_pressed?
+    if !$app.mouse_pressed?
       @locked = false
     else
-      @locked = mouse_pressed? && over_event?
+      @locked = $app.mouse_pressed? && over_event?
     end
     @newspos = constrain(mouse_x - sheight / 2, spos_min, spos_max) if locked
     @spos = spos + (newspos - spos) / loose if (newspos - spos).abs > 1
@@ -100,8 +104,4 @@ class Boundary
   def include?(val)
     (low..high).include? val
   end
-end
-
-def settings
-  size 640, 360
 end

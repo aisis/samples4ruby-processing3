@@ -1,12 +1,16 @@
 attr_reader :handles
 
+def settings
+  size(640, 360)
+end
+
 def setup
   sketch_title 'Handles'
   num = height / 15
   @handles = []
   hsize = 10
   num.times do |i|
-    handles[i] = Handle.new(width / 2, 10 + i * 15, 50 - hsize / 2, 10, handles)
+    handles[i] = Handle.new(width / 2, 10 + i * 15, 50 - hsize / 2, 10, self)
   end
 end
 
@@ -27,19 +31,20 @@ def over_rect(x, y, width, height)
   true
 end
 
-# the class Handle, unfortunate need to access global $app.mouse_pressed? variable
+# the class Handle
 class Handle
-  attr_reader :x, :y, :boxx, :boxy, :otherslocked
+  attr_reader :app, :x, :y, :boxx, :boxy, :otherslocked
   attr_reader :others, :over, :locked, :press, :size, :stretch
 
-  def initialize(ix, iy, il, is, o)
+  def initialize(ix, iy, il, is, app)
+    @app = app
     @x = ix
     @y = iy
     @stretch = il
     @size = is
     @boxx = x + stretch - size / 2
     @boxy = y - size / 2
-    @others = o
+    @others = app.handles
     @locked = false
     @otherslocked = false
   end
@@ -61,7 +66,7 @@ class Handle
   end
 
   def press_event
-    if over && $app.mouse_pressed? || locked
+    if over && app.mouse_pressed? || locked
       @press = true
       @locked = true
     else
@@ -87,8 +92,4 @@ class Handle
     update
     display
   end
-end
-
-def settings
-  size(640, 360)
 end

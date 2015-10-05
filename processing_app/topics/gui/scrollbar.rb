@@ -12,8 +12,8 @@ end
 def setup
   sketch_title 'Scrollbar'
   no_stroke
-  @hs1 = HScrollbar.new(0, height / 2 - 8, width, 16, 16)
-  @hs2 = HScrollbar.new(0, height / 2 + 8, width, 16, 16)
+  @hs1 = HScrollbar.new(app: self, height: height / 2 - 8, wd: 16, loose: 16)
+  @hs2 = HScrollbar.new(app: self, height: height / 2 + 8, wd: 16, loose: 16)
   # Load images
   @img1 = load_image('seedTop.jpg')
   @img2 = load_image('seedBottom.jpg')
@@ -39,34 +39,34 @@ def draw
   line(0, height / 2, width, height / 2)
 end
 
-# Scrollbar class
+# Scrollbar class (keywords constructor wd is widget handle dimension)
 class HScrollbar
-  include Processing::Proxy
-  attr_reader :swidth, :sheight, :xpos, :ypos, :spos, :newspos, :bound_x
+  attr_reader :app, :swidth, :wd, :xpos, :ypos, :spos, :newspos, :bound_x
   attr_reader :spos_max, :spos_min, :loose, :over, :locked, :ratio, :bound_y
-  def initialize(xp, yp, sw, sh, l)
-    @swidth = sw
-    @sheight = sh
-    widthtoheight = sw - sh
-    @ratio = sw.to_f / widthtoheight
-    @xpos = xp
-    @ypos = yp - sheight / 2
-    @spos = xpos + swidth / 2 - sheight / 2
+  def initialize(app:, height:, wd:, loose:)
+    @app = app
+    @swidth = app.width
+    @wd = wd
+    widthtoheight = app.width - wd
+    @ratio = app.width.to_f / widthtoheight
+    @xpos = 0
+    @ypos = height - wd / 2
+    @spos = xpos + swidth / 2 - wd / 2
     @newspos = spos
     @spos_min = xpos
-    @spos_max = xpos + swidth - sheight
-    @loose = l
+    @spos_max = xpos + swidth - wd
+    @loose = loose # how loose/heavy the slider is coupled?
     @bound_x = Boundary.new(xpos, xpos + swidth)
-    @bound_y = Boundary.new(ypos, ypos + sheight)
+    @bound_y = Boundary.new(ypos, ypos + wd)
   end
 
   def update
-    if !$app.mouse_pressed?
+    if !app.mouse_pressed?
       @locked = false
     else
-      @locked = $app.mouse_pressed? && over_event?
+      @locked = app.mouse_pressed? && over_event?
     end
-    @newspos = constrain(mouse_x - sheight / 2, spos_min, spos_max) if locked
+    @newspos = constrain(mouse_x - wd / 2, spos_min, spos_max) if locked
     @spos = spos + (newspos - spos) / loose if (newspos - spos).abs > 1
   end
 
@@ -77,13 +77,13 @@ class HScrollbar
   def display
     no_stroke
     fill(204)
-    rect(xpos, ypos, swidth, sheight)
+    rect(xpos, ypos, swidth, wd)
     if over || locked
       fill(0, 0, 0)
     else
       fill(102, 102, 102)
     end
-    rect(spos, ypos, sheight, sheight)
+    rect(spos, ypos, wd, wd)
   end
 
   def position
@@ -102,6 +102,6 @@ class Boundary
   end
 
   def include?(val)
-    (low..high).include? val
+    (low..high).cover? val
   end
 end

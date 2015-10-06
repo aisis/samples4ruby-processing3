@@ -1,6 +1,8 @@
 load_library :guido
 include_package 'de.bezier.guido'
 
+# see https://github.com/fjenett/Guido/
+
 def settings
   size 400, 400
 end

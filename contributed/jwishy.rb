@@ -30,7 +30,6 @@ def setup
   end
   @hide = false
   @shape = 'oval'
-  @alpha, @bluish = 0.5, 0.5
   @x_wiggle, @y_wiggle = 10.0, 0
   @magnitude = 8.15
   @back_color = [0.06, 0.03, 0.18]
@@ -41,7 +40,7 @@ end
 
 def draw_background
   back_color[3] = alpha
-  fill(*back_color.to_java(:float)) if back_color[0]
+  fill(*back_color.to_java(:float))
   rect 0, 0, width, height
 end
 
@@ -87,24 +86,27 @@ def draw
 end
 
 def mouse_pressed
-  @hide = false if hide
+  return unless hide
+  @hide = false
 end
 
 def draw_shape(args)
   case args[0]
   when 'triangle'
-    x0 = args[1] - (args[3] * 0.6)
-    x1 = args[1]
-    x2 = args[1] + (args[3] * 0.6)
-    y0 = args[2] + (args[4] * 0.396)
-    y1 = args[2] - (args[4] * 0.792)
-    y2 = args[2] + (args[4] * 0.396)
-    triangle(x0, y0, x1, y1, x2, y2)
+    draw_triangle(args)
   when 'square'
     rect(args[1], args[2], args[3], args[4])
   else
-    oval(args[1], args[2], args[3], args[4])
+    oval(args[1], args[2], args[3], args[4]) # ellipse alias
   end
+end
+
+def draw_triangle(args)
+  x2 = args[1] + (args[3] * 0.6)
+  y0 = args[2] + (args[4] * 0.396)
+  y1 = args[2] - (args[4] * 0.792)
+  y2 = args[2] + (args[4] * 0.396)
+  triangle(args[1] - (args[3] * 0.6), y0, args[1], y1, x2, y2)
 end
 
 def settings

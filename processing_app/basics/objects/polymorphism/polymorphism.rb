@@ -4,7 +4,11 @@
 
 # Example 22-2: Polymorphism
 
-# One array of Shapes, in ruby we don't need polymorphism to achieve that
+# One array of Shapes, in ruby we don't need polymorphism to achieve that,
+# this is a JRubyArt port. Introducing the hook method,
+# keyword args and the post_initialization hook for flexible inheritance.
+# Important change we only really need to know run method initialization of
+# color is also really irrelevant save showing how to use hook.
 require_relative 'circle'
 require_relative 'square'
 
@@ -15,18 +19,16 @@ def setup
   @shps = []
   30.times do
     if rand < 0.5
-      shps << Circle.new(320, 180, 32, color(rand(255), 100))
+      shps << Circle.new(x: 320, y: 180, r: 32, c: color(rand(255), 100))
     else
-      shps << Square.new(320, 180, 32)
+      shps << Square.new(x: 320, y: 180, r: 32)
     end
   end
 end
 
 def draw
   background(255)
-  shps.each(&:jiggle)
-  shps.each { |shape| shape.change_color if shape.respond_to? :change_color }
-  shps.each(&:display)
+  shps.each(&:run)
 end
 
 def settings

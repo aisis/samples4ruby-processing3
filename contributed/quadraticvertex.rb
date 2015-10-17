@@ -1,3 +1,4 @@
+
 # sketch by Jan Vantomme
 # Part of a series of articles on Processing 2.
 # Blog post here:
@@ -15,14 +16,13 @@ def setup
   sketch_title 'Quadratic Vertex'
   @hide = false
   control_panel do |c|
-    c.title = 'controller'
+    c.title = 'Controller'
     c.menu(:detail, %w(4 5 6 7 8 9 10), '7')
-    c.button :toggle_debug
+    c.checkbox :debug
     c.button :save_image
     @panel = c
   end
-  @debug = false
-  @save_one = false  
+  @save_one = false
 end
 
 def draw
@@ -71,7 +71,7 @@ def draw
 end
 
 def mouse_pressed
-  @hide = false  
+  @hide = false
 end
 
 def cos_x(n)
@@ -88,10 +88,6 @@ end
 
 def sin_cy(n)
   sin(step_angle * n - (step_angle / 2)) * cr
-end
-
-def toggle_debug
-  @debug = !debug
 end
 
 def save_image

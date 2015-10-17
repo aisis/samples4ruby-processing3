@@ -1,7 +1,7 @@
-# Ruby modules, are another way of extending a classes behaviour, the class 
-# ParticleSystem includes Enumerable (from ruby core) and our custom Runnable 
-# module. Here we use the module Runnable to capture behaviour that can be 
-# shared between different classes. Modules are also very useful for wrapping 
+# Ruby modules, are another way of extending a classes behaviour, the class
+# ParticleSystem includes Enumerable (from ruby core) and our custom Runnable
+# module. Here we use the module Runnable to capture behaviour that can be
+# shared between different classes. Modules are also very useful for wrapping
 # imported classes (wrapped packages can then be called using convenient names).
 
 # This example is bit complicated, because Enumerable and Forwardable are used
@@ -32,34 +32,32 @@ module Runnable
   end
 end
 
-class ParticleSystem 
+class ParticleSystem
   extend Forwardable
-  def_delegators(:@particle_system, :each, :<<, :reject!)  
-  include Enumerable 
+  def_delegators(:@particle_system, :each, :<<, :reject!)
+  include Enumerable
   include Runnable
-  
+
   attr_reader :origin
- 
+
   def initialize(loc)
     @particle_system = []
-    @origin = Vec2D.new(loc.x, loc.y)
+    @origin = loc
   end
-  
+
   def add_particle
-    self << Particle.new(origin) 
+    self << Particle.new(origin)
   end
-  
+
 end
 
 # A simple Particle class
-
-class Particle 
-  
+class Particle
   attr_reader :loc, :vel, :acc, :lifespan
-  def initialize(loc) 
+  def initialize(loc)
     @acc = Vec2D.new(0, 0.05)
     @vel = Vec2D.new(rand(-1.0..1), rand(-2.0..0))
-    @loc = loc    # loc.clone is unecessary in ruby
+    @loc = loc
     @lifespan = 255.0
   end
 
@@ -86,4 +84,3 @@ end
 def settings
   size(640,360)
 end
-

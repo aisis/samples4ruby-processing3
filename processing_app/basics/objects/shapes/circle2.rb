@@ -11,6 +11,10 @@ require_relative 'shape'
 class Circle < Shape  
   COLORS = %w{#ff0000 #ffff00 #3333ff #33cc33}
   attr_reader :c, :x, :y, :r
+  
+  def initialize(x:, y:, r:)
+    super
+  end
 
   def post_initialize(args)
     @c = args[:c]          # Also deal with this new instance variable
@@ -25,8 +29,10 @@ class Circle < Shape
   end
 
   # The change_color function is unique to the Circle class.
+  # @HACK color(COLORS.sample) produces solid color we can add transparency
+  # for these colors (all negative int)
   def change_color
-    @c = color(COLORS.sample) - (100<<24)
+    @c = color(COLORS.sample) + (100<<24) 
   end
 
   def display

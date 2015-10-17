@@ -9,8 +9,8 @@
 # keyword args and the post_initialization hook for flexible inheritance.
 # Important change we only really need to know run method initialization of
 # color is also really irrelevant save showing how to use hook.
-require_relative 'circle'
-require_relative 'square'
+require_relative 'shapes/square'
+require_relative 'shapes/circle2.rb'
 
 attr_reader :shps
 
@@ -19,7 +19,7 @@ def setup
   @shps = []
   30.times do
     if rand < 0.5
-      shps << Circle.new(x: 320, y: 180, r: 32, c: color(rand(255), 100))
+      shps << Circle.new(x: 320, y: 180, r: 32)
     else
       shps << Square.new(x: 320, y: 180, r: 32)
     end

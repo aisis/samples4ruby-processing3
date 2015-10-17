@@ -58,7 +58,8 @@ X1, Y1, X2, Y2 = 50.0, 50.0, 250.0, 250.0
 REDDISH = [250, 100, 100]
 RADIUS = 7
 
-load_library :control_panel
+load_library 
+
 include Olap
 
 def setup

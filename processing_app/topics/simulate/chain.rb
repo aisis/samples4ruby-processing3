@@ -1,3 +1,4 @@
+
 #
 # Ported from http://processing.org/learning/topics/chain.html
 #
@@ -31,7 +32,6 @@ def draw
   background 204
   @s1.update(mouse_x, mouse_y, gravity)
   display(@s1, mouse_x, mouse_y)
-
   @s2.update(@s1.x, @s1.y, gravity)
   display(@s2, @s1.x, @s1.y)
 end

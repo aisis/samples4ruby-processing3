@@ -1,4 +1,4 @@
-require_relative 'lib/egg_ring'
+load_libraries :eggring
 
 attr_reader :egg_one, :egg_two
 
@@ -17,4 +17,3 @@ end
 def settings
   size 640, 360
 end
-

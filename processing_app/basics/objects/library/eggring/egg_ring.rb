@@ -1,6 +1,3 @@
-require_relative 'ring'
-require_relative 'egg'
-
 class EggRing
    attr_reader :ovoid, :circle
 

@@ -4,21 +4,21 @@
 # Also the Array is extended to yield one_of_each using a module
 # pair of pts. See the drawolver library. Also features the use each_cons, 
 # possibly a rare use for this ruby Enumerable method?
-# 2010-03-22 - fjenett (last revised by monkstone 2013-09-13)
+# 2010-03-22 - fjenett (last revised by monkstone 2015-10-17)
 
-attr_reader :drawing_mode, :points, :rot_x, :rot_y, :vertices
+attr_reader :drawing_mode, :points, :rot_x, :rot_y, :vertices, :renderer
 
 module ExtendedArray
   # send one item from each array, expects array to be 2D:
   # array [[1,2,3], [a,b,c]] sends
   # [1,a] , [2,b] , [3,c]
-  def one_of_each( &block )
+  def one_of_each(&block)
     i = 0
     one = self[0]
     two = self[1]
     mi = one.length > two.length ? two.length : one.length
     while i < mi do
-      yield( one[i], two[i] )
+      yield(one[i], two[i])
       i += 1
     end
   end
@@ -26,6 +26,7 @@ end
 
 def setup 
   sketch_title 'Module Two'
+  @renderer = AppRender.new(self)
   frame_rate 30 
   reset_scene
 end
@@ -42,23 +43,22 @@ def draw
   end 
   no_fill
   stroke 255
-  points.each_cons(2) { |ps, pe| line ps.x, ps.y, pe.x, pe.y}
+  points.each_cons(2) { |ps, pe| line ps.x, ps.y, pe.x, pe.y }
 
-  if (!drawing_mode)    
-    stroke 125
-    fill 120
-    lights 
-    ambient_light 120, 120, 120
-    vertices.each_cons(2) do |r1, r2|
-      begin_shape(TRIANGLE_STRIP)
-      ext_array = [r1,r2].extend ExtendedArray # extend an instance of Array
-      ext_array.one_of_each do |v1, v2|          
-        vertex v1.x, v1.y, v1.z
-        vertex v2.x, v2.y, v2.z
-      end
-      end_shape 
+  return if drawing_mode    
+  stroke 125
+  fill 120
+  lights 
+  ambient_light 120, 120, 120
+  vertices.each_cons(2) do |r1, r2|
+    begin_shape(TRIANGLE_STRIP)
+    ext_array = [r1,r2].extend ExtendedArray # extend an instance of Array
+    ext_array.one_of_each do |v1, v2|          
+      v1.to_vertex(renderer)
+      v2.to_vertex(renderer)
     end
-  end 
+    end_shape 
+  end
 end
 
 def reset_scene 
@@ -107,4 +107,3 @@ end
 def settings
   size 1024, 768, P3D
 end
-

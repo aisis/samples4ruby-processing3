@@ -1,5 +1,5 @@
 # Description:
-# Flight Patterns is that ol' Euruko 2008 demo. 
+# Boids Example demonstrates use of boid.angle (heading). 
 # Usage:
 # Drag mouse to steer 'invisible' flock attractor, use 'f' key to toggle flee
 load_library :boids
@@ -11,6 +11,7 @@ def settings
 end
 
 def setup
+  sketch_title 'Boids Example'
   sphere_detail 8
   color_mode RGB, 1.0
   @radius = 0.02 * height

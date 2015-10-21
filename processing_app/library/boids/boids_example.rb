@@ -12,7 +12,6 @@ end
 
 def setup
   sketch_title 'Boids Example'
-  sphere_detail 8
   color_mode RGB, 1.0
   @radius = 0.02 * height
   @click = false

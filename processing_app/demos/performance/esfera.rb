@@ -1,7 +1,8 @@
 #
 # Esfera
 # by David Pena.
-# Somewhat re-factored for JRubyArt
+# Somewhat re-factored to demonstrate JRubyArt features, including ArcBall,
+# use of Forwardable, and Factory Module
 # by Martin Prout
 # Distribucion aleatoria uniforme sobre la superficie de una esfera.
 #
@@ -16,15 +17,20 @@ java_alias :fill_int, :fill, [Java::int]
 java_alias :stroke_int, :stroke, [Java::int]
 java_alias :stroke_float_float, :stroke, [Java::float, Java::float]
 
+def settings
+  size(800, 600, P3D)
+  no_smooth
+end
+
 def setup
   sketch_title 'Esfera'
   ArcBall.init(self, width / 2.0, height / 2.0)
   @rx = 0
-  @ry = 0  
+  @ry = 0
   @radius = height / 3.5
-  @orb = HairyOrb.new(self, radius)
+  @orb = HairyOrb.new(radius)
   QUANTITY.times do
-    orb << create_hair(radius)
+    orb << HairFactory.create_hair(radius)
   end
   noise_detail(3)
 end
@@ -35,34 +41,27 @@ def draw
   no_stroke
   sphere(radius)
   orb.render
-  puts(frame_rate) if (frame_count % 10 == 0)
-end
-
-def create_hair radius
-  z = rand(-radius..radius)
-  phi = rand(0..TAU)
-  len = rand(1.15..1.2)
-  theta = Math.asin(z / radius)
-  Hair.new(z, phi, len, theta)
+  # puts(frame_rate) if (frame_count % 10 == 0)
 end
 
 require 'forwardable'
 
+# HairOrb class uses Forwardable to implement require bits of Enumerable
 class HairyOrb
   extend Enumerable
   extend Forwardable
   def_delegators(:@hairs, :each, :<<)
-  attr_reader :app, :hairs, :radius
+  attr_reader :hairs, :radius
 
-  def initialize app, radius
-    @app, @radius = app, radius
+  def initialize(radius)
+    @radius = radius
     @hairs = []
   end
 
   def render
-    self.each do |hair|
-      off = (noise(millis() * 0.0005, sin(hair.phi)) - 0.5) * 0.3
-      offb = (noise(millis() * 0.0007, sin(hair.z) * 0.01) - 0.5) * 0.3
+    each do |hair|
+      off = (noise(millis * 0.0005, sin(hair.phi)) - 0.5) * 0.3
+      offb = (noise(millis * 0.0007, sin(hair.z) * 0.01) - 0.5) * 0.3
       thetaff = hair.theta + off
       costhetaff = cos(thetaff)
       coshairtheta = cos(hair.theta)
@@ -80,14 +79,20 @@ class HairyOrb
       vertex(x, y, za)
       stroke_float_float(200, 150)
       vertex(xb, yb, zb)
-      end_shape()
+      end_shape
     end
   end
 end
 
-Hair = Struct.new(:z, :phi, :len, :theta )
+# Hair factory can create anonymous instances of Hair Struct
+module HairFactory
+  Hair = Struct.new(:z, :phi, :len, :theta)
 
-def settings
-  size(800, 600, P3D)
-  no_smooth
+  def self.create_hair(radius)
+    z = rand(-radius..radius)
+    phi = rand(0..Math::PI * 2)
+    len = rand(1.15..1.2)
+    theta = Math.asin(z / radius)
+    Hair.new(z, phi, len, theta)
+  end
 end

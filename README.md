@@ -1,4 +1,4 @@
-# samples4ruby-processing3
-Samples for JRubyArt (formerly ruby-processing-3.0)
+# Samples for JRubyArt-1.0+
+Samples for JRubyArt
 
 Suggestions for improvements welcome!!!

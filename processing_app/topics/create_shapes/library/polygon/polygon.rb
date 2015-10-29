@@ -5,12 +5,12 @@ class Polygon
   # The PShape object
   attr_reader :s, :x, :y, :speed, :height
 
-  def initialize(s_, width, height)
-    @x = rand(width)
+  def initialize(shape:, max_x:, max_y:)
+    @x = rand(0..max_x)
     @y = rand(-500..-100)
-    @s = s_
+    @s = shape
     @speed = rand(2..6)
-    @height = height
+    @height = max_y
   end
   
   # Simple motion
@@ -32,4 +32,3 @@ class Polygon
     move
   end
 end
-

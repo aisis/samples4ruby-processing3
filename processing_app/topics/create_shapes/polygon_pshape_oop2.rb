@@ -1,7 +1,7 @@
 #
-# PolygonPShapeOOP. 
-# 
-# Wrapping a PShape inside a custom class 
+# PolygonPShapeOOP.
+#
+# Wrapping a PShape inside a custom class
 # and demonstrating how we can have a multiple objects each
 # using the same PShape.
 #
@@ -10,12 +10,17 @@ load_library 'polygon'
 # A list of objects
 attr_reader :polygons
 
+def settings
+  size(640, 360, P2D)
+  smooth
+end
+
 def setup
-  sketch_title 'Polygon Pshape Oop2'
+  sketch_title 'Polygon PShape OOP 002'
   # Make a PShape
-  star = createShape
-  star.beginShape
-  star.noStroke
+  star = create_shape
+  star.begin_shape
+  star.no_stroke
   star.fill(0, 127)
   star.vertex(0, -50)
   star.vertex(14, -20)
@@ -27,31 +32,16 @@ def setup
   star.vertex(-23, 7)
   star.vertex(-47, -15)
   star.vertex(-14, -20)
-  star.endShape(CLOSE)
-
-  @polygons = []
-  
-  # Add a bunch of objects to the ArrayList
-  # Pass in reference to the PShape
+  star.end_shape(CLOSE)
   # We coud make polygons with different PShapes
-  25.times do
-    polygons << Polygon.new(star, width, height)
+  @polygons = (0..25).map do
+    Polygon.new(shape: star, max_x: width, max_y: height)
   end
 end
 
 def draw
   background(255)
-
   # Display and move them all
-  polygons.each do |poly|
-    poly.display
-    poly.move
-  end
-end
-
-
-def settings
-  size(640, 360, P2D)
-  smooth
+  polygons.each(&:run)
 end
 

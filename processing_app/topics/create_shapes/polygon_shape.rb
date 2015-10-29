@@ -1,12 +1,15 @@
-
 #
-# PrimitivePShape. 
-# 
-# Using a PShape to display a custom polygon. 
+# PrimitivePShape.
 #
-
+# Using a PShape to display a custom polygon.
+#
 # The PShape object
 attr_reader :star
+
+def settings
+  size(640, 360, P2D)
+  smooth
+end
 
 def setup
   sketch_title 'Polygon Shape'
@@ -34,14 +37,7 @@ end
 def draw
   background(51)
   # We can use translate to move the PShape
-  translate(mouseX, mouseY)
+  translate(mouse_x, mouse_y)
   # Display the shape
   shape(star)
 end
-
-
-def settings
-  size(640, 360, P2D)
-  smooth
-end
-

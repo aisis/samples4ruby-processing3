@@ -14,10 +14,8 @@ def setup
   stroke_int(0)  # set stroke this way to avoid overload warnings
   srand(5)
   # Initialize box2d physics and create the world
-  @box2d = Box2D.new(self)
-  puts box2d.version # print out version of pbox2d gem in use
-  box2d.init_options(scale: 10, gravity: [0, -20.0])
-  box2d.create_world
+  @box2d = WorldBuilder.build(app: self, scale: 10, gravity: [0, -20.0])
+  puts box2d.version
   # Set a custom gravity
   # box2d.gravity(0, -20)  
   # Create ArrayLists	

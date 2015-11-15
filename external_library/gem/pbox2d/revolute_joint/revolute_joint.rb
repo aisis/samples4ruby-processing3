@@ -12,8 +12,7 @@ attr_reader :box2d, :windmill, :system
 
 def setup
   size(640,360)
-  @box2d = Box2D.new(self)
-  box2d.createWorld
+  @box2d = WorldBuilder.build(app: self)
   @windmill = Windmill.new(width / 2, 175)
   @system = ParticleSystem.new
 end

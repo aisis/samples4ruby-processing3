@@ -33,7 +33,7 @@ def setup
   @hide = false
   @resolution = 5
   control_panel do |p|
-    p.look_feel 'Metal'	# optionall set look and feel  
+    p.look_feel 'Metal'	# optional set look and feel  
     p.slider :resolution, (2..50), 5
     @panel = p
   end

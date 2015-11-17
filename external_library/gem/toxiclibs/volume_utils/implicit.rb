@@ -1,5 +1,4 @@
-# A ruby processing sketch (needs re-factoring for jruby_art)
-#
+
 #
 # This example implements a custom VolumetricSpace using an implicit function
 # to calculate each voxel. This is slower than the default array or HashMap
@@ -10,16 +9,14 @@
 # acting as lower threshold when computing the iso surface)
 #
 # Usage:
-# move mouse to rotate camera
-# w: toggle wireframe on/off
-# -/=: zoom in/out
+# drag mouse to rotate camera
+# mouse wheel zoom in/out
 # l: apply laplacian mesh smooth
 #
 #
 
 #
 # Copyright (c) 2010 Karsten Schmidt & JRubyArt version Martin Prout 2015
-# This sketch relies on a custom toxiclibscore library for PovRAY export
 #
 # This library is free software you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -37,51 +34,64 @@
 # License along with this library if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
-
 require 'toxiclibs'
- 
+
 RES = 64
 ISO = 0.2
 MAX_ISO = 0.66
-attr_reader :mesh, :gfx, :curr_zoom, :is_wire_frame
 
-def setup
-  sketch_title 'Isosurface'
-  ArcBall.init(self)
-  @gfx = Gfx::ToxiclibsSupport.new(self)
-  vol = EvaluatingVolume.new(TVec3D.new(400, 400, 400), RES, RES, RES, MAX_ISO)
-  surface = Volume::HashIsoSurface.new(vol)
-  @mesh = WETriangleMesh.new
-  surface.compute_surface_mesh(mesh, ISO)
-  @is_wire_frame = false
-end
+attr_reader :mesh, :vbo, :curr_zoom, :implicit
 
 def settings
   size(720, 720, P3D)
 end
 
+def setup
+  sketch_title 'Implicit Surface'
+  Processing::ArcBall.init(self)
+  @vbo = Gfx::MeshToVBO.new(self)
+  @curr_zoom = 1
+  vol = EvaluatingVolume.new(TVec3D.new(400, 400, 400), RES, RES, RES, MAX_ISO)
+  surface = Volume::HashIsoSurface.new(vol)
+  @mesh = WETriangleMesh.new
+  surface.compute_surface_mesh(mesh, ISO)
+  @is_wire_frame = false
+  no_stroke
+  @implicit = vbo.mesh_to_shape(mesh, true)
+  implicit.set_fill(color(222, 222, 222))
+  implicit.set_ambient(color(50, 50, 50))
+  implicit.set_shininess(color(10, 10, 10))
+  implicit.set_specular(color(50, 50, 50))
+end
+
 def draw
-  background(200, 0, 200)
-  if is_wire_frame
-    no_fill
-    stroke(255)
-  else
-    fill(255)
-    no_stroke
-    define_lights
-    lights
-  end
-  @gfx.mesh(mesh, true)
+  background(0)
+  lights
+  define_lights
+  shape(implicit)
 end
 
 def key_pressed
   case key
-  when 'w', 'W'
-    @is_wire_frame = !is_wire_frame
   when 'l', 'L'
     LaplacianSmooth.new.filter(mesh, 1)
+    @implicit = vbo.mesh_to_shape(mesh, true)
+    # new mesh so need to set finish
+    implicit.set_fill(color(222, 222, 222))
+    implicit.set_ambient(color(50, 50, 50))
+    implicit.set_shininess(color(10, 10, 10))
+    implicit.set_specular(color(50, 50, 50))
   when 's', 'S'
     save_frame('implicit.png')
+  when 'p', 'P'
+    no_loop
+    pm = Gfx::POVMesh.new(self)
+    file = java.io.File.new('implicit.inc')
+    pm.begin_save(file)
+    pm.set_texture(Gfx::Textures::WHITE)
+    pm.saveAsPOV(mesh, true)
+    pm.end_save
+    exit
   end
 end
 
@@ -92,12 +102,10 @@ def define_lights
   spot_light(30, 30, 30, 0, 40, 200, 0, -0.5, -0.5, PI / 2, 2)
 end
 
-# Creating a volumetric space class
-#
+# Custom evaluating Volume Class
 class EvaluatingVolume < Volume::VolumetricSpace
-  include Processing::Proxy
   attr_reader :upper_bound
-  FREQ = PI * 3.8
+  FREQ = Math::PI * 3.8
 
   def initialize(scal_vec, resX, resY, resZ, upper_limit)
     super(scal_vec, resX, resY, resZ)
@@ -109,20 +117,19 @@ class EvaluatingVolume < Volume::VolumetricSpace
   end
 
   def getVoxelAt(i)
-    getVoxel(i % resX, (i % sliceRes) / resX, i / sliceRes)
+    get_voxel(i % resX, (i % sliceRes) / resX, i / sliceRes)
   end
 
-  def getVoxel(x, y, z)  # can't overload so we renamed
-    val = 0
-    if x > 0 && x < resX1 && y > 0 && y < resY1 && z > 0 && z < resZ1
-      xx = x * 1.0 / resX - 0.5  # NB: careful about integer division !!!
-      yy = y * 1.0 / resY - 0.5
-      zz = z * 1.0 / resZ - 0.5
-      val = cos(xx * FREQ) * sin(yy * FREQ) + cos(yy * FREQ) * sin(zz* FREQ) + cos(zz * FREQ) * sin(xx * FREQ)
-      # val = sin(xx * FREQ) + cos(yy * FREQ) + sin(zz * FREQ)
-      # val = sin(xx * FREQ) * (xx * FREQ) + sin(yy * FREQ) * (yy * FREQ) + sin(zz * FREQ) * (zz * FREQ)
-      val = 0 if val > upper_bound
+  def get_voxel(x, y, z) # can't overload so we renamed
+    out = ->(val, res) { val <= 0 || val >= res }
+    return 0 if out.call(x, resX1) || out.call(y, resY1) || out.call(z, resZ1)
+    value = ->(val, res) { val * 1.0 / res - 0.5 }
+    function = lambda do |x, y, z, c|
+      cos(x * c) * sin(y * c) + cos(y * c) * sin(z * c) + cos(z * c) * sin(x * c)
     end
+    val = function.call(value.call(x, resX),value.call(y, resY), value.call(z, resZ), FREQ)
+    # val = cos(xx * FREQ) * sin(yy * FREQ) + cos(yy * FREQ) * sin(zz * FREQ) + cos(zz * FREQ) * sin(xx * FREQ)
+    return 0 if val > upper_bound
     val
   end
 end

@@ -35,8 +35,7 @@ def init_mesh
   @mesh = WETriangleMesh.new
   Toxi::AABB.new(Vec3D.new(0, 0, 0), 100).to_mesh(mesh)
   5.times do |i|
-    # subdiv = MidpointDisplacementSubdivision.new( # should work?
-    subdiv = Java::ToxiGeomMeshSubdiv::MidpointDisplacementSubdivision.new(
+    subdiv = Toxi::MidpointDisplacementSubdivision.new(
       mesh.compute_centroid,
       i.even? ? 0.35 : -0.2
     )

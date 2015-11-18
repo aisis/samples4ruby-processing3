@@ -19,11 +19,11 @@ def draw
   background(255)
   if !is_wireframe
     fill(255)
-    noStroke
+    no_stroke
     lights
   else
     gfx.origin(TVec3D.new, 100)
-    noFill
+    no_fill
     stroke(0)
   end
   gfx.mesh_normal_mapped(mesh, !is_wireframe)

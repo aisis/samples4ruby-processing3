@@ -11,8 +11,8 @@ Vec3D.class_eval do # re-open the Vec3D class to add rotation functionality
   def rotate_y(theta)
     co = Math.cos(theta)
     si = Math.sin(theta)
-    xx = co * self.x - si * self.z
-    self.z = si * self.x + co * self.z
+    xx = co * x - si * z
+    self.z = si * x + co * z
     self.x = xx
     self
   end
@@ -20,8 +20,8 @@ Vec3D.class_eval do # re-open the Vec3D class to add rotation functionality
   def rotate_x(theta)
     co = Math.cos(theta)
     si = Math.sin(theta)
-    zz = co * self.z - si * self.y
-    self.y = si * self.z + co * self.y
+    zz = co * z - si * y
+    self.y = si * z + co * y
     self.z = zz
     self
   end

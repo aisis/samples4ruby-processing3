@@ -4,7 +4,7 @@ require 'toxiclibs'
 # Adapted for JRubyArt and mesh to PShape, and mesh2 export by Martin Prout
 # Hold down 'y' key and drag mouse left to right to rotate tentacle in Y-axis
 
-attr_reader :mesh, :gfx, :tentacle
+attr_reader :mesh, :gfx, :tentacle, :tex
 
 def settings
   size(500, 500, P3D)
@@ -12,8 +12,10 @@ end
 
 def setup
   sketch_title 'Tentacle'
+  @tex = load_image('rock_texture2.png')
   ArcBall.init(self)
   @gfx = Gfx::MeshToVBO.new(self)
+  # gfx.fill_color(color(0, 0, 200))
   volume = VolumetricSpaceArray.new(TVec3D.new(100, 200, 100), 100, 100, 100)
   surface = ArrayIsoSurface.new(volume)
   @mesh = TriangleMesh.new
@@ -38,7 +40,7 @@ def setup
   surface.reset
   surface.compute_surface_mesh(mesh, 0.5)
   no_stroke
-  @tentacle = gfx.mesh_to_shape(mesh, true)
+  @tentacle = gfx.mesh_to_textured_shape(mesh, tex)
 end
 
 def draw

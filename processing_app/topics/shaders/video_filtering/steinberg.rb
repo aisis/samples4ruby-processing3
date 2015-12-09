@@ -8,7 +8,7 @@ attr_reader :cam, :my_shader
 def setup
   sketch_title 'Steinberg'
   @my_shader = load_shader('steinberg.glsl')
-  my_shader.set('sketchSize', width.to_f, height.to_f)
+  my_shader.set('sketchSize', width.to_java(Java::float), height.to_java(Java::float))
   start_capture(width, height)
 end
 

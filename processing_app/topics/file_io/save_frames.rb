@@ -38,7 +38,7 @@ def draw
   # Let's draw some stuff to tell us what is happening
   # It's important to note that none of this will show up in the
   # rendered files b/c it is drawn *after* saveFrame
-  textAlign(CENTER)
+  text_align(CENTER)
   fill(255)
   if !recording
     text('Press r to start recording.', width / 2, height - 24)

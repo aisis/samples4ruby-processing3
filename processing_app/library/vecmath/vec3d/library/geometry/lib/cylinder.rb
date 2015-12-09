@@ -1,21 +1,21 @@
 class Cylinder
   include Processing::Proxy
   attr_accessor :vecs
-  attr_reader :detail, :dim  
-  
+  attr_reader :detail, :dim
+
   def initialize(dim, detail)
     @dim = dim
     @detail = detail
     init
   end
-  
+
   def init
     #    created around x-axis
     #    y = Math.cos
     #    z = Math.sin
     veca = []
     vecb = []
-    (0 ... 360).step(360 / detail) do |theta|
+    (0...360).step(360 / detail) do |theta|
       cost = DegLut.cos(theta)
       sint = DegLut.sin(theta)
       veca << Vec3D.new(0, cost * dim.y, sint * dim.z)
@@ -23,7 +23,7 @@ class Cylinder
     end
     @vecs = veca.concat(vecb)
   end
-  
+
   def display(renderer)
     begin_shape(QUADS)
     detail.times do |i|

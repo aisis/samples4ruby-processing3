@@ -1,4 +1,5 @@
 attr_reader :d, :sh
+
 def settings
   size(640, 360, P3D)
 end
@@ -13,7 +14,7 @@ end
 
 def draw
   background(255)
-  sh.set('tween', norm(mouse_x, 0, width))
+  sh.set('tween', norm_strict(mouse_x, 0, width))
   translate(width / 2, height / 2, 0)
   rotate_x(frame_count * 0.01)
   rotate_y(frame_count * 0.01)

@@ -81,18 +81,8 @@ def setup
     # and the vector now as a Matrix with 4 rows and 1 column.
     # When you multiply matrices the inner numbers MUST match, so:
     # [4 x 4] [4 x 1] is OK, but [4 x 4] [1 x 4] is NOT COOL.
-
-    # (Please note there is also row vector approach that you can
-    # Google about; it simply puts the vector on left side of matrix and treats
-    # it as a 1 row and 4 column matrix. However, you'll also need to shift
-    # the translation terms to the bottom of the matrix for the math to grock.)
-
-    # The Matrix multiplication looks like this
-    # n.x * x + t.x *y + B.x * z + translation.x * 1  =  new transformed x
-    # n.y * x + t.y *y + B.y * z + translation.y * 1  =  new transformed y
-    # n.z * x + t.z *y + B.z * z + translation.z * 1  =  new transformed z
-    # 0 * x + 0 *y + 0 * z + 1 * 1   =   unused.
-    #
+    # see mat4.rb where we use ruby Matrix to handle the multiplication for us
+        
     nn = p[i].n
     tt = Vec3D.new(
       p[i].vecs[1].x - p[i].vecs[0].x,
@@ -102,9 +92,8 @@ def setup
     nn.normalize!
     tt.normalize!
     bb = nn.cross(tt)
-    bb.normalize! # not really needed
     # build matrix with frame and translation (to centroid of each triangle)
-    m4 = Mat4.new(nn, tt, bb, p[i].c)
+    m4 = Mat4.new(xaxis: nn, yaxis: tt, zaxis: bb, translate: p[i].c)
     # transform each cylinder to align with each triangle
     c[i].vecs = m4.mult(c[i].vecs)
   end
@@ -116,7 +105,7 @@ def draw
   background(0)
   lights
   FACE_COUNT.times do |i|
-    p[i].display(renderer)
+    p[i].display(renderer) 
     c[i].display(renderer)
   end
 end

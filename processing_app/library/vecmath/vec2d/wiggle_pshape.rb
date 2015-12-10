@@ -24,7 +24,7 @@ end
 
 class Wiggler
   include Processing::Proxy
-  attr_reader :original, :x, :y, :s, :yoff, :xoff, :renderer
+  attr_reader :original, :x, :y, :s, :yoff, :xoff
 
   def initialize width, height
     @x = width/2
@@ -37,7 +37,7 @@ class Wiggler
     
     # Now make the PShape with those vertices
     @s = create_shape
-    @renderer = ShapeRender.new(s)
+    renderer = ShapeRender.new(s)
     s.begin_shape
     s.fill(127)
     s.stroke(0)

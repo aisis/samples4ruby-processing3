@@ -4,11 +4,11 @@ require 'matrix'
 class Mat4
   attr_reader :mat
 
-  def initialize(axisX, axisY, axisZ, trans)
+  def initialize(xaxis:, yaxis:, zaxis:, translate:)
     @mat = Matrix[
-    [axisX.x, axisY.x, axisZ.x, trans.x],
-    [axisX.y, axisY.y, axisZ.y, trans.y],
-    [axisX.z, axisY.z, axisZ.z, trans.z],
+    [xaxis.x, yaxis.x, zaxis.x, translate.x],
+    [xaxis.y, yaxis.y, zaxis.y, translate.y],
+    [xaxis.z, yaxis.z, zaxis.z, translate.z],
     [0, 0, 0, 1]
     ]
   end
@@ -25,7 +25,7 @@ class Mat4
 
   private
 
-  # I isn't obvious but we only require first 3 elements
+  # It isn't obvious but we only require first 3 elements
   def matrix_to_vector(vec)
     Vec3D.new(vec.column(0)[0], vec.column(0)[1], vec.column(0)[2])
   end

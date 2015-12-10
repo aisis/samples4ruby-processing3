@@ -104,10 +104,10 @@ def create_plane(xsegs, ysegs)
   mesh.no_stroke
   mesh.texture(tex) # set a texture to make a textured PShape
   # put all the vertices, uv texture coordinates and normals into the PShape
-  positions.each_with_index { |p, i|
+  positions.each_with_index do |p, i|
     t = tex_coords[i]
     p.to_vertex_uv(renderer, t.x, t.y)
-  }
+  end
   mesh.end_shape
 
   return mesh # our work is done here, return DA MESH! -)

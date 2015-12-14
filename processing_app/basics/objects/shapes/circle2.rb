@@ -9,7 +9,7 @@ require_relative 'shape'
 # post_initialize hook method. Use of change_color makes initilization of @c
 # irrelevant, but without example is spoiled.
 class Circle < Shape  
-  COLORS = %w{#ff0000 #ffff00 #3333ff #33cc33}
+  COLORS = %w(#ff0000 #ffff00 #3333ff #33cc33)
   attr_reader :c, :x, :y, :r
   
   def initialize(x:, y:, r:)

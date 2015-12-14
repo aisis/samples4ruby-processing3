@@ -1,4 +1,3 @@
-# uber simple Homogeneous 4 x 4 matrix
 require 'matrix'
 
 class Mat4

@@ -3,7 +3,6 @@
 # https://github.com/irajgreenberg/ProcessingTips
 # Translated to JRubyArt by Martin Prout December 2015
 ###############
-
 load_library :geometry
 
 FACE_COUNT = 50

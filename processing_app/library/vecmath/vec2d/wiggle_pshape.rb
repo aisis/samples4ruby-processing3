@@ -33,11 +33,11 @@ class Wiggler
     
     # The "original" locations of the vertices make up a circle
 
-    @original = (0 ... 16).map{ |a| Vec2D.from_angle(PI * a / 8) * 100 }
+    @original = (0...16).map{ |a| Vec2D.from_angle(PI * a / 8) * 100 }
     
     # Now make the PShape with those vertices
     @s = create_shape
-    renderer = ShapeRender.new(s)
+    renderer = Sketch::ShapeRender.new(s) # Prefix with Sketch classname
     s.begin_shape
     s.fill(127)
     s.stroke(0)

@@ -5,7 +5,7 @@
 # + Windows:  first install winpcap (http://winpcap.org)
 # + Mac:      first open a Terminal and execute this commmand: sudo chmod 777 /dev/bpf*
 #             you need to do this each time you reboot Mac
-# + Linux:    run with difficulty (run with sudo) also install libpcap
+# + Linux:    run with difficulty (run with sudo or some hack) also install libpcap
 
 load_library :carnivore
 include_package 'org.rsg.carnivore'

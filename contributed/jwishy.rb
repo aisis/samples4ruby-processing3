@@ -30,6 +30,7 @@ def setup
   end
   @hide = false
   @shape = 'oval'
+  @go_big = false
   @x_wiggle, @y_wiggle = 10.0, 0
   @magnitude = 8.15
   @back_color = [0.06, 0.03, 0.18]

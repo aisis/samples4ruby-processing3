@@ -3,7 +3,7 @@ attr_reader :f, :add, :subtract, :multiply
 
 def setup
   sketch_title 'Math Blackboard'
-  @f = createFont('Arial', 24, true)
+  @f = create_font('Arial', 24, true)
   third = 1 / 3r     # since ruby 2.1.0 (and jruby-9.0.0.0)
   quarter = 1 / 4r
   format_add = '%s + %s = %s'

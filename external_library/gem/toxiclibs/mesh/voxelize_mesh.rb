@@ -33,7 +33,7 @@ end
 # on all edges for several iterations
 def init_mesh
   @mesh = WETriangleMesh.new
-  Toxi::AABB.new(Vec3D.new(0, 0, 0), 100).to_mesh(mesh)
+  Toxi::AABB.new(TVec3D.new(0, 0, 0), 100).to_mesh(mesh)
   5.times do |i|
     subdiv = Toxi::MidpointDisplacementSubdivision.new(
       mesh.compute_centroid,

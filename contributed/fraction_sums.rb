@@ -37,11 +37,11 @@ def draw
   text_font(f, 24)
   fill(220)
   text('Math Blackboard JRubyArt', 110, 50)
-  text(two, 100, 80)
-  text(three, 100, 105)
-  text(four, 100, 130)
-  text(five, 100, 155)
-  text(six, 100, 180)
+  text(two, 80, 80)
+  text(three, 80, 105)
+  text(four, 80, 130)
+  text(five, 80, 155)
+  text(six, 80, 180)
 end
 
 def numeric_to_mixed_number(amount)
@@ -55,6 +55,5 @@ def numeric_to_mixed_number(amount)
 end
 
 def settings
-  size 640, 250
-  smooth 4
+  size 700, 240
 end

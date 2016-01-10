@@ -1,8 +1,11 @@
-# Because this sketch uses a glsl shader it needs to run using
-# jruby-complete (typically rp5 --nojruby sketch.rb)
 # hold down mouse to see unfiltered output
-load_libraries :video, :video_event
+require_relative 'video_event'
+
+load_libraries :video
 include_package 'processing.video'
+
+include Java::MonkstoneVideoevent::VideoInterface
+
 attr_reader :cam, :my_shader
 
 def setup
@@ -28,6 +31,6 @@ def captureEvent(c)
 end
 
 def settings
-  size(640, 480, P2D)
+  size(960, 544, P2D)
 end
 

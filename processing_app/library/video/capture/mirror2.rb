@@ -52,6 +52,6 @@ def draw
 end
 
 def settings
-  size(640, 480)
+  size(960, 544, P2D)
 end
 

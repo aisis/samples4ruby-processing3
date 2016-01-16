@@ -4,11 +4,11 @@ attr_reader :f, :add, :subtract, :multiply
 def setup
   sketch_title 'Math Blackboard'
   @f = create_font('Arial', 24, true)
-  third = 1 / 3r     # since ruby 2.1.0 (and jruby-9.0.0.0)
+  third = 1 / 3r # since ruby 2.1.0 (and jruby-9.0.0.0)
   quarter = 1 / 4r
   format_add = '%s + %s = %s'
-  format_sub = format_add.gsub('+', '-')
-  format_mult = format_add.gsub('+', '*')
+  format_sub = format_add.tr('+', '-')
+  format_mult = format_add.tr('+', '*')
   @add = format(format_add, third, quarter, third + quarter)
   @subtract = format(format_sub, third, quarter, third - quarter)
   @multiply = format(format_mult, third, quarter, third * quarter)

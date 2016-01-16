@@ -31,13 +31,13 @@ def set_gradient(x, y, w, h, c1, c2, axis)
   no_fill
   if (axis == Y_AXIS) # Top to bottom gradient
     (y...y + h).each do |i|
-      inter = map1d(i, (y..y + h), (0..1.0))
+      inter = norm(i, y, y + h)
       stroke lerp_color(c1, c2, inter)
       line(x, i, x + w, i)
     end
   elsif (axis == X_AXIS) # Left to right gradient
     (x...x + w).each do |i|
-      inter = map(i, x, x + w, 0, 1)
+      inter = norm(i, x, x + w)
       stroke lerp_color(c1, c2, inter)
       line(i, y, i, y + h)
     end

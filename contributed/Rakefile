@@ -8,7 +8,7 @@ task default: [:demo]
 
 desc 'demo'
 task :demo do
-  samples_list.shuffle.each{ |sample| run_sample sample }
+  samples_list.shuffle.each { |sample| run_sample sample }
 end
 
 def samples_list
@@ -25,6 +25,6 @@ def run_sample(sample_name)
   open("|k9 run #{sample_name}", 'r') do |io|
     while l = io.gets
       puts(l.chop)
-    end      
+    end
   end
 end

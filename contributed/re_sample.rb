@@ -8,8 +8,8 @@ COLOR_RANGE = 16_581_375 # 255 * 255 * 255
 attr_reader :grid
  
 def setup
-  @grid = create_image(width/SCALE, height/SCALE, RGB)
-  g.texture_sampling(2)       # 2 = POINT mode sampling
+  @grid = create_image(width / SCALE, height / SCALE, RGB)
+  g.texture_sampling(2) # 2 = POINT mode sampling
 end
  
 def draw

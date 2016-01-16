@@ -37,7 +37,6 @@ def draw
   cells.each(&:draw_line) if started?
 end
 
-
 def started?
   pmouse_x != 0 || pmouse_y != 0
 end
@@ -77,4 +76,3 @@ end
 def settings
   size(500, 500, P2D)
 end
-

@@ -2,12 +2,12 @@
 # This is a full-screen demo 
 # Since processing-3.0a10 set in settings
 
-class FullScreen < Processing::App  
+class FullScreen < Processing::App
   def setup
   sketch_title 'Full Screen'
     no_stroke
   end
-  
+
   def draw
     lights
     background 0

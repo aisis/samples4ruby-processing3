@@ -4,16 +4,14 @@
 #
 # Controls:
 # 1. drag mouse to rotate sphere (uses builtin arcball library)
-# 2. click mouse to toggle add box to sphere surface
+# 2. click mouse to toggle add boxes to sphere surface
 # 3. press x, y, or z to constrain arcball rotation to that axis
 #
 
-
-
-PHI = (sqrt(5) + 1) / 2 - 1   # golden ratio
-GA = PHI * TAU           # golden angle
-
+PHI = (sqrt(5) + 1) / 2 - 1 # golden ratio
+GA = PHI * TAU # golden angle
 KMAX_POINTS = 100_000
+MIN_POINTS = 2_000
 
 attr_reader :pts, :rotation_x, :rotation_y, :nbr_points, :radius, :add_points
 attr_reader :my_ball # for arcball rotation
@@ -23,21 +21,18 @@ def setup
   ArcBall.init(self, width / 2.0, height / 2.0)
   @rotation_x = 0
   @rotation_y = 0
-  @nbr_points = 2000
+  @nbr_points = MIN_POINTS
   @radius = 0.8 * height / 2
-  @add_points = true
-  @pts = Array.new(KMAX_POINTS)
-  init_sphere(nbr_points)
+  @add_points = false
+  @pts = init_sphere(nbr_points)
   background(0)
 end
 
 def draw
   if add_points
-    @nbr_points += 1
-    @nbr_points = [nbr_points, KMAX_POINTS].min
-    init_sphere(nbr_points)
+    @nbr_points += 1 unless nbr_points > KMAX_POINTS
+    @pts = init_sphere(nbr_points)
   end
-
   background 0
   lights
   ambient(200, 10, 10)
@@ -51,9 +46,9 @@ end
 
 def render_globe
   push_matrix
-  (0..[nbr_points, pts.length].min).each do |i|
-    lat = pts[i].lat
-    lon = pts[i].lon
+  pts.map do |pt|
+    lat = pt.lat
+    lon = pt.lon
     push_matrix
     rotate_y(lon)
     rotate_z(-lat)
@@ -67,12 +62,13 @@ end
 
 def mouse_clicked
   @add_points = !add_points
+  @nbr_points = MIN_POINTS
 end
 
 SpherePoint = Struct.new(:lat, :lon)
 
 def init_sphere(num)
-  (0..num).each do |i|
+  Array.new(num) do |i|
     lon = GA * i
     lon /= TAU
     lon -= lon.floor
@@ -80,7 +76,7 @@ def init_sphere(num)
     lon -= TAU if lon > PI
     # Convert dome height (which is proportional to surface area) to latitude
     # lat = asin(-1 + 2 * i / num.to_f)
-    pts[i] = SpherePoint.new(asin(-1 + 2 * i / num.to_f), lon)
+    SpherePoint.new(asin(-1 + 2 * i / num.to_f), lon)
   end
 end
 

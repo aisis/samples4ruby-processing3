@@ -4,10 +4,12 @@
 
 PFont = Java::ProcessingCore::PFont
 
-def setup    
-  @x = 30 
-  PFont::list.each {|fnt| puts fnt} 
-  @font = create_font("Georgia", 24)     
+def setup
+  sketch_title 'Words'
+  @x = 30
+  puts 'Available Fonts:'
+  PFont::list.each{ |f| puts f } 
+  @font = create_font('Georgia', 24)     
   text_font @font, 32    
   no_loop
 end
@@ -22,19 +24,18 @@ def draw
   draw_type(width * 0.75)
 end
 
-def draw_type x    
+def draw_type(x)   
   line(x, 0, x, 65)
   line(x, 220, x, height)   
   fill 0
-  text "ichi", x, 95
+  text 'ichi', x, 95
   fill 51
-  text "ni", x, 130
+  text 'ni', x, 130
   fill 204
-  text "san", x, 165
+  text 'san', x, 165
   fill 255
-  text "shi", x, 210    
+  text 'shi', x, 210    
 end
-
 
 def settings
   size 640, 360

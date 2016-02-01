@@ -10,7 +10,7 @@ def draw
     y = rand(height)
     text("HELLO", x, y)
   end
-  puts(frame_rate) if (frame_count % 10) == 0
+  puts(frame_rate) if (frame_count % 10).zero?
 end
 
 def settings

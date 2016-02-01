@@ -31,10 +31,12 @@ def draw
 end
 
 def key_pressed
-  return unless (key == 'r')
-  @mesh = spherical_mesh(random_parameters)
-  no_stroke
-  @spherical = gfx.mesh_to_colored_shape(mesh, true) # harmonic colors
+  case(key) 
+  when 'k', 'K'
+    @mesh = spherical_mesh(random_parameters.to_java(:float))
+   # no_stroke
+    @spherical = gfx.mesh_to_colored_shape(mesh, true) # harmonic colors
+  end
 end
 
 def random_parameters

@@ -7,7 +7,7 @@ attr_reader :distances
 
 def setup
   sketch_title 'Array 2D'
-  @distances = Array.new(width) { Array.new(height) } 
+  @distances = Array.new(width) { Array.new(height) }
   stroke_weight 2
   max_distance = dist(width / 2, height / 2, width, height)
   width.times do |x|
@@ -16,8 +16,8 @@ def setup
       distances[x][y] = distance / max_distance * 255
     end
   end
-end  
-  
+end
+
 def draw
   background 0
   x = 0

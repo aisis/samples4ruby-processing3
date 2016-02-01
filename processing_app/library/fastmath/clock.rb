@@ -7,6 +7,8 @@
 def setup
   sketch_title 'Clock'
   stroke 255
+  @font = create_font 'Roman', 20
+  text_font @font
 end
 
 def draw
@@ -27,10 +29,10 @@ def draw
   stroke_weight 6
   t = Time.now
   line(100, 100, clock_x.call(t.hour % 12 + (t.min / 60.0), 30, 50),
-                 clock_y.call(t.hour % 12 + (t.min / 60.0), 30, 50))
+    clock_y.call(t.hour % 12 + (t.min / 60.0), 30, 50))
   stroke_weight 3
   line(100, 100, clock_x.call(t.min + (t.sec / 60.0), 6, 60),
-                 clock_y.call(t.min + (t.sec / 60.0), 6, 60))
+    clock_y.call(t.min + (t.sec / 60.0), 6, 60))
   stroke 255, 0, 0
   stroke_weight 1
   line(100, 100, clock_x.call(t.sec, 6, 72), clock_y.call(t.sec, 6, 72))
@@ -42,10 +44,12 @@ def draw
     y = 100 + DegLut.sin(a) * 72
     point x, y
   end
+  fill 200
+  text t.strftime('%H:%M:%S'), 50, 200
 end
 
 def settings
-  size 200, 200, P2D
+  size 200, 220, P2D
   smooth 8
 end
 

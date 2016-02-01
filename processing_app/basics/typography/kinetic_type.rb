@@ -7,6 +7,7 @@ WORDS = %w(sometimes\ it's\ like the\ lines\ of\ text are\ so\ happy
            waiting\ to\ be\ read...)
 
 def setup
+  sketch_title 'Kinetic Type'
   frame_rate 30
   # Load the font from the sketch's data directory.
   text_font load_font('Univers45.vlw'), 1.0
@@ -59,12 +60,7 @@ class Line
   end
 end
 
-class Letter
-  attr_accessor :char, :x, :y
-  def initialize(c, x, y)
-    @char, @x, @y = c, x, y
-  end
-end
+Letter = Struct.new(:char, :x, :y)
 
 def settings
   size(200, 200, P3D)

@@ -1,4 +1,4 @@
-# * Demonstrates the syntax for creating an array of custom objects.
+# Demonstrates the syntax for creating an array of custom objects.
 
 UNIT = 40
 attr_reader :mods
@@ -18,18 +18,23 @@ end
 
 def draw
   background 0
-  mods.each do |mod|
-    mod.update
-    mod.draw(self)
-  end
+  mods.each(&:run)
 end
 
 def settings
   size 640, 360, FX2D
 end
 
+module Runnable
+  def run
+    update
+    draw
+  end
+end
+
 # the custom object
 class CustomObject
+  include Processing::Proxy, Runnable
   attr_reader :x, :y, :mx, :my, :size
   def initialize(mx, my, x, y, speed)
     @mx, @my      = my, mx # This is backwards to match original example.
@@ -51,8 +56,8 @@ class CustomObject
     @y += @ydir
   end
 
-  def draw(app)
-    app.fill(255)
-    app.ellipse(mx + x, my + y, 6, 6)
+  def draw
+    fill(255)
+    ellipse(mx + x, my + y, 6, 6)
   end
 end

@@ -24,7 +24,7 @@ def draw
   pop_matrix
 end
 
-def segment ( x, y, a )  	
+def segment(x, y, a)  	
   translate x, y
   rotate a  	
   line 0, 0, @seg_length, 0 

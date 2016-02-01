@@ -25,10 +25,9 @@ def draw
  		fill 0, 100, 255 if key_pressed? && (letter.upcase.eql? key)  	
     text letter, x, y  		
     x += gap  		
-    if x > width - 30
-      x = 0
-      y += gap
-    end
+    next unless x > width - 30
+    x = 0
+    y += gap
   end
 end
 

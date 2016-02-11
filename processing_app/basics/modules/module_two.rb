@@ -34,7 +34,7 @@ end
 def draw  
   background 0    
   if (!drawing_mode)      
-    translate(width/2, height/2)
+    translate(width / 2, height / 2)
     rotate_x rot_x
     rotate_y rot_y
     @rot_x += 0.01

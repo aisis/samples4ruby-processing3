@@ -50,9 +50,7 @@ class Bounds
 
   # Returns the current position or the limit, sets the `inside` flag
   def position(val)
-    @inside = true
-    return val if (low..high).cover? val
-    @inside = false
-    return constrain(val, low, high)
+    @inside = (low..high).cover? val
+    constrain(val, low, high)
   end
 end

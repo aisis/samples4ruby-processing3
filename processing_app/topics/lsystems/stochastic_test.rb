@@ -5,7 +5,7 @@ Turtle = Struct.new(:x, :y, :angle)
 #######################################################
 # StochasticPlant
 #
-# Lindenmayer System in ruby-processing by Martin Prout
+# Lindenmayer System in JRubyArt by Martin Prout
 # Exploring terminals with minimum logic
 ########################################################
 class StochasticPlant

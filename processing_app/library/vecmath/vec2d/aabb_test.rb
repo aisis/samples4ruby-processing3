@@ -1,6 +1,6 @@
 # Click on the box and drag it across the screen.
 
-attr_reader :block, :block_locked, :over_block, :renderer, :bounds
+attr_reader :block, :block_locked, :over_block, :bounds
 BLOCK_WIDTH = 150
 
 def setup
@@ -13,8 +13,8 @@ def setup
   @over_block = false
   @bounds = AaBb.new(
     center: Vec2D.new(width / 2, height / 2),
-    extent: Vec2D.new(width - BLOCK_WIDTH, height - BLOCK_WIDTH))
-  @renderer = AppRender.new(self)
+    extent: Vec2D.new(width - BLOCK_WIDTH, height - BLOCK_WIDTH)
+  )
 end
 
 def draw
@@ -32,6 +32,10 @@ def draw
   begin_shape
   block.points_array.each { |vec| vec.to_vertex(renderer) }
   end_shape(CLOSE)
+end
+
+def renderer
+  @renderer ||= AppRender.new(self)
 end
 
 def block_locked?

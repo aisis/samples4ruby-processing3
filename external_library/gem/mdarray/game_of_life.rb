@@ -1,5 +1,5 @@
-# game_of_life.rb featuring MDArray in ruby-processing
-# A ruby-processing implementation of Game of Life
+# game_of_life.rb featuring MDArray in JRubyArt
+# A JRubyArt implementation of Game of Life
 # By Martin Prout after a processing version by Joan Soler-Adillon
 #
 # Press SPACE BAR to pause and change the cell's values with the mouse

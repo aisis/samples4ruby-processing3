@@ -1,6 +1,6 @@
 ########################################################
 # A 3D plant implemented using a
-# Lindenmayer System in ruby-processing by Martin Prout
+# Lindenmayer System in JRubyArt by Martin Prout
 ########################################################
 
 load_libraries :stochastic_grammar, :control_panel

@@ -1,4 +1,4 @@
-# levy.rb ruby-processing NB: :alpha is now implemented ruby-processing
+# levy.rb JRubyArt NB: :alpha is now implemented JRubyArt
 require 'cf3'
 
 def setup_the_levy

@@ -1,6 +1,6 @@
 ########################################################
 # Chequer implemented using a grammar library
-# Lindenmayer System in ruby-processing by Martin Prout
+# Lindenmayer System in JRubyArt by Martin Prout
 ########################################################
 load_library :grammar
 attr_reader :chequer

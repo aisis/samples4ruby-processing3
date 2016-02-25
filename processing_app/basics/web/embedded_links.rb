@@ -22,8 +22,8 @@ def draw
 end
 
 def mouse_pressed
-  link 'https://github.com/jashkenas/ruby-processing/wiki' if @over_left_button
-  link 'https://github.com/jashkenas/ruby-processing/wiki' if @over_right_button
+  link 'https://github.com/jashkenas/JRubyArt/wiki' if @over_left_button
+  link 'https://github.com/jashkenas/JRubyArt/wiki' if @over_right_button
 end
 
 def mouse_moved 

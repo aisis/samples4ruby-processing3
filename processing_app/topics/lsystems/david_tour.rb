@@ -2,7 +2,7 @@ load_library :grammar
 
 ########################################################
 # A David Tour fractal implemented using a
-# Lindenmayer System in ruby-processing by Martin Prout
+# Lindenmayer System in JRubyArt by Martin Prout
 ########################################################
 class DavidTour  
   attr_reader :draw_length, :xpos, :ypos, :theta, :axiom, :grammar

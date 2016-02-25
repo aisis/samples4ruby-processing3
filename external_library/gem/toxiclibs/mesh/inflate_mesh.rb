@@ -1,6 +1,6 @@
 
 require 'toxiclibs'
-# A JRubyArt sketch needs refactoring for ruby-processing
+# A JRubyArt sketch needs refactoring for JRubyArt
 #
 # Copyright (c) 2010 Karsten Schmidt & JRubyArt version Martin Prout 2015
 # This library is free software you can redistribute it and/or

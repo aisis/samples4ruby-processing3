@@ -1,5 +1,5 @@
 # Hooky class demonstrates how to use the post_initialize hook,
-# available since ruby-processing-2.6.2, to additional attribute
+# available since JRubyArt-2.6.2, to additional attribute
 # in this case :background as an array of int (splat to color)
 # Not sure how clever it is to have multiple sketch instances.
 

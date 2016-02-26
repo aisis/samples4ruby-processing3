@@ -7,13 +7,12 @@ load_libraries :grammar
 # Peano class
 class Peano
   include Processing::Proxy
-
   attr_reader :draw_length, :vec, :theta, :axiom, :grammar
-  DELTA  = 60  # degrees
+  DELTA = 60 # degrees
   def initialize(vec)
-    @axiom = 'XF'       # Axiom
+    @axiom = 'XF' # Axiom
     rules = {
-      'X' => 'X+YF++YF-FX--FXFX-YF+',      # LSystem Rules
+      'X' => 'X+YF++YF-FX--FXFX-YF+', # LSystem Rules
       'Y' => '-FX+YFYF++YF+FX--FX-Y'
     }
     @grammar = Grammar.new(axiom, rules)
@@ -28,11 +27,18 @@ class Peano
   end
 
   def translate_rules(prod)
+    coss = ->(orig, alpha, len) { orig + len * DegLut.cos(alpha) }
+    sinn = ->(orig, alpha, len) { orig - len * DegLut.sin(alpha) }
     [].tap do |pts| # An array to store line vertices as Vec2D
       prod.each do |ch|
         case ch
         when 'F'
-          pts << vec.copy << Vec2D.new(vec.x += draw_length * DegLut.cos(theta), vec.y -= draw_length * DegLut.sin(theta))
+          pts << vec.copy
+          @vec = Vec2D.new(
+            coss.call(vec.x, theta, draw_length),
+            sinn.call(vec.y, theta, draw_length)
+          )
+          pts << vec
         when '+'
           @theta += DELTA
         when '-'
@@ -46,13 +52,12 @@ class Peano
   end
 end
 
-attr_reader :points, :renderer
+attr_reader :points
 
 def setup
   sketch_title 'Peano'
-  @renderer = AppRender.new(self)
   peano = Peano.new(Vec2D.new(width * 0.65, height * 0.9))
-  production = peano.generate 4                  # 4 generations looks OK
+  production = peano.generate 4 # 4 generations looks OK
   @points = peano.translate_rules(production)
   no_loop
 end
@@ -74,7 +79,10 @@ def render(points)
   end_shape
 end
 
+def renderer
+  @renderer ||= AppRender.new(self)
+end
+
 def settings
   size(800, 800)
 end
-

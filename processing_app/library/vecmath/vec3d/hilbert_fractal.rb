@@ -1,13 +1,13 @@
 ########################################################
 # A 3D Hilbert fractal implemented using a
 # Lindenmayer System in JRubyArt by Martin Prout
-# processing-3.0 JRuby-9.0.0.0+
+# processing-3.0.2+ JRuby-9.0.5.0+
 # Demonstrates arcball rotation hold down z, y or z key
 # to constrain to that axis of rotation. Otherwise get
 # intuitive rotation using mouse drag.
 ########################################################
 load_libraries :hilbert
-attr_reader :hilbert, :renderer
+attr_reader :hilbert
 
 def setup
   sketch_title 'Hilbert Fractal'

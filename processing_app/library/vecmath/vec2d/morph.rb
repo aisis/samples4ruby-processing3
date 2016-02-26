@@ -1,12 +1,9 @@
-#
 # Morph.
-# 
+#
 # Changing one shape into another by interpolating
 # vertices from one to another
-#
 
-
-attr_reader :circle, :square, :morph, :state, :v1, :v2, :renderer
+attr_reader :circle, :square, :morph, :state, :v1, :v2
 
 ALPHA = Math::PI / 4.0
 OMEGA = TAU + ALPHA
@@ -18,7 +15,6 @@ def setup
   @square = []
   @morph = []
   @state = false
-  @renderer = AppRender.new(self)
   frame_rate(15)
   # Create a circle using vectors pointing from center
   (ALPHA..OMEGA).step(THETA) do |angle|
@@ -51,20 +47,20 @@ end
 def draw
   background(51)
   # We will keep how far the vertices are from their target
-  @total_distance = 0  
+  @total_distance = 0
   # Look at each vertex
   circle.length.times do |i|
     # Are we lerping to the circle or square?
-    v1 = state ?  circle[i] : square[i]
+    v1 = state ? circle[i] : square[i]
     # Get the vertex we will draw
-    v2 = morph[i]    
+    v2 = morph[i]
     # Lerp to the target
     v2.lerp!(v1, 0.1)
     # Check how far we are from target
     @total_distance += v1.dist(v2)
-  end  
+  end
   # If all the vertices are close, switch shape
-  @state = !state if @total_distance < 0.08  
+  @state = !state if @total_distance < 0.08
   # Draw relative to center
   translate(width / 2, height / 2)
   stroke_weight(4)
@@ -72,10 +68,12 @@ def draw
   begin_shape
   no_fill
   stroke(255)
-  morph.each do |v|
-    v.to_vertex(renderer)
-  end
+  morph.each { |v| v.to_vertex(renderer) }
   end_shape(CLOSE)
+end
+
+def renderer
+  @renderer = AppRender.new(self)
 end
 
 def settings

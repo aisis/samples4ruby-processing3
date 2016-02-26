@@ -5,11 +5,10 @@
 # ruby Enumerable method?
 # 2010-03-22 - fjenett (somewhat revised by Martin Prout 2014-07-06)
 
-attr_reader :drawing_mode, :points, :rot_x, :rot_y, :vertices, :renderer
+attr_reader :drawing_mode, :points, :rot_x, :rot_y, :vertices
 
 def setup
   sketch_title 'Drawolver'
-  @renderer = AppRender.new(self)
   frame_rate 30
   reset_scene
 end
@@ -41,6 +40,10 @@ def draw
       end_shape
     end
   end
+end
+
+def renderer
+  @renderer ||= AppRender.new(self)
 end
 
 def reset_scene
@@ -82,7 +85,7 @@ def recalculate_shape
   end
   @drawing_mode = false
 end
+
 def settings
   size 1024, 768, P3D
 end
-

@@ -1,7 +1,7 @@
 ###############
 # Frame of Reference example by Ira Greenberg
 # https://github.com/irajgreenberg/ProcessingTips
-# Translated to JRubyArt by Martin Prout December 2015
+# Translated to JRubyArt by Martin Prout February 2016
 ###############
 load_library :geometry
 
@@ -94,7 +94,7 @@ def setup
     # build matrix with frame and translation (to centroid of each triangle)
     m4 = Mat4.new(xaxis: nn, yaxis: tt, zaxis: bb, translate: p[i].c)
     # transform each cylinder to align with each triangle
-    c[i].vecs = m4.mult(c[i].vecs)
+    c[i].vecs = m4 * c[i].vecs
   end
   fill(187)
   stroke(50, 20)
@@ -103,10 +103,8 @@ end
 def draw
   background(0)
   lights
-  FACE_COUNT.times do |i|
-    p[i].display(renderer)
-    c[i].display(renderer)
-  end
+  p.each(&:display)
+  c.each(&:display)
 end
 
 def renderer

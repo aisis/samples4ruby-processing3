@@ -3,7 +3,7 @@
 # 
 # Click and drag mouse up and down to control the signal. 
 #
-# Note in ruby-processing to access booleans use
+# Note in JRubyArt to access booleans use
 #       mouse_pressed? and key_pressed?
 #
 # Press and hold any key to view the image scanning. 

@@ -1,7 +1,7 @@
 ########################################################
 # csplant.rb
 # A 3D Plant implemented using a Context Sensitive
-# Lindenmayer System in ruby-processing
+# Lindenmayer System in JRubyArt
 # by Martin Prout (30 January 2013)
 # Hold down 'y' key and drag mouse to rotate about y axis
 ########################################################

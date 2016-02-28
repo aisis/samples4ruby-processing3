@@ -1,6 +1,6 @@
 #######################################################
 # penrose tiling in ruby processing using LSystems
-# in ruby-processing by Martin Prout
+# in JRubyArt by Martin Prout
 ######################################################
 load_library :grammar
 

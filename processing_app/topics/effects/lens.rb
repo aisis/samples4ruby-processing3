@@ -1,4 +1,4 @@
-require 'ruby-processing'
+require 'JRubyArt'
 
 # Original by luis2048
 

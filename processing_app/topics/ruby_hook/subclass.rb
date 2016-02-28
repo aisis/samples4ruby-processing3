@@ -1,5 +1,5 @@
 # An example demonstrating the use of a hook to decouple subclasses in
-# ruby-processing. The base class here is Spin, and we have included
+# JRubyArt. The base class here is Spin, and we have included
 # post_initialize as the hook (it does nothing in the base class). SpinArm
 # and SpinSpots both subclass Spin, but only SpinSpots requires the hook to
 # change the initialization. Note the use the hook means the subclass does

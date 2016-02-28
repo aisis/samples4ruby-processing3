@@ -1,11 +1,11 @@
 # After a toxiclibs "MeshDoodle" sketch by Karsten Schmidt
 # Adapted to use JRubyArt Vec2D and Vec3D classes by Martin Prout
-# Note: The extension Vec3D class to support rotations and use of a Struct
-# for triangle 'mesh' Face. Also use of AppRenderer for Vec3D => vertex
+# Note: The extension of Vec3D class to support rotations, and the ruby Struct
+# Face for triangle 'mesh'. Also an example of AppRenderer for Vec3D => vertex
 
-attr_reader :prev, :p, :q, :rotation, :faces, :pos, :weight, :renderer
+attr_reader :prev, :p, :q, :rotation, :faces, :pos, :weight
 
-Face = Struct.new(:a, :b, :c)
+Face = Struct.new(:a, :b, :c) # triangle mesh face
 
 Vec3D.class_eval do # re-open the Vec3D class to add rotation functionality
   def rotate_y(theta)
@@ -33,7 +33,6 @@ end
 
 def setup
   sketch_title 'Ribbon Doodle'
-  @renderer = AppRender.new(self)
   @weight = 0
   @prev = Vec3D.new
   @p = Vec3D.new
@@ -79,4 +78,8 @@ def mouse_moved
   @prev = pos
   @p = a
   @q = b
+end
+
+def renderer
+  @renderer ||= AppRender.new(self)
 end

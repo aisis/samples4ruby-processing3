@@ -7,7 +7,7 @@
 # 
 # c = cycle through the color maps
 # 
-# Tested with ruby-procesing 2.5.0
+# Requires JRubyArt-1.0.5+
 # 
 # Photographs by Folkert Gorter (@folkertgorter / http://superfamous.com/) made available under a CC Attribution 3.0 license.
 #
@@ -105,11 +105,9 @@ def create_plane(xsegs, ysegs)
   mesh.texture(tex) # set a texture to make a textured PShape
   # put all the vertices, uv texture coordinates and normals into the PShape
   positions.each_with_index do |p, i|
-    t = tex_coords[i]
-    p.to_vertex_uv(renderer, t.x, t.y)
+    p.to_vertex_uv(renderer, tex_coords[i])
   end
   mesh.end_shape
-
   return mesh # our work is done here, return DA MESH! -)
 end
 
@@ -122,7 +120,6 @@ def key_pressed
     puts format('key pressed: %s', key)
   end # cycle through colorMaps (set variable and set colorMap in PShader)
 end
-
 
 def settings
   size(1280, 720, P3D) # use the P3D OpenGL renderer

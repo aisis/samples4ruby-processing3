@@ -16,11 +16,8 @@
 # 	'w' key _________ toggle wireframe/solid shading
 # 	'h' key _________ toggle sphere/helix
 
-attr_reader :renderer
-
 def setup
   sketch_title 'Toroid'
-  @renderer = AppRender.new(self)
   @pts = 40
   @angle = 0.0
   @radius = 60.0
@@ -53,7 +50,8 @@ def draw
     vertices[i] = Vec3D.new
     vertices[i].x = @lathe_radius + Math.sin(@angle.radians) * @radius
     if @is_helix
-      vertices[i].z = Math.cos(@angle.radians) * @radius - (@helix_offset * @segments) / 2
+      vertices[i].z =
+        Math.cos(@angle.radians) * @radius - (@helix_offset * @segments) / 2
     else
       vertices[i].z = Math.cos(@angle.radians) * @radius
     end
@@ -62,21 +60,20 @@ def draw
   @lathe_angle = 0
   0.upto(@segments) do |i|
     begin_shape QUAD_STRIP
-      (0..@pts).each do |j|
-        vertex_for_vector vertices2[j] if i > 0
-        vertices2[j].x = Math.cos(@lathe_angle.radians) * vertices[j].x
-        vertices2[j].y = Math.sin(@lathe_angle.radians) * vertices[j].x
-        vertices2[j].z = vertices[j].z
-        vertices[j].z += @helix_offset if @is_helix
-        vertex_for_vector vertices2[j]
-      end
-      @lathe_angle += (@is_helix ? 720 : 360) / @segments
-      end_shape
+    (0..@pts).each do |j|
+      vertex_for_vector vertices2[j] if i > 0
+      vertices2[j].x = Math.cos(@lathe_angle.radians) * vertices[j].x
+      vertices2[j].y = Math.sin(@lathe_angle.radians) * vertices[j].x
+      vertices2[j].z = vertices[j].z
+      vertices[j].z += @helix_offset if @is_helix
+      vertex_for_vector vertices2[j]
+    end
+    @lathe_angle += (@is_helix ? 720 : 360) / @segments
+    end_shape
   end
-
 end
 
-def vertex_for_vector (pvec)
+def vertex_for_vector(pvec)
   pvec.to_vertex(renderer)
 end
 
@@ -97,4 +94,8 @@ end
 
 def settings
   size 640, 360, P3D
+end
+
+def renderer
+  @renderer ||= AppRender.new(self)
 end

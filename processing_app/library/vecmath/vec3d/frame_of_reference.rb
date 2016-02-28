@@ -7,7 +7,7 @@ load_library :geometry
 
 FACE_COUNT = 50
 
-attr_reader :c, :p, :renderer
+attr_reader :c, :p
 
 def settings
   size(800, 800, P3D)
@@ -16,7 +16,6 @@ end
 def setup
   sketch_title 'Frame Of Reference'
   ArcBall.init(self) # so we use mouse to rotate sketch and mouse wheel to zoom
-  @renderer = AppRender.new(self) # so we can render Vec3D as vertices
   @c = []
   @p = []
   FACE_COUNT.times do |i|
@@ -60,13 +59,14 @@ def setup
     # |/____T
 
     #
-    # N, T, B together give you a Frame of Reference (cute little local coordinate
-    # system), based on each triangle. You can then take the cylinder (or any
-    # vertices) and transform them using a 3 x 3 matrix to this coordinate system.
-    # (In the matrix each column is based on N, T and B respecivley.)
-    # The transform will handle any rotations and scaling, but not the translation,
-    # but we can add another dimenson to the matrix to hold the translation values.
-    # Here's what all this confusing description looks like:
+    # N, T, B together give you a Frame of Reference (cute little local
+    # coordinate system), based on each triangle. You can then take the
+    # cylinder (or any vertices) and transform them using a 3 x 3 matrix to
+    # this coordinate system. (In the matrix each column is based on N, T and
+    # B respecivley.) The transform will handle any rotations and scaling, but
+    # not the translation, but we can add another dimenson to the matrix to
+    # hold the translation values. Here's what all this confusing description
+    # looks like:
 
     #
     # Matrix :                               Vector :
@@ -81,7 +81,7 @@ def setup
     # When you multiply matrices the inner numbers MUST match, so:
     # [4 x 4] [4 x 1] is OK, but [4 x 4] [1 x 4] is NOT COOL.
     # see mat4.rb where we use ruby Matrix to handle the multiplication for us
-        
+
     nn = p[i].n
     tt = Vec3D.new(
       p[i].vecs[1].x - p[i].vecs[0].x,
@@ -104,7 +104,11 @@ def draw
   background(0)
   lights
   FACE_COUNT.times do |i|
-    p[i].display(renderer) 
+    p[i].display(renderer)
     c[i].display(renderer)
   end
+end
+
+def renderer
+  @renderer ||= AppRender.new(self)
 end

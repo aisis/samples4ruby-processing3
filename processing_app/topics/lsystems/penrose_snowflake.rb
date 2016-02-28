@@ -1,7 +1,7 @@
 load_library :grammar
 
 #
-# Lindenmayer System in ruby-processing by Martin Prout
+# Lindenmayer System in JRubyArt by Martin Prout
 # Very loosely based on a processing Penrose L-System
 # by Geraldine Sarmiento
 ###

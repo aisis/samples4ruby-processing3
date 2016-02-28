@@ -2,9 +2,9 @@
 # A parametric surface is textured procedurally
 # by drawing on an offscreen PGraphics surface.
 #
-# Features (Vec3D).to_normal(renderer) and (Vec3D).to_vertex_uv(renderer, u, v)
-# see line 62 for inititialization of renderer where obj is an instance of PShape
-# renderer = ShapeRender.new(obj)
+# Features Vec3D.to_normal(renderer) and Vec3D.to_vertex_uv(renderer, u, v)
+# see line 62 for inititialization of renderer where obj is an instance of
+# PShape renderer = ShapeRender.new(obj)
 
 attr_reader :pg, :trefoil
 
@@ -31,7 +31,7 @@ def draw
   ambient(250, 250, 250)
   pointLight(255, 255, 255, 0, 0, 200)
   push_matrix
-  translate(width/2, height/2, -200)
+  translate(width / 2, height / 2, -200)
   rotate_x(frame_count * PI / 500)
   rotate_y(frame_count * PI / 500)
   shape(trefoil)
@@ -50,10 +50,10 @@ def create_trefoil(s, ny, nx, tex)
   obj.begin_shape(TRIANGLES)
   obj.texture(tex)
   renderer = ShapeRender.new(obj)
-  (0 ... nx).each do |j|
+  (0...nx).each do |j|
     u0 = j.to_f / nx
     u1 = (j + 1).to_f / nx
-    (0 ... ny).each do |i|
+    (0...ny).each do |i|
       v0 = i.to_f / ny
       v1 = (i + 1).to_f / ny
 
@@ -87,7 +87,7 @@ def create_trefoil(s, ny, nx, tex)
     end
   end
   obj.end_shape
-  return obj
+  obj
 end
 
 # Evaluates the surface normal corresponding to normalized
@@ -95,11 +95,11 @@ end
 def eval_normal(u, v)
   # Compute the tangents and their cross product.
   p = eval_point(u, v)
-  tangU = eval_point(u + 0.01, v)
-  tangV = eval_point(u, v + 0.01)
-  tangU -= p
-  tangV -= p
-  tangV.cross(tangU).normalize! # it is easy to chain Vec3D operations
+  tang_u = eval_point(u + 0.01, v)
+  tang_v = eval_point(u, v + 0.01)
+  tang_u -= p
+  tang_v -= p
+  tang_v.cross(tang_u).normalize! # it is easy to chain Vec3D operations
 end
 
 # Evaluates the surface point corresponding to normalized
@@ -120,21 +120,22 @@ def eval_point(u, v)
   y = r * sint
   z = c * sint15
   dv = Vec3D.new(
-  -1.5 * b * sint15 * cost - y,
-  -1.5 * b * sint15 * sint + x,
-  1.5 * c * cost15)
-  q = dv.normalize     # regular normalize creates a new Vec3D for us
-  qvn = Vec3D.new(q.y, -q.x, 0).normalize!  # chained Vec3D operations
+    -1.5 * b * sint15 * cost - y,
+    -1.5 * b * sint15 * sint + x,
+    1.5 * c * cost15
+  )
+  q = dv.normalize # regular normalize creates a new Vec3D for us
+  qvn = Vec3D.new(q.y, -q.x, 0).normalize # chained Vec3D operations
   ww = q.cross(qvn)
   coss = cos(s)
   sins = sin(s)
   Vec3D.new(
-  x + d * (qvn.x * coss + ww.x * sins),
-  y + d * (qvn.y * coss + ww.y * sins),
-  z + d * ww.z * sins)
+    x + d * (qvn.x * coss + ww.x * sins),
+    y + d * (qvn.y * coss + ww.y * sins),
+    z + d * ww.z * sins
+  )
 end
 
 def settings
   size(1024, 768, P3D)
 end
-

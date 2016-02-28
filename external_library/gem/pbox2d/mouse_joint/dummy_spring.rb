@@ -1,5 +1,5 @@
 # dummy_spring.rb by Martin Prout 
-# An example of duck-typing in ruby-processing
+# An example of duck-typing in JRubyArt
 
 # This class avoids the tests for null of the vanilla processing version
 class DummySpring

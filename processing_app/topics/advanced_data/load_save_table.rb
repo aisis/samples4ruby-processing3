@@ -58,7 +58,12 @@ def mouse_pressed
   bubbles.shift if bubbles.size > 10
   # Writing the csv data back to the same file, (also specify UTF-8 format)
   headers = %w(x y diameter name) # create csv headers
-  CSV.open('data/data.csv', 'w:UTF-8', write_headers: true, headers: headers) do |csv|
+  CSV.open(
+    'data/data.csv',
+    'w:UTF-8',
+    write_headers: true,
+    headers: headers
+  ) do |csv|
     bubbles.each do |bubble|
       csv << bubble.to_a # write back bubble data
     end

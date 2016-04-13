@@ -10,6 +10,7 @@ task :all do
   Rake::Task[:contributed].execute
   Rake::Task[:vecmath].execute  
   Rake::Task[:shaders].execute
+  Rake::Task[:slider].execute
 end
 
 desc 'run contributed samples'
@@ -27,4 +28,9 @@ task :vecmath do
   sh "cd #{root}/processing_app/library/vecmath/vec2d && rake"
   sh "cd #{root}/processing_app/library/vecmath/vec3d && rake"
   sh "cd #{root}/processing_app/library/vecmath/arcball && rake"
+end
+
+desc 'slider'
+task :slider do
+  sh "cd #{root}/processing_app/library/slider && rake"
 end

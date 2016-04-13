@@ -1,3 +1,6 @@
+# encoding: UTF-8
+# frozen_string_literal: true
+# Cylinder class can access sketch methods thanks to Processing::Proxy module
 class Cylinder
   include Processing::Proxy
   attr_accessor :vecs
@@ -24,20 +27,18 @@ class Cylinder
     @vecs = veca.concat(vecb)
   end
 
-  def display(renderer)
+  def display
     begin_shape(QUADS)
     detail.times do |i|
+      vecs[i].to_vertex(renderer)
       if i < (detail - 1)
-        vecs[i].to_vertex(renderer)
         vecs[i + 1].to_vertex(renderer)
         vecs[detail + i + 1].to_vertex(renderer)
-        vecs[detail + i].to_vertex(renderer)
       else
-        vecs[i].to_vertex(renderer)
         vecs[0].to_vertex(renderer)
         vecs[detail].to_vertex(renderer)
-        vecs[detail + i].to_vertex(renderer)
       end
+      vecs[detail + i].to_vertex(renderer)
     end
     end_shape
   end

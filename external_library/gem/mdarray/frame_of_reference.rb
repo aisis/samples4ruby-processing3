@@ -1,7 +1,7 @@
 ###############
 # Frame of Reference example by Ira Greenberg
 # https://github.com/irajgreenberg/ProcessingTips
-# Translated to JRubyArt by Martin Prout December 2015
+# Translated to JRubyArt by Martin Prout February 2016
 ###############
 load_library :geometry
 
@@ -79,7 +79,7 @@ def setup
     # and the vector now as a Matrix with 4 rows and 1 column.
     # When you multiply matrices the inner numbers MUST match, so:
     # [4 x 4] [4 x 1] is OK, but [4 x 4] [1 x 4] is NOT COOL.
-    # see mat4.rb where we use ruby Matrix to handle the multiplication for us
+    # see mat4.rb where we use MDMatrix to handle the multiplication for us
 
     nn = p[i].n
     tt = Vec3D.new(
@@ -93,7 +93,7 @@ def setup
     # build matrix with frame and translation (to centroid of each triangle)
     m4 = Mat4.new(xaxis: nn, yaxis: tt, zaxis: bb, translate: p[i].c)
     # transform each cylinder to align with each triangle
-    c[i].vecs = m4.mult(c[i].vecs)
+    c[i].vecs = m4 * c[i].vecs
   end
   fill(187)
   stroke(50, 20)
@@ -103,8 +103,8 @@ def draw
   background(0)
   lights
   FACE_COUNT.times do |i|
-    p[i].display(renderer)
-    c[i].display(renderer)
+    p.each(&:display)
+    c.each(&:display)
   end
 end
 

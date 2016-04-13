@@ -31,9 +31,8 @@ def setup
   @resize_factor = 0.25
   displace_strength = 0.25 # the displace strength of the GLSL shader displacement effect
   # load the images
-  @images = []
-  images << load_image(data_path('Texture01.jpg'))
-  images << load_image(data_path('Texture02.jpg'))
+  textures = %w(Texture01.jpg Texture02.jpg)
+  @images = textures.map { |texture| load_image(data_path(texture)) }
   @color_map = 0
   # load the PShader with a fragment and a vertex shader
   @displace = load_shader('displaceFrag.glsl', 'displaceVert.glsl')
@@ -55,7 +54,6 @@ def draw
   # perspective for close shapes
   perspective(PI / 3.0, width.to_f / height, 0.1, 1_000_000)
   scale(750) # scale by 750 (the model itself is unit length
-
   displace.set('time', millis / 5_000.0) # feed time to the GLSL shader
   shader(displace) # use shader
   shape(height_map) # display the PShape
@@ -98,7 +96,7 @@ def create_plane(xsegs, ysegs)
   # STEP 2: put all the relevant data into the PShape
 
   texture_mode(NORMAL) # set texture_mode to normalized (range 0 to 1)
-  tex = load_image(data_path('Texture01.jpg'))
+  tex = images[0]
 
   mesh = create_shape # create the initial PShape
   renderer = ShapeRender.new(mesh) # initialize the shape renderer

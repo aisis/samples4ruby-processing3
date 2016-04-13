@@ -15,10 +15,10 @@ class Mat4
 
   # The processing version changes the input 'array', here we return
   # a new array with transformed values (which we then assign to the input)
-  # see line 89 Frame_of_Reference.rb
+  # see line 89 Frame_of_Reference.rb, NB: regular ruby Matrix is much faster
 
-  def mult(array)
-    array.map.each do |arr|
+  def *(other)
+    other.map.each do |arr|
       matrix_to_vector(mat * MDMatrix.double([4, 1], [arr.x, arr.y, arr.z, 1]))
     end
   end

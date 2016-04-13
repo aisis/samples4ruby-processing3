@@ -61,35 +61,44 @@ def draw
   0.upto(@segments) do |i|
     begin_shape QUAD_STRIP
     (0..@pts).each do |j|
-      vertex_for_vector vertices2[j] if i > 0
+      vertices2[j].to_vertex(renderer) if i > 0
       vertices2[j].x = Math.cos(@lathe_angle.radians) * vertices[j].x
       vertices2[j].y = Math.sin(@lathe_angle.radians) * vertices[j].x
       vertices2[j].z = vertices[j].z
       vertices[j].z += @helix_offset if @is_helix
-      vertex_for_vector vertices2[j]
+      vertices2[j].to_vertex(renderer)
     end
     @lathe_angle += (@is_helix ? 720 : 360) / @segments
     end_shape
   end
 end
 
-def vertex_for_vector(pvec)
-  pvec.to_vertex(renderer)
-end
-
 def key_pressed
-  if key == CODED
-    @pts += 1 if keyCode == UP && @pts < 40
-    @pts -= 1 if keyCode == DOWN && @pts > 3
-    @segments += 1 if keyCode == RIGHT && @segments < 80
-    @segments -= 1 if keyCode == LEFT && @segments > 3
+  case key
+  when CODED
+    case keyCode
+    when UP
+      @pts += 1 if @pts < 40    
+    when DOWN
+      @pts -= 1 if @pts > 3  
+    when RIGHT      
+      @segments += 1 if @segments < 80
+     when LEFT
+      @segments -= 1 if @segments > 3
+    end
+  when 's'
+    @lathe_radius += 1 
+  when 'a'
+    @lathe_radius -= 1 if @lathe_radius > 0
+  when 'x'
+    @radius += 1
+  when 'z'
+    @radius -= 1 if @radius > 10
+  when 'w'
+    @is_wireframe = !@is_wireframe
+  when 'h'
+    @is_helix = !@is_helix
   end
-  @lathe_radius += 1 if key == 's'
-  @lathe_radius -= 1 if key == 'a' && @lathe_radius > 0
-  @radius += 1 if key == 'x'
-  @radius -= 1 if key == 'z' && @radius > 10
-  @is_wireframe = !@is_wireframe if key == 'w'
-  @is_helix = !@is_helix if key == 'h'
 end
 
 def settings

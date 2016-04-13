@@ -1,5 +1,7 @@
+# encoding: UTF-8
+# frozen_string_literal: true
 NORM_LEN = 225.0
-
+# Plane class can access sketch methods thanks to Processing::Proxy module
 class Plane
   include Processing::Proxy
   attr_reader :vecs, :c, :n
@@ -23,7 +25,8 @@ class Plane
     n.normalize!
   end
 
-  def display(renderer)
+  def display
+    
     begin_shape(TRIANGLES)
     vecs.map { |vec| vec.to_vertex(renderer) }
     end_shape

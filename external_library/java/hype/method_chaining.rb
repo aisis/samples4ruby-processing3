@@ -8,7 +8,7 @@ end
 def setup
   sketch_title('Method Chaining')
   H.init(self)
-  background(color('#242424'))
+  H.background(color('#242424'))
   rect1 = HRect.new(100)
   rect1.rounding(10) # set corner rounding
   rect1.stroke_weight(6) # set stroke weight

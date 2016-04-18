@@ -12,31 +12,31 @@ def setup
   H.init(self)
   background(color('#242424'))
   @rect1 = HRect.new(100)
-  rect1.rounding(10)         # set corner rounding
-  rect1.stroke_weight(6)      # set stroke weight
+  rect1.rounding(10) # set corner rounding
+  rect1.stroke_weight(6) # set stroke weight
   rect1.stroke(color('#000000'), 150) # set stroke color and alpha
-  rect1.fill(color('#FF6600'))       # set fill color
-  rect1.anchorAt(H::CENTER)   # set where anchor point is / key point for rotation and positioning
-  rect1.rotation(45)         # set rotation of the rect
-  rect1.loc(100,height / 2)  # set x and y location
+  rect1.fill(color('#FF6600')) # set fill color
+  rect1.anchor_at(H::CENTER) # set where anchor point is / key point for rotation and positioning
+  rect1.rotation(45) # set rotation of the rect
+  rect1.loc(100, height / 2) # set x and y location
   H.add(rect1)
 
   # here's the same code / with method chaining
 
   @rect2 = HRect.new(100)
   rect2.rounding(10)
-    .stroke_weight(6)
-    .stroke(color('#000000'), 150)
-    .fill(color('#FF9900'))
-    .anchorAt(H::CENTER)
-    .rotation(45)
-    .loc(247,height / 2)
+       .stroke_weight(6)
+       .stroke(color('#000000'), 150)
+       .fill(color('#FF9900'))
+       .anchor_at(H::CENTER)
+       .rotation(45)
+       .loc(247, height / 2)
   H.add(rect2)
 
-  # here's the same code / minus the hard returns and tabbing
+  # here's the same code / minus the hard returns and indentation (tabs are bad)
 
   @rect3 = HRect.new(100)
-  rect3.rounding(10).stroke_weight(6).stroke(color('#000000'), 150).fill(color('#FFCC00')).anchorAt(H::CENTER).rotation(45).loc(394,height / 2)
+  rect3.rounding(10).stroke_weight(6).stroke(color('#000000'), 150).fill(color('#FFCC00')).anchor_at(H::CENTER).rotation(45).loc(394, height / 2)
   H.add(rect3)
 
   H.draw_stage # paint the stage
@@ -44,20 +44,18 @@ def setup
   # here is the non HYPE version / basic processing syntax
 
   push_matrix
-    stroke_weight(6)
-    stroke(color('#000000'), 150)
-    fill(color('#FF3300'))
-    translate(width - 100, (height / 2))
-    rotate( 45.radians )
-    rect(0, 0, 100, 100, 10, 10, 10, 10)
+  stroke_weight(6)
+  stroke(color('#000000'), 150)
+  fill(color('#FF3300'))
+  translate(width - 100, (height / 2))
+  rotate(45.radians)
+  rect(0, 0, 100, 100, 10, 10, 10, 10)
   pop_matrix
   stroke_weight(1)
   stroke(color('#0095a8'))
-  line(0, height/2, width, height/2)
-
+  line(0, height / 2, width, height / 2)
   no_loop
 end
 
-def draw
-
-end
+# def draw
+# end

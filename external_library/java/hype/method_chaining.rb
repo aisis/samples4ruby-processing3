@@ -1,8 +1,6 @@
 load_library :hype
 include_package 'hype'
 
-attr_reader :rect1, :rect2, :rect3
-
 def settings
   size(640, 640)
 end
@@ -11,7 +9,7 @@ def setup
   sketch_title('Method Chaining')
   H.init(self)
   background(color('#242424'))
-  @rect1 = HRect.new(100)
+  rect1 = HRect.new(100)
   rect1.rounding(10) # set corner rounding
   rect1.stroke_weight(6) # set stroke weight
   rect1.stroke(color('#000000'), 150) # set stroke color and alpha
@@ -23,7 +21,7 @@ def setup
 
   # here's the same code / with method chaining
 
-  @rect2 = HRect.new(100)
+  rect2 = HRect.new(100)
   rect2.rounding(10)
        .stroke_weight(6)
        .stroke(color('#000000'), 150)
@@ -35,7 +33,7 @@ def setup
 
   # here's the same code / minus the hard returns and indentation (tabs are bad)
 
-  @rect3 = HRect.new(100)
+  rect3 = HRect.new(100)
   rect3.rounding(10).stroke_weight(6).stroke(color('#000000'), 150).fill(color('#FFCC00')).anchor_at(H::CENTER).rotation(45).loc(394, height / 2)
   H.add(rect3)
 
@@ -54,8 +52,8 @@ def setup
   stroke_weight(1)
   stroke(color('#0095a8'))
   line(0, height / 2, width, height / 2)
-  no_loop
+  # no_loop # we are not looping
 end
 
-# def draw
+# def draw # unecessary draw loop
 # end

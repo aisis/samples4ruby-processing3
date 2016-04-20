@@ -52,8 +52,4 @@ def setup
   stroke_weight(1)
   stroke(color('#0095a8'))
   line(0, height / 2, width, height / 2)
-  # no_loop # we are not looping
 end
-
-# def draw # unecessary draw loop
-# end

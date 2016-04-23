@@ -3,8 +3,13 @@
 load_library :slider
 attr_reader :color1, :color2, :color3, :r, :gs, :b, :back
 
+def settings
+  size(600, 400)
+  smooth(4)
+end
+
 def setup
-  sketch_title 'Slider Demo'
+  sketch_title 'Slider Demo'  
   @back = true
   @r, @gs, @b = 0, 0, 0
   @color1 = Slider.slider(
@@ -15,8 +20,8 @@ def setup
     length: 200,
     range: (-125.0..125.0),
     name: 'Slider 1',
-    initial_value: 10
-    )
+    inital_value: 10
+  )
   @color2 = Slider.slider(
     app: self,
     vertical: true,
@@ -26,7 +31,7 @@ def setup
     range: (0..255),
     name: 'Slider 2',
     initial_value: 180
-    )
+  )
   @color3 = Slider.slider(
     app: self,
     vertical: true,
@@ -36,7 +41,7 @@ def setup
     range: (0.0..255.0),
     name: 'Slider 3',
     initial_value: 134
-    )
+  )
   color1.bar_width(100)
   color1.widget_colors(color('#930303'), color('#FF0000'))
   color2.bar_width(100)
@@ -52,6 +57,3 @@ def draw
   @b = color3.read_value
 end
 
-def settings
-  size(600, 400)
-end

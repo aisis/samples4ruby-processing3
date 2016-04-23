@@ -11,6 +11,7 @@ task :all do
   Rake::Task[:vecmath].execute  
   Rake::Task[:shaders].execute
   Rake::Task[:slider].execute
+  Rake::Task[:hype].execute
 end
 
 desc 'run contributed samples'
@@ -28,6 +29,11 @@ task :vecmath do
   sh "cd #{root}/processing_app/library/vecmath/vec2d && rake"
   sh "cd #{root}/processing_app/library/vecmath/vec3d && rake"
   sh "cd #{root}/processing_app/library/vecmath/arcball && rake"
+end
+
+desc 'hype'
+task :hype do
+  sh "cd #{root}/external_library/java/hype && rake"
 end
 
 desc 'slider'

@@ -1,11 +1,15 @@
 # encoding: utf-8
 # frozen_string_literal: true
-
 load_library :slider
 attr_reader :color1, :color2, :color3, :r, :gs, :b, :back
 
-def setup
-  sketch_title 'Simple Slider'
+def settings
+  size(600, 400)
+  smooth(4)
+end
+
+def setup 
+  sketch_title 'Slider Sample'
   @back = true
   @r, @gs, @b = 0, 0, 0
   @color1 = Slider.slider(
@@ -40,6 +44,3 @@ def draw
   @b = color3.read_value
 end
 
-def settings
-  size(600, 400)
-end

@@ -10,7 +10,7 @@ def settings
 end
 
 def setup
-  sketch_title 'Sea of Stars'
+  sketch_title 'Web of Stars'
   background(0)
   @ball_collection = []
   create_stuff

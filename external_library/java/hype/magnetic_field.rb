@@ -32,9 +32,8 @@ def setup
       .add(HShape.new('arrow.svg').enable_style(false).anchor_at(H::CENTER))
       .layout(Hype::HGridLayout.new.start_x(-60).start_y(-60).spacing(16, 16).cols(50))
       .on_create do |obj|
-        d = obj.to_java(Java::Hype::HDrawable)
-        d.no_stroke.anchor(-20, -20)
-        field.add_target(d)
+        obj.no_stroke.anchor(-20, -20)
+        field.add_target(obj)
       end
       .requestAll
 
@@ -43,9 +42,8 @@ def setup
   pool_swarm.auto_add_to_stage
             .add(HRect.new(5))
             .on_create do |obj|
-              d = obj.to_java(Java::Hype::HDrawable)
-              d.no_stroke.no_fill.loc(rand(0..width), rand(0..width)).visibility(false)
-              swarm.add_target(d)
+              obj.no_stroke.no_fill.loc(rand(0..width), rand(0..width)).visibility(false)
+              swarm.add_target(obj)
             end
             .requestAll
 end

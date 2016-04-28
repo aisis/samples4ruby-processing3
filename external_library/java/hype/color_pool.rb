@@ -26,8 +26,7 @@ def setup
       .layout(Hype::HGridLayout.new.start_x(5).start_y(5).spacing(5, 5).cols(126))
       .on_create do |obj|
         i = pool.current_index
-        d = obj.to_java(Java::Hype::HDrawable)
-        d.no_stroke.fill(colors.get_color(i))
+        obj.no_stroke.fill(colors.get_color(i))
       end
       .request_all
   H.draw_stage

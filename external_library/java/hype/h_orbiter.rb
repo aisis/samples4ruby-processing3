@@ -33,17 +33,16 @@ def setup
       .add(HSphere.new)
       .colorist(Hype::HColorPool.new(*color_int).fill_only)
       .on_create do |obj|
-        d = obj.to_java(Java::Hype::HSphere)
         ran_size = 10 + (rand(0..3) * 7)
-        d.size(ran_size).stroke_weight(0).no_stroke.anchor_at(H::CENTER)
+        obj.size(ran_size).stroke_weight(0).no_stroke.anchor_at(H::CENTER)
         orb = Hype::HOrbiter3D.new(width / 2, height / 2, 0)
-                              .target(d)
+                              .target(obj)
                               .z_speed(rand(-1.5..1.5))
                               .y_speed(rand(-0.5..0.5))
                               .radius(195)
                               .z_angle(rand(0..360))
                               .y_angle(rand(0..360))
-        d.extras(HBundle.new.obj('o', orb))
+        obj.extras(HBundle.new.obj('o', orb))
       end
       .request_all
 end
@@ -51,11 +50,12 @@ end
 def draw
   point_light(100, 0, 0, width / 2, height, 200) # under red light
   point_light(51, 153, 153, width / 2, -50, 150) # over teal light
-  point_light(204, 204, 204, width / 2, (height / 2) - 50, 500) # mid light gray light
+  # mid light gray light
+  point_light(204, 204, 204, width / 2, (height / 2) - 50, 500)
   pool.each do |d|
     r = rand(190..220)
     obj1 = d.extras
-    o = obj1.obj('o').to_java(Hype::HOrbiter3D)
+    o = obj1.obj('o') #.to_java(Hype::HOrbiter3D)
     o.radius(r)
   end
   sphere_detail(20)

@@ -56,13 +56,12 @@ def setup
   pool2.auto_parent(canvas_shader)
        .add(HRect.new.rounding(4))
        .on_create do |obj|
-    d = obj.to_java(Java::Hype::HDrawable)
-    d.size(rand(50..100))
-     .fill(colors.get_color)
-     .no_stroke
-     .loc(width / 2, height / 2)
-     .anchor_at(H::CENTER)
-    swarm.add_target(d)
+    obj.size(rand(50..100))
+       .fill(colors.get_color)
+       .no_stroke
+       .loc(width / 2, height / 2)
+       .anchor_at(H::CENTER)
+    swarm.add_target(obj)
   end
   @timer = Hype::HTimer.new
                        .num_cycles(pool1.num_active)

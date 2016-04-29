@@ -8,7 +8,7 @@ module Hype
   java_import 'hype.extended.layout.HGridLayout'
 end
 
-WEB_COLORS = %w(#FFFFFF #F7F7F7 #ECECEC #0095A8 #00616F #333333 #FF3300 #FF6600).freeze
+PALETTE = %w(#FFFFFF #F7F7F7 #ECECEC #0095A8 #00616F #333333 #FF3300 #FF6600).freeze
 
 def settings
   size(600, 600)
@@ -18,8 +18,8 @@ def setup
   sketch_title 'Color Pool'
   H.init(self)
   H.background(color('#242424'))
-  col_int = WEB_COLORS.map { |col| color(col) }
-  colors = Hype::HColorPool.new(*col_int)  
+  palette = PALETTE.map { |col| color(col) }
+  colors = Hype::HColorPool.new(*palette)  
   pool = HDrawablePool.new(15_876)
   pool.auto_add_to_stage
       .add(HRect.new(5))

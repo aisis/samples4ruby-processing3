@@ -11,7 +11,7 @@ module Hype
 end
 
 attr_reader :colors, :canvas
-COLOR_POOL = %w(#FFFFFF #F7F7F7 #ECECEC #333333 #0095a8 #00616f #FF3300 #FF6600).freeze
+PALETTE = %w(#FFFFFF #F7F7F7 #ECECEC #333333 #0095a8 #00616f #FF3300 #FF6600).freeze
 
 def settings
   size(640, 640)
@@ -21,8 +21,8 @@ def setup
   sketch_title('Tween Example')
   H.init(self)
   H.background(color('#000000'))
-  color_int = COLOR_POOL.map { |col| color(col) }
-  @colors = Hype::HColorPool.new(*color_int)
+  palette = PALETTE.map { |col| color(col) }
+  @colors = Hype::HColorPool.new(*palette)
   H.add(@canvas = HCanvas.new).autoClear(false).fade(1)
   tween_trigger = Hype::HRandomTrigger.new(1.0 / 6)
   tween_trigger.callback do

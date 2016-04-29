@@ -9,7 +9,7 @@ module Hype
 end
 
 attr_reader :colors, :pool
-COLOR_POOL = %w(#333333 #494949 #5F5F5F #707070 #7D7D7D #888888 #949494 #A2A2A2 #B1B1B1 #C3C3C3 #D6D6D6 #EBEBEB #FFFFFF).freeze
+PALETTE = %w(#333333 #494949 #5F5F5F #707070 #7D7D7D #888888 #949494 #A2A2A2 #B1B1B1 #C3C3C3 #D6D6D6 #EBEBEB #FFFFFF).freeze
 
 def settings
   size(640, 640, P3D)
@@ -27,11 +27,11 @@ def setup
    .fill(color('#666666'))
    .anchor_at(H::CENTER)
    .loc(width / 2, height / 2)
-  color_int = COLOR_POOL.map { |col| color(col) }
+  palette = PALETTE.map { |col| color(col) }
   @pool = HDrawablePool.new(100)
   pool.autoAddToStage
       .add(HSphere.new)
-      .colorist(Hype::HColorPool.new(*color_int).fill_only)
+      .colorist(Hype::HColorPool.new(*palette).fill_only)
       .on_create do |obj|
         ran_size = 10 + (rand(0..3) * 7)
         obj.size(ran_size).stroke_weight(0).no_stroke.anchor_at(H::CENTER)
@@ -55,7 +55,7 @@ def draw
   pool.each do |d|
     r = rand(190..220)
     obj1 = d.extras
-    o = obj1.obj('o') #.to_java(Hype::HOrbiter3D)
+    o = obj1.obj('o')
     o.radius(r)
   end
   sphere_detail(20)

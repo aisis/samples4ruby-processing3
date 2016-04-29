@@ -1,6 +1,8 @@
+# encoding: utf-8
+# frozen_string_literal: true
 load_library :hype
 include_package 'hype'
-
+# Use Hype namespace
 module Hype
   java_import 'hype.extended.layout.HGridLayout'
   java_import 'hype.extended.behavior.HMagneticField'
@@ -21,9 +23,11 @@ def setup
   @field = Hype::HMagneticField.new
   NUM_MAGNETS.times do
     if rand > 0.5
-      field.add_pole(rand(0..width), rand(0..height), 3) # x, y, north polarity / strength =  3 / repel
+      # x, y, north polarity / strength =  3 / repel
+      field.add_pole(rand(0..width), rand(0..height), 3)
     else
-      field.add_pole(rand(0..width), rand(0..height), -3) # x, y, south polarity / strength = -3 / attract
+      # x, y, south polarity / strength = -3 / attract
+      field.add_pole(rand(0..width), rand(0..height), -3)
     end
   end
 

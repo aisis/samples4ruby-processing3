@@ -29,12 +29,12 @@ def setup
   sketch_title 'Scanlines GLSL sketch'
   H.init(self)
   H.background(color('#000000'))
-  cols = COLS.map { |col| color(col) }
+  palette = COLS.map { |col| color(col) }
   @my_shader = load_shader('scanlines.glsl')
   my_shader.set('resolution', 1.0, 1.0)
   my_shader.set('screenres', width.to_f, height.to_f)
   my_shader.set('time', millis / 1000.0)
-  colors = Hype::HColorPool.new(*cols)
+  colors = Hype::HColorPool.new(*palette)
   canvas_shader = H.add(HCanvas.new(P3D)
                    .auto_clear(true)
                    .shader(my_shader))
@@ -44,13 +44,12 @@ def setup
   pool1.auto_add_to_stage
        .add(HRect.new.rounding(4))
        .on_create do |obj|
-    d = obj.to_java(Java::Hype::HDrawable)
-    d.size(rand(50..100))
+    obj.size(rand(50..100))
      .fill(colors.get_color)
      .no_stroke
      .loc(width / 2, height / 2)
      .anchor_at(H::CENTER)
-    swarm.add_target(d)
+    swarm.add_target(obj)
   end
   pool2 = HDrawablePool.new(20)
   pool2.auto_parent(canvas_shader)

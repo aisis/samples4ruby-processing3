@@ -25,6 +25,7 @@ def draw
 end
 
 # use camel case to match java reflect method
+java_signature 'movieEvent(processing.event.Event m)'
 def movieEvent(m)
   m.read
 end

@@ -5,13 +5,12 @@ root = File.expand_path(__dir__)
 desc 'run contributed samples'    
 task :default => [:all]
 
-desc 'run all autorun samples'
+desc 'run all autorun samples except hype'
 task :all do
   Rake::Task[:contributed].execute
   Rake::Task[:vecmath].execute  
   Rake::Task[:shaders].execute
   Rake::Task[:slider].execute
-  Rake::Task[:hype].execute
 end
 
 desc 'run contributed samples'

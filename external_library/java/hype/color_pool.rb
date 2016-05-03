@@ -18,8 +18,7 @@ def setup
   sketch_title 'Color Pool'
   H.init(self)
   H.background(color('#242424'))
-  palette = PALETTE.map { |col| color(col) }
-  colors = Hype::HColorPool.new(*palette)  
+  colors = Hype::HColorPool.new(*web_to_color_array(PALETTE))
   pool = HDrawablePool.new(15_876)
   pool.auto_add_to_stage
       .add(HRect.new(5))

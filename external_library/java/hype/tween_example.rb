@@ -10,7 +10,6 @@ module Hype
   java_import 'hype.extended.colorist.HColorPool'
 end
 
-attr_reader :colors, :canvas
 PALETTE = %w(#FFFFFF #F7F7F7 #ECECEC #333333 #0095a8 #00616f #FF3300 #FF6600).freeze
 
 def settings
@@ -22,8 +21,9 @@ def setup
   H.init(self)
   H.background(color('#000000'))
   palette = PALETTE.map { |col| color(col) }
-  @colors = Hype::HColorPool.new(*palette)
-  H.add(@canvas = HCanvas.new).autoClear(false).fade(1)
+  colors = Hype::HColorPool.new(*palette)
+  canvas = HCanvas.new
+  H.add(canvas).autoClear(false).fade(1)
   tween_trigger = Hype::HRandomTrigger.new(1.0 / 6)
   tween_trigger.callback do
     r = canvas.add(HRect.new(25 + (rand(0..5) * 25)).rounding(10))

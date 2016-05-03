@@ -44,7 +44,6 @@ class Particle
     vel.set_mag(MAX_SPEED) { vel.mag > MAX_SPEED }
     @loc += @vel
     @acc *= 0.0
-    @timer -= 0.5
     self << loc.to_a # store vector as array to save space
   end
 

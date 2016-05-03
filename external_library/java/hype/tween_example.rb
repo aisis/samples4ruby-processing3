@@ -1,5 +1,4 @@
 # encoding: utf-8
-# frozen_string_literal: true
 load_library :hype
 include_package 'hype'
 # namespace for imported classes
@@ -20,8 +19,7 @@ def setup
   sketch_title('Tween Example')
   H.init(self)
   H.background(color('#000000'))
-  palette = PALETTE.map { |col| color(col) }
-  colors = Hype::HColorPool.new(*palette)
+  colors = Hype::HColorPool.new(web_to_color_array(PALETTE))
   canvas = HCanvas.new
   H.add(canvas).autoClear(false).fade(1)
   tween_trigger = Hype::HRandomTrigger.new(1.0 / 6)

@@ -1,3 +1,5 @@
+# encoding: utf-8
+# frozen_string_literal: true
 # Description:
 # This is a full-screen demo 
 # Since processing-3.0a10 set in settings

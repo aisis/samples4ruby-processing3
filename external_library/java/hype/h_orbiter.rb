@@ -1,5 +1,4 @@
 # encoding: utf-8
-# frozen_string_literal: true
 load_library :hype
 include_package 'hype'
 # namespace for imported classes
@@ -27,11 +26,10 @@ def setup
    .fill(color('#666666'))
    .anchor_at(H::CENTER)
    .loc(width / 2, height / 2)
-  palette = PALETTE.map { |col| color(col) }
   @pool = HDrawablePool.new(100)
   pool.autoAddToStage
       .add(HSphere.new)
-      .colorist(Hype::HColorPool.new(*palette).fill_only)
+      .colorist(Hype::HColorPool.new(web_to_color_array(PALETTE)).fill_only)
       .on_create do |obj|
         ran_size = 10 + (rand(0..3) * 7)
         obj.size(ran_size).stroke_weight(0).no_stroke.anchor_at(H::CENTER)
@@ -53,10 +51,9 @@ def draw
   # mid light gray light
   point_light(204, 204, 204, width / 2, (height / 2) - 50, 500)
   pool.each do |d|
-    r = rand(190..220)
     obj1 = d.extras
     o = obj1.obj('o')
-    o.radius(r)
+    o.radius(rand(190..220))
   end
   sphere_detail(20)
   H.draw_stage

@@ -1,3 +1,4 @@
+# encoding: utf-8
 load_library :hype
 include_package 'hype'
 

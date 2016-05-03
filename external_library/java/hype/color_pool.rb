@@ -1,5 +1,4 @@
 # encoding: utf-8
-# frozen_string_literal: true
 load_library :hype
 include_package 'hype'
 # Access through Hype namespace
@@ -18,7 +17,7 @@ def setup
   sketch_title 'Color Pool'
   H.init(self)
   H.background(color('#242424'))
-  colors = Hype::HColorPool.new(*web_to_color_array(PALETTE))
+  colors = Hype::HColorPool.new(web_to_color_array(PALETTE))
   pool = HDrawablePool.new(15_876)
   pool.auto_add_to_stage
       .add(HRect.new(5))

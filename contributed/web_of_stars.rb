@@ -1,5 +1,4 @@
 # encoding: utf-8
-# frozen_string_literal: true
 # After a sketch by Jerome Herr
 # see http://www.openprocessing.org/sketch/147466
 attr_reader :save, :ball_collection, :fc

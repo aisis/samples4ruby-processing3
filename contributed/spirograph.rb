@@ -1,5 +1,4 @@
 # encoding: utf-8
-# frozen_string_literal: true
 # After a ruby-processing sketch by Peter Esveld
 # demonstrates how to create and use a local library with JRubyArt
 # Also features use of 'forwardable' to create a custom enumerable

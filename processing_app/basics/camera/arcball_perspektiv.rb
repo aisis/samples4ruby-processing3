@@ -9,8 +9,12 @@
 # perspective and the version with up to four parameters allows the programmer 
 # to set the environment more precisely.
 
+attr_reader :aspect
+
 def setup
   sketch_title 'Perspektiv Example'
+  ArcBall.constrain self
+  @aspect = width.to_f / height 
   no_stroke
 end
 
@@ -20,17 +24,13 @@ def draw
   camera_y = height / 2.0
   fov = mouse_x / width.to_f * PI / 2.0
   camera_z = camera_y / Math.tan(fov / 2.0)
-  aspect = width.to_f / height 
-  aspect /= 2.0 if mouse_pressed?  
   perspektiv(
     fov: fov, 
     aspect_ratio: aspect, 
     near_z: camera_z / 10.0, 
     far_z: camera_z * 10.0
   )  
-  translate width / 2.0 + 30, height / 2.0, 0
   rotate_x -PI / 6
-  rotate_y PI / 3 + mouse_y / height.to_f * PI
   box 45
   translate 0, 0, -50
   box 30
@@ -38,4 +38,13 @@ end
 
 def settings
   size 640, 360, P3D
+end
+
+def key_pressed
+  case key
+  when ' '
+    @aspect = width * 0.5 / height 
+  when 'n', 'N'
+    @aspect = width.to_f / height 
+  end
 end

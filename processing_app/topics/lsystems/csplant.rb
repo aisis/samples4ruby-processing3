@@ -11,7 +11,7 @@ attr_reader :csplant
 
 def setup
   sketch_title 'Context Sensitive Plant'
-  ArcBall.init(self)
+  ArcBall.constrain(self) # Arcball constrained to y-axis rotation
   @csplant = CSPlant.new(height)
   csplant.create_grammar 5
   no_stroke

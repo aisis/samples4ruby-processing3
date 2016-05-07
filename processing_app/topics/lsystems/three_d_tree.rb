@@ -52,7 +52,6 @@ end
 ###########################
 class Plant
   include Processing::Proxy
-  include PConstants
   attr_reader :grammar, :axiom, :production, :premis, :rule,
               :theta, :scale_factor, :distance, :phi
 

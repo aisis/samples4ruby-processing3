@@ -32,10 +32,11 @@ def mouse_pressed
   bubble_data.create_new_bubble(mouse_x, mouse_y)
 end
 
-# This class can load store and create instances of Bubble
+# This class can load store and create instances of Bubble, the enumerable
+# acts like a circular buffer MAX_BUBBLE size
 class BubbleData
   extend Forwardable
-  def_delegators(:@bubbles, :each, :<<, :size, :shift, :clear)
+  def_delegators(:@bubbles, :each, :map, :size, :shift, :clear)
   include Enumerable
 
   MAX_BUBBLE = 10
@@ -50,7 +51,7 @@ class BubbleData
   end
 
   def create_new_bubble(x, y)
-    add Bubble.new(x, y, rand(40..80), 'new label')
+    self << Bubble.new(x, y, rand(40..80), 'new label')
     save_data
     load_data path
   end
@@ -70,16 +71,16 @@ class BubbleData
     data = JSON.parse(file)[key]
     clear
     # iterate the bubble_data array, and create an array of bubbles
-    data.each do |point|
-      add Bubble.new(
+    @bubbles = data.map do |point|
+      Bubble.new(
         point['position']['x'],
         point['position']['y'],
         point['diameter'],
         point['label'])
-    end
+      end
   end
 
-  def add(bubble)
+  def <<(bubble)
     bubbles << bubble
     shift if size > MAX_BUBBLE
   end

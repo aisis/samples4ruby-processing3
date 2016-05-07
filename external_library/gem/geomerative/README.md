@@ -17,7 +17,7 @@ Here is a collection on [Open Processing][open_processing]
 
 
 
-[dutch]:http://freeartbureau.org/fab_activity/geomerative-tutorial-part-1/
+[french]:http://freeartbureau.org/fab_activity/geomerative-tutorial-part-1/
 [dutch]:http://www.creativeapplications.net/processing/generative-typography-processing-tutorial/
 [german]:https://lernprocessing.wordpress.com/2011/11/15/geomerative-library/
 [open_processing]:http://www.openprocessing.org/collection/1374

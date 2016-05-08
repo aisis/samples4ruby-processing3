@@ -30,14 +30,14 @@ def setup
   RG.init(self) # initialize the Geomerative library
   RCommand.setSegmentator(RCommand::UNIFORMSTEP) # settings for the generated shape density
   RCommand.setSegmentStep(2) # settings for the generated shape density
-  # create the font used by Geomerative
-  font = RFont.new('/usr/share/fonts/truetype/freefont/FreeSans.ttf', 350, CENTER) 
+  # create the font used by Geomerative using absolute path on ArchLinux
+  font = RFont.new('/usr/share/fonts/TTF/FreeSans.ttf', 350, CENTER) 
   rmesh = font.toGroup(INPUT).toMesh # create a 2D mesh from a text
   # call the methods (see below) that do the actual work in this sketch
   mesh = rmesh_to_hemesh(rmesh) # create a 3D mesh from an INPUT string (using Geomerative & Hemesh)
   manipulate_mesh(mesh) # apply modifiers to the HE::HE_Mesh to subdivide and distort it
   mesh = color_faces(mesh) # color the faces of the generated mesh using a bit of custom code
-  @text_shape = hemesh_to_pshape(mesh, false) # store the HE::HE_Mesh in a PShape for fast display on the GPU
+  @text_shape = hemesh_to_pshape(mesh) # store the HE::HE_Mesh in a PShape for fast display on the GPU
 end
 
 def draw
@@ -97,19 +97,17 @@ def random_selection(mesh, threshold)
   selection
 end
 
-# color each face in the mesh based on it's xy-position using HSB colormode
+# color each face in the mesh based on it's xy-position using hsb_color method
 def color_faces(mesh)
-  color_mode(HSB, 360, 1.0, 1.0) # set colorMode to HSB
   mesh.getFacesAsArray.each do |face|
     c = face.getFaceCenter
-    face.setLabel($app.color(map1d(c.xf + c.yf, -300..300, 30..330), 0.65, 1.0))
+    face.setLabel(hsb_color(map1d(c.xf + c.yf, -500..500, 0.12..0.70), 0.65, 1.0))
   end
-  color_mode(RGB, 255) # (re)set colorMode to RGB
   mesh
 end
 
 # store the geometry from a HE::HE_Mesh in a PShape for quick display on the GPU
-def hemesh_to_pshape(mesh, with_vertex_normals)
+def hemesh_to_pshape(mesh)
   puts 'Triangulating mesh.'
   mesh.triangulate # ensure it's triangles only (CPU-intensive, but necessary)
 
@@ -117,7 +115,6 @@ def hemesh_to_pshape(mesh, with_vertex_normals)
   faces_hemesh = mesh.getFacesAsInt
   vertices_hemesh = mesh.getVerticesAsFloat
   face_array = mesh.getFacesAsArray
-  vertex_normals = mesh.getVertexNormals if with_vertex_normals
   puts 'Storing mesh in PShape.'
   # create a PShape from the HE::HE_Mesh shape data
   tshape = create_shape
@@ -125,13 +122,10 @@ def hemesh_to_pshape(mesh, with_vertex_normals)
   tshape.stroke(0, 125)
   tshape.stroke_weight(0.5)
   faces_hemesh.length.times do |i|
-    normal = face_array[i].getFaceNormal if with_vertex_normals
     tshape.fill(face_array[i].getLabel)
     3.times do |j|
       index = faces_hemesh[i][j]
       vertex_hemesh = vertices_hemesh[index]
-      normal = vertex_normals[index] if with_vertex_normals
-      tshape.normal(normal.xf, normal.yf, normal.zf) unless normal.nil?
       tshape.vertex(vertex_hemesh[0], vertex_hemesh[1], vertex_hemesh[2])
     end
   end

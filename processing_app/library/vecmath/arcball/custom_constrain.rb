@@ -1,5 +1,3 @@
-
-
 ############################
 # Use mouse drag to rotate
 # the arcball. Use mousewheel
@@ -9,7 +7,7 @@
 
 def setup
   sketch_title 'Arcball Box'
-  ArcBall.constrain self, Java::MonkstoneArcball::Constrain::ZAXIS
+  ArcBall.constrain self, :zaxis
   fill 180
 end
 

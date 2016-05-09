@@ -1,3 +1,4 @@
+
 # Brightness 
 # by Rusty Robison. 
 # 
@@ -7,7 +8,6 @@
 def setup
   sketch_title 'Brightness'
   no_stroke
-  color_mode HSB, 360, height, height
   @bar_width = 20
   @brightness = Array.new(width / @bar_width, 0)
 end
@@ -17,7 +17,7 @@ def draw
     n = i * @bar_width
     range = (n..n + @bar_width)
     @brightness[i] = mouse_y if range.include? mouse_x
-    fill n, height, @brightness[i]
+    fill hsb_color(norm(n, 0, 360), 1.0, norm(@brightness[i], 0, height))
     rect n, 0, @bar_width, height
   end
 end

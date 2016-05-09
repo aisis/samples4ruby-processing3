@@ -6,23 +6,21 @@ attr_reader :bar_width, :saturation
 
 def setup
   sketch_title 'Saturation'
-  color_mode HSB, 360
   no_stroke
   @bar_width = 20
   @saturation = Array.new(width / bar_width, 0)
 end
 
 def draw
-  i, j = 0, 0
-  while i <= (width - bar_width)
+  j = 0
+  (1...width).step(bar_width) do |i|
     saturation[j] = mouse_y if (i..i + bar_width).include? mouse_x
-    fill i, saturation[j], height / 1.5
+    fill hsb_color(norm(i, 0, 360), norm(saturation[j], 0, 360), 0.75)
     rect i, 0, bar_width, height
     j += 1
-    i += bar_width
   end
 end
 
 def settings
-  size 640, 360, P2D
+  size 640, 360, FX2D
 end

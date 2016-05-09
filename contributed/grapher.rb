@@ -13,7 +13,6 @@ SZ = 5
 def setup
   sketch_title 'Grapher'
   no_stroke
-  color_mode(HSB, 1.0)
   background(0)
   frame_rate(4_000)
 end
@@ -28,7 +27,7 @@ def dot(px, py, c)
   # change function to change the graph eg.
   # func = DegLut.cos(px) + DegLut.sin(py) + c
   if func.abs <= FUZZ
-    fill(((CMIN - c) / (CMIN - CMAX)), 1, 1)
+    fill(hsb_color((CMIN - c) / (CMIN - CMAX), 1, 1))
     ellipse px * width / 360, py * height / 360, SZ, SZ
   else
     dot(rand(-180..180), rand(-180..180), rand(CMIN..CMAX))

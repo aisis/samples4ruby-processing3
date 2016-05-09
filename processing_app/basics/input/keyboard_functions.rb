@@ -4,8 +4,6 @@
 # Click on the window to give it focus and press the letter keys to type
 # colors. The keyboard function keyPressed() is called whenever a key is
 # pressed.
-
-
 MAX_HEIGHT = 40
 MIN_HEIGHT = 20
 NUM_CHARS = 26
@@ -14,25 +12,22 @@ attr_reader :new_letter
 
 def setup
   sketch_title 'Keyboard Functions'
-  @letter_width = MIN_HEIGHT
-  @letter_height = MAX_HEIGHT
+  @letter_width = MAX_HEIGHT
+  @letter_height = MIN_HEIGHT
   @x = -letter_width
   @y = 0
   @new_letter = false
-  color_mode(HSB, NUM_CHARS)
-  background(NUM_CHARS / 2)
-  @colours = []
-  NUM_CHARS.times do |i|
-    colours << color(i, NUM_CHARS, NUM_CHARS)
-  end
+  background(125)
+  # changing hue with key value
+  @colours = (0..NUM_CHARS).map{ |i| hsb_color(norm(i, 0, NUM_CHARS), 1.0, 1.0) }
 end
 
 def draw
   if new_letter
     if letter_height == MAX_HEIGHT
-      rect( x, y, letter_width, letter_height )
+      rect(x, y, letter_width, letter_height)
     else
-      rect( x, y + MIN_HEIGHT, letter_width, letter_height )
+      rect(x, y + MIN_HEIGHT, letter_width, letter_height)
     end
     @new_letter = false
   end
@@ -45,7 +40,7 @@ def key_pressed
     @letter_height = (key <= 'Z' ? MAX_HEIGHT : MIN_HEIGHT)
   else
     fill 0
-    letter_height = 10
+    @letter_height = 10
   end
   @new_letter = true
   # update letter position
